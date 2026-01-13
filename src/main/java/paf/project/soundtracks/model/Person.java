@@ -6,4 +6,6 @@ public class Person {
     private Integer reviewCount;
     private Integer eventCount;
     private Double reviewScore;
+
+    // constructors, getters, and setters
 }
