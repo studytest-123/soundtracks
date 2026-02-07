@@ -1,30 +1,41 @@
 package paf.project.soundtracks.model;
 
-public class EventRating {
-    private Long eventRatingId;
-    private Long eventId;
+import java.math.BigDecimal;
 
-    private double eventAverageRating;
-    private double atmosphereAverageRating;
-    private double gastronomyAverageRating;
-    private double locationAverageRating;
-    private double performanceAverageRating;
-    private double restroomAverageRating;
-    private double securityAverageRating;
-    private double soundAverageRating;
-    private double wardrobeAverageRating;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "event_rating")
+public class EventRating {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "event_rating_id")
+    private Long eventRatingId;
+    @OneToOne
+    @JoinColumn(name = "event_id_event")
+    private Event event;
+
+    private BigDecimal eventAverageRating;
+    private BigDecimal atmosphereAverageRating;
+    private BigDecimal gastronomyAverageRating;
+    private BigDecimal locationAverageRating;
+    private BigDecimal performanceAverageRating;
+    private BigDecimal restroomAverageRating;
+    private BigDecimal securityAverageRating;
+    private BigDecimal soundAverageRating;
+    private BigDecimal wardrobeAverageRating;
 
     
 
     // constructors
     public EventRating() {
     }  
-    public EventRating(Long eventRatingId, Long eventId, double atmosphereAverageRating,
-            double gastronomyAverageRating, double locationAverageRating, double performanceAverageRating,
-            double restroomAverageRating, double securityAverageRating, double soundAverageRating,
-            double wardrobeAverageRating, double eventAverageRating) {
+    public EventRating(Long eventRatingId, Event event, BigDecimal atmosphereAverageRating,
+            BigDecimal gastronomyAverageRating, BigDecimal locationAverageRating, BigDecimal performanceAverageRating,
+            BigDecimal restroomAverageRating, BigDecimal securityAverageRating, BigDecimal soundAverageRating,
+            BigDecimal wardrobeAverageRating, BigDecimal eventAverageRating) {
         this.eventRatingId = eventRatingId;
-        this.eventId = eventId;
+        this.event = event;
         this.atmosphereAverageRating = atmosphereAverageRating;
         this.gastronomyAverageRating = gastronomyAverageRating;
         this.locationAverageRating = locationAverageRating;
@@ -43,64 +54,64 @@ public class EventRating {
     public void setEventRatingId(Long eventRatingId) {
         this.eventRatingId = eventRatingId;
     }
-    public Long getEventId() {
-        return eventId;
+    public Event getEvent() {
+        return event;
     }
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
+    public void setEvent(Event event) {
+        this.event = event;
     }
-    public double getAtmosphereAverageRating() {
+    public BigDecimal getAtmosphereAverageRating() {
         return atmosphereAverageRating;
     }
-    public void setAtmosphereAverageRating(double atmosphereAverageRating) {
+    public void setAtmosphereAverageRating(BigDecimal atmosphereAverageRating) {
         this.atmosphereAverageRating = atmosphereAverageRating;
     }
-    public double getGastronomyAverageRating() {
+    public BigDecimal getGastronomyAverageRating() {
         return gastronomyAverageRating;
     }
-    public void setGastronomyAverageRating(double gastronomyAverageRating) {
+    public void setGastronomyAverageRating(BigDecimal gastronomyAverageRating) {
         this.gastronomyAverageRating = gastronomyAverageRating;
     }
-    public double getLocationAverageRating() {
+    public BigDecimal getLocationAverageRating() {
         return locationAverageRating;
     }
-    public void setLocationAverageRating(double locationAverageRating) {
+    public void setLocationAverageRating(BigDecimal locationAverageRating) {
         this.locationAverageRating = locationAverageRating;
     }
-    public double getPerformanceAverageRating() {
+    public BigDecimal getPerformanceAverageRating() {
         return performanceAverageRating;
     }
-    public void setPerformanceAverageRating(double performanceAverageRating) {
+    public void setPerformanceAverageRating(BigDecimal performanceAverageRating) {
         this.performanceAverageRating = performanceAverageRating;
     }
-    public double getRestroomAverageRating() {
+    public BigDecimal getRestroomAverageRating() {
         return restroomAverageRating;
     }
-    public void setRestroomAverageRating(double restroomAverageRating) {
+    public void setRestroomAverageRating(BigDecimal restroomAverageRating) {
         this.restroomAverageRating = restroomAverageRating;
     }
-    public double getSecurityAverageRating() {
+    public BigDecimal getSecurityAverageRating() {
         return securityAverageRating;
     }
-    public void setSecurityAverageRating(double securityAverageRating) {
+    public void setSecurityAverageRating(BigDecimal securityAverageRating) {
         this.securityAverageRating = securityAverageRating;
     }
-    public double getSoundAverageRating() {
+    public BigDecimal getSoundAverageRating() {
         return soundAverageRating;
     }
-    public void setSoundAverageRating(double soundAverageRating) {
+    public void setSoundAverageRating(BigDecimal soundAverageRating) {
         this.soundAverageRating = soundAverageRating;
     }
-    public double getWardrobeAverageRating() {
+    public BigDecimal getWardrobeAverageRating() {
         return wardrobeAverageRating;
     }
-    public void setWardrobeAverageRating(double wardrobeAverageRating) {
+    public void setWardrobeAverageRating(BigDecimal wardrobeAverageRating) {
         this.wardrobeAverageRating = wardrobeAverageRating;
     }
-    public double getEventAverageRating() {
+    public BigDecimal getEventAverageRating() {
         return eventAverageRating;
     }
-    public void setEventAverageRating(double eventAverageRating) {
+    public void setEventAverageRating(BigDecimal eventAverageRating) {
         this.eventAverageRating = eventAverageRating;
     }
 }

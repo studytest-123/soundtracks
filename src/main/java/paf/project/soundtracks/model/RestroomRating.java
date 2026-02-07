@@ -1,22 +1,45 @@
 package paf.project.soundtracks.model;
 
+import java.math.BigDecimal;
+
+import org.checkerframework.checker.units.qual.C;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "restroom_rating")
 public class RestroomRating {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "restroom_rating_id")
     private Long restroomRatingId;
-    private double restroomAverageRating;
-    private double restroomCleanliness;
-    private double restroomAccessibility;
-    private double restroomSupplies;
-    private double restroomSize;
+
+    @OneToOne
+    @JoinColumn(name = "personal_event_rating_id_personal_event_rating")
+    private PersonalEventRating personalEventRating;
+
+    @Column(name = "restroom_average_rating")
+    private BigDecimal restroomAverageRating;
+    @Column(name = "restroom_cleanliness")
+    private BigDecimal restroomCleanliness;
+    @Column(name = "restroom_accessibility")
+    private BigDecimal restroomAccessibility;
+    @Column(name = "restroom_supplies")
+    private BigDecimal restroomSupplies;
+    @Column(name = "restroom_size")
+    private BigDecimal restroomSize;
+    @Column(name = "restroom_rating_comments")
     private String restroomRatingComments;
 
     // constructors
     public RestroomRating() {
     }
 
-    public RestroomRating(Long restroomRatingId, double restroomAverageRating, double restroomCleanliness,
-                          double restroomAccessibility, double restroomSupplies, double restroomSize,
+    public RestroomRating(Long restroomRatingId, PersonalEventRating personalEventRating, BigDecimal restroomAverageRating, BigDecimal restroomCleanliness,
+                          BigDecimal restroomAccessibility, BigDecimal restroomSupplies, BigDecimal restroomSize,
                           String restroomRatingComments) {
         this.restroomRatingId = restroomRatingId;
+        this.personalEventRating = personalEventRating;
         this.restroomAverageRating = restroomAverageRating;
         this.restroomCleanliness = restroomCleanliness;
         this.restroomAccessibility = restroomAccessibility;
@@ -32,34 +55,40 @@ public class RestroomRating {
     public void setRestroomRatingId(Long restroomRatingId) {
         this.restroomRatingId = restroomRatingId;
     }
-    public double getRestroomAverageRating() {
+    public PersonalEventRating getPersonalEventRating() {
+        return personalEventRating;
+    }
+    public void setPersonalEventRating(PersonalEventRating personalEventRating) {
+        this.personalEventRating = personalEventRating;
+    }
+    public BigDecimal getRestroomAverageRating() {
         return restroomAverageRating;
     }
-    public void setRestroomAverageRating(double restroomAverageRating) {
+    public void setRestroomAverageRating(BigDecimal restroomAverageRating) {
         this.restroomAverageRating = restroomAverageRating;
     }
-    public double getRestroomCleanliness() {
+    public BigDecimal getRestroomCleanliness() {
         return restroomCleanliness;
     }
-    public void setRestroomCleanliness(double restroomCleanliness) {
+    public void setRestroomCleanliness(BigDecimal restroomCleanliness) {
         this.restroomCleanliness = restroomCleanliness;
     }
-    public double getRestroomAccessibility() {
+    public BigDecimal getRestroomAccessibility() {
         return restroomAccessibility;
     }
-    public void setRestroomAccessibility(double restroomAccessibility) {
+    public void setRestroomAccessibility(BigDecimal restroomAccessibility) {
         this.restroomAccessibility = restroomAccessibility;
     }
-    public double getRestroomSupplies() {
+    public BigDecimal getRestroomSupplies() {
         return restroomSupplies;
     }
-    public void setRestroomSupplies(double restroomSupplies) {
+    public void setRestroomSupplies(BigDecimal restroomSupplies) {
         this.restroomSupplies = restroomSupplies;
     }
-    public double getRestroomSize() {
+    public BigDecimal getRestroomSize() {
         return restroomSize;
     }
-    public void setRestroomSize(double restroomSize) {
+    public void setRestroomSize(BigDecimal restroomSize) {
         this.restroomSize = restroomSize;
     }
     public String getRestroomRatingComments() {

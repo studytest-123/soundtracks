@@ -34,32 +34,32 @@ public class EventController {
         );
 
         // Mock performances
-        List<Performance> performances = List.of(
-            new Performance(1L, id, 2L,
-                new Artist(2L, "DJ Awesome", "Electronic", "Germany", "Berlin-based DJ"),
-                List.of(
-                    new SetlistItem(1L, 1, "Intro Beat", 210, "Opening track"),
-                    new SetlistItem(2L, 2, "Summer Drop", 180, "Crowd favorite")
-                ),
-                new PerformanceRating()
-            ),
-            new Performance(2L, id, 3L,
-                new Artist(3L, "The Rockers", "Rock", "Germany", "Classic rock band"),
-                List.of(
-                    new SetlistItem(3L, 1, "Firestorm", 240, ""),
-                    new SetlistItem(4L, 2, "Encore Anthem", 230, "")
-                ),
-                null
-            )
-        );
+        //List<Performance> performances = List.of(
+        //    new Performance(1L, id, 2L,
+        //        new Artist(2L, "DJ Awesome", "Electronic", "Germany", "Berlin-based DJ"),
+        //        List.of(
+        //            new SetlistItem(1L, 1, "Intro Beat", 210, "Opening track"),
+        //            new SetlistItem(2L, 2, "Summer Drop", 180, "Crowd favorite")
+        //        ),
+        //        new PerformanceRating()
+        //    ),
+        //    new Performance(2L, id, 3L,
+        //        new Artist(3L, "The Rockers", "Rock", "Germany", "Classic rock band"),
+        //        List.of(
+        //            new SetlistItem(3L, 1, "Firestorm", 240, ""),
+        //            new SetlistItem(4L, 2, "Encore Anthem", 230, "")
+        //        ),
+        //        null
+        //    )
+        //);
 
-        performances.forEach(p ->
+        /* performances.forEach(p ->
         System.out.println("Performance " + p.getPerformanceId() +
                 " artist = " + p.getArtistObject().getArtistName()));
 
 
         model.addAttribute("event", event);
-        model.addAttribute("performances", performances);
+        model.addAttribute("performances", performances); */
         
 
         return "event-details";

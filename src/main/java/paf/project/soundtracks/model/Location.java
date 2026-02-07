@@ -1,13 +1,29 @@
 package paf.project.soundtracks.model;
 
+import org.checkerframework.checker.units.qual.C;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "location")
 public class Location {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "location_id")
     private Long locationId;
+    @Column(name = "location_name")
     private String locationName;
+    @Column(name = "location_address")
     private String locationAddress;
+    @Column(name = "location_postal_code")
     private String locationPostalCode;
+    @Column(name = "location_city")
     private String locationCity;
+    @Column(name = "location_country")
     private String locationCountry;
+    @Column(name = "location_capacity")
     private int locationCapacity;
+    @Column(name = "location_description")
     private String locationDescription;
 
     // constructors

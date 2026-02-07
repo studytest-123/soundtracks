@@ -2,15 +2,20 @@ package paf.project.soundtracks.model;
 
 import jakarta.persistence.*;
 
-//@Entity
-//@Table(name = "artist")
+@Entity
+@Table(name = "artist")
 public class Artist {
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "artist_id")
     private Long artistId;
+    @Column(name = "artist_name")
     private String artistName;
+    @Column(name = "artist_genre")
     private String artistGenre;
+    @Column(name = "artist_country")
     private String artistCountry;
+    @Column(name = "artist_description")
     private String artistDescription;
 
     // constructors

@@ -1,30 +1,45 @@
 package paf.project.soundtracks.model;
 
+import java.math.BigDecimal;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "location_rating")
 public class LocationRating {
-    // future database primary key
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "location_rating_id")
     private Long locationRatingId;
 
-    private Long locationId;
-    //private Location ratedLocation;
-    private double locationAverageRating;
-    private double locationSize;
-    private double locationArea;
-    private double locationAccessibility;
-    private double locationEquipment;
-    private double locationAmbience;
-    private double locationCleanliness;
-    private double locationStaff;
+    @ManyToOne
+    @JoinColumn(name = "location_id_location")
+    private Location location;    
+    
+    @ManyToOne
+    @JoinColumn(name = "personal_event_rating_id_personal_event_rating")
+    private PersonalEventRating personalEventRating;
+
+
+    private BigDecimal locationAverageRating;
+    private BigDecimal locationSize;
+    private BigDecimal locationArea;
+    private BigDecimal locationAccessibility;
+    private BigDecimal locationEquipment;
+    private BigDecimal locationAmbience;
+    private BigDecimal locationCleanliness;
+    private BigDecimal locationStaff;
     private String locationRatingComments;
 
     // constructors
     public LocationRating() {
     }
 
-    public LocationRating(Long locationRatingId, Long locationId, double locationAverageRating, double locationSize,
-            double locationArea, double locationAccessibility, double locationEquipment, double locationAmbience,
-            double locationCleanliness, double locationStaff, String locationRatingComments) {
+    public LocationRating(Long locationRatingId, Location location, BigDecimal locationAverageRating, BigDecimal locationSize,
+            BigDecimal locationArea, BigDecimal locationAccessibility, BigDecimal locationEquipment, BigDecimal locationAmbience,
+            BigDecimal locationCleanliness, BigDecimal locationStaff, String locationRatingComments) {
         this.locationRatingId = locationRatingId;
-        this.locationId = locationId;
+        this.location = location;
         this.locationAverageRating = locationAverageRating;
         this.locationSize = locationSize;
         this.locationArea = locationArea;
@@ -43,58 +58,58 @@ public class LocationRating {
     public void setLocationRatingId(Long locationRatingId) {
         this.locationRatingId = locationRatingId;
     }
-    public Long getLocationId(){
-        return locationId;
+    public Location getLocation(){
+        return location;
     }
-    public void setLocationId(Long locationId){
-        this.locationId = locationId;
+    public void setLocation(Location location){
+        this.location = location;
     }
-    public double getLocationAverageRating() {
+    public BigDecimal getLocationAverageRating() {
         return locationAverageRating;
     }
-    public void setLocationAverageRating(double locationAverageRating) {
+    public void setLocationAverageRating(BigDecimal locationAverageRating) {
         this.locationAverageRating = locationAverageRating;
     }
-    public double getLocationSize() {
+    public BigDecimal getLocationSize() {
         return locationSize;
     }
-    public void setLocationSize(double locationSize) {
+    public void setLocationSize(BigDecimal locationSize) {
         this.locationSize = locationSize;
     }
-    public double getLocationArea() {
+    public BigDecimal getLocationArea() {
         return locationArea;
     }
-    public void setLocationArea(double locationArea) {
+    public void setLocationArea(BigDecimal locationArea) {
         this.locationArea = locationArea;
     }
-    public double getLocationAccessibility() {
+    public BigDecimal getLocationAccessibility() {
         return locationAccessibility;
     }
-    public void setLocationAccessibility(double locationAccessibility) {
+    public void setLocationAccessibility(BigDecimal locationAccessibility) {
         this.locationAccessibility = locationAccessibility;
     }
-    public double getLocationEquipment() {
+    public BigDecimal getLocationEquipment() {
         return locationEquipment;
     }
-    public void setLocationEquipment(double locationEquipment) {
+    public void setLocationEquipment(BigDecimal locationEquipment) {
         this.locationEquipment = locationEquipment;
     }
-    public double getLocationAmbience() {
+    public BigDecimal getLocationAmbience() {
         return locationAmbience;
     }
-    public void setLocationAmbience(double locationAmbience) {
+    public void setLocationAmbience(BigDecimal locationAmbience) {
         this.locationAmbience = locationAmbience;
     }
-    public double getLocationCleanliness() {
+    public BigDecimal getLocationCleanliness() {
         return locationCleanliness;
     }
-    public void setLocationCleanliness(double locationCleanliness) {
+    public void setLocationCleanliness(BigDecimal locationCleanliness) {
         this.locationCleanliness = locationCleanliness;
     }
-    public double getLocationStaff() {
+    public BigDecimal getLocationStaff() {
         return locationStaff;
     }
-    public void setLocationStaff(double locationStaff) {
+    public void setLocationStaff(BigDecimal locationStaff) {
         this.locationStaff = locationStaff;
     }
     public String getLocationRatingComments() {

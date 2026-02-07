@@ -1,22 +1,43 @@
 package paf.project.soundtracks.model;
 
+import java.math.BigDecimal;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "sound_rating")
 public class SoundRating {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "sound_rating_id")
     private Long soundRatingId;
-    private double soundAverageRating;
-    private double soundOverallQuality;
-    private double soundLoudness;
-    private double soundTechnicalIssues;
-    private double soundRoomAcoustics;
+
+    @OneToOne
+    @JoinColumn(name = "personal_event_rating_id_personal_event_rating")
+    private PersonalEventRating personalEventRating;
+
+    @Column(name = "sound_average_rating")
+    private BigDecimal soundAverageRating;
+    @Column(name = "sound_overall_quality")
+    private BigDecimal soundOverallQuality;
+    @Column(name = "sound_loudness")
+    private BigDecimal soundLoudness;
+    @Column(name = "sound_technical_issues")
+    private BigDecimal soundTechnicalIssues;
+    @Column(name = "sound_room_acoustics")
+    private BigDecimal soundRoomAcoustics;
+    @Column(name = "sound_rating_comments")
     private String soundRatingComments;
 
     // constructors
     public SoundRating() {
     }
 
-    public SoundRating(Long soundRatingId, double soundAverageRating, double soundOverallQuality,
-                       double soundLoudness, double soundTechnicalIssues, double soundRoomAcoustics,
+    public SoundRating(Long soundRatingId, PersonalEventRating personalEventRating, BigDecimal soundAverageRating, BigDecimal soundOverallQuality,
+                       BigDecimal soundLoudness, BigDecimal soundTechnicalIssues, BigDecimal soundRoomAcoustics,
                        String soundRatingComments) {
         this.soundRatingId = soundRatingId;
+        this.personalEventRating = personalEventRating;
         this.soundAverageRating = soundAverageRating;
         this.soundOverallQuality = soundOverallQuality;
         this.soundLoudness = soundLoudness;
@@ -32,34 +53,40 @@ public class SoundRating {
     public void setSoundRatingId(Long soundRatingId) {
         this.soundRatingId = soundRatingId;
     }
-    public double getSoundAverageRating() {
+    public PersonalEventRating getPersonalEventRating() {
+        return personalEventRating;
+    }
+    public void setPersonalEventRating(PersonalEventRating personalEventRating) {
+        this.personalEventRating = personalEventRating;
+    }
+    public BigDecimal getSoundAverageRating() {
         return soundAverageRating;
     }
-    public void setSoundAverageRating(double soundAverageRating) {
+    public void setSoundAverageRating(BigDecimal soundAverageRating) {
         this.soundAverageRating = soundAverageRating;
     }
-    public double getSoundOverallQuality() {
+    public BigDecimal getSoundOverallQuality() {
         return soundOverallQuality;
     }
-    public void setSoundOverallQuality(double soundOverallQuality) {
+    public void setSoundOverallQuality(BigDecimal soundOverallQuality) {
         this.soundOverallQuality = soundOverallQuality;
     }
-    public double getSoundLoudness() {
+    public BigDecimal getSoundLoudness() {
         return soundLoudness;
     }
-    public void setSoundLoudness(double soundLoudness) {
+    public void setSoundLoudness(BigDecimal soundLoudness) {
         this.soundLoudness = soundLoudness;
     }
-    public double getSoundTechnicalIssues() {
+    public BigDecimal getSoundTechnicalIssues() {
         return soundTechnicalIssues;
     }
-    public void setSoundTechnicalIssues(double soundTechnicalIssues) {
+    public void setSoundTechnicalIssues(BigDecimal soundTechnicalIssues) {
         this.soundTechnicalIssues = soundTechnicalIssues;
     }
-    public double getSoundRoomAcoustics() {
+    public BigDecimal getSoundRoomAcoustics() {
         return soundRoomAcoustics;
     }
-    public void setSoundRoomAcoustics(double soundRoomAcoustics) {
+    public void setSoundRoomAcoustics(BigDecimal soundRoomAcoustics) {
         this.soundRoomAcoustics = soundRoomAcoustics;
     }
     public String getSoundRatingComments() {

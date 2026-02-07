@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="1.1.0-beta1" use-changelog="false" last-position="0,0" last-zoom="0.85" max-obj-count="19"
+<dbmodel pgmodeler-ver="1.1.0-beta1" use-changelog="false" last-position="0,270" last-zoom="0.85" max-obj-count="19"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -93,7 +93,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="location_name">
 		<type name="varchar" length="255"/>
 	</column>
-	<column name="location_adress">
+	<column name="location_address">
 		<type name="varchar" length="255"/>
 	</column>
 	<column name="location_postal_code">
@@ -106,7 +106,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="varchar" length="255"/>
 	</column>
 	<column name="location_capacity">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
 	<column name="location_description">
 		<type name="text" length="0"/>
@@ -440,10 +440,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="varchar" length="255"/>
 	</column>
 	<column name="review_count">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
 	<column name="event_count">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
 	<column name="review_score">
 		<type name="numeric" length="3" precision="2"/>
@@ -518,7 +518,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 custom-color="#18e619"
 	 src-table="public.event_rating"
 	 dst-table="public.personal_event_rating"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
 
 <relationship name="location_has_many_location_rating" type="rel1n" layers="0"
 	 src-col-pattern="{sc}_{st}"
@@ -696,10 +700,14 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-col-pattern="{sc}_{st}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="{st}_fk"
-	 custom-color="#20052f"
+	 custom-color="#ffffff"
 	 src-table="public.personal_event_rating"
 	 dst-table="public.performance_rating"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-2.9079" y="0.34701"/>
+	</label>
+</relationship>
 
 <relationship name="performance_rating_has_many_performance" type="rel1n" layers="0"
 	 src-col-pattern="{sc}_{st}"
