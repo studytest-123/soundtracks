@@ -2,38 +2,48 @@ package paf.project.soundtracks.model;
 
 public class PersonalEventRating {
     private Long personalEventRatingId;
-    private Long eventId;
+    private Long personId;
+    private Long eventRatingId;
+    private Long atmosphereRatingId;
+    private Long gastronomyRatingId;
+    private Long locationRatingId;
+    private Long performanceRatingId;
+    private Long restroomRatingId;
+    private Long securityRatingId;
+    private Long soundRatingId;
+    private Long wardrobeRatingId;
 
-    private AtmosphereRating atmosphereRating;
+    /* private AtmosphereRating atmosphereRating;
     private GastronomyRating gastronomyRating;
     private LocationRating locationRating;
     private PerformanceRating performanceRating;
     private RestroomRating restroomRating;
     private SecurityRating securityRating;
     private SoundRating soundRating;
-    private WardrobeRating wardrobeRating;
+    private WardrobeRating wardrobeRating; */
 
-    private double eventAverageRating;
+    private double personalEventAverageRating;
     private String personalEventRatingComments;
 
     // constructors
     public PersonalEventRating() {
     }  
-    public PersonalEventRating(Long personalEventRatingId, Long eventId, AtmosphereRating atmosphereRating,
-            GastronomyRating gastronomyRating, LocationRating locationRating, PerformanceRating performanceRating,
-            RestroomRating restroomRating, SecurityRating securityRating, SoundRating soundRating,
-            WardrobeRating wardrobeRating, double eventAverageRating, String personalEventRatingComments) {
+    public PersonalEventRating(Long personalEventRatingId, Long personId, Long eventRatingId, Long atmosphereRatingId,
+            Long gastronomyRatingId, Long locationRatingId, Long performanceRatingId,
+            Long restroomRatingId, Long securityRatingId, Long soundRatingId,
+            Long wardrobeRatingId, double personalEventAverageRating, String personalEventRatingComments) {
         this.personalEventRatingId = personalEventRatingId;
-        this.eventId = eventId;
-        this.atmosphereRating = atmosphereRating;
-        this.gastronomyRating = gastronomyRating;
-        this.locationRating = locationRating;
-        this.performanceRating = performanceRating;
-        this.restroomRating = restroomRating;
-        this.securityRating = securityRating;
-        this.soundRating = soundRating;
-        this.wardrobeRating = wardrobeRating;
-        this.eventAverageRating = eventAverageRating;
+        this.personId = personId;
+        this.eventRatingId = eventRatingId;
+        this.atmosphereRatingId = atmosphereRatingId;
+        this.gastronomyRatingId = gastronomyRatingId;
+        this.locationRatingId = locationRatingId;
+        this.performanceRatingId = performanceRatingId;
+        this.restroomRatingId = restroomRatingId;
+        this.securityRatingId = securityRatingId;
+        this.soundRatingId = soundRatingId;
+        this.wardrobeRatingId = wardrobeRatingId;
+        this.personalEventAverageRating = personalEventAverageRating;
         this.personalEventRatingComments = personalEventRatingComments;
     }
 
@@ -44,65 +54,71 @@ public class PersonalEventRating {
     public void setPersonalEventRatingId(Long personalEventRatingId) {
         this.personalEventRatingId = personalEventRatingId;
     }
-    public Long getEventId() {
-        return eventId;
+    public Long getPersonId() {
+        return personId;
     }
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
+    public void setPersonId(Long personId) {
+        this.personId = personId;
     }
-    public AtmosphereRating getAtmosphereRating() {
-        return atmosphereRating;
+    public Long getEventRatingId() {
+        return eventRatingId;
     }
-    public void setAtmosphereRating(AtmosphereRating atmosphereRating) {
-        this.atmosphereRating = atmosphereRating;
+    public void setEventRatingId(Long eventRatingId) {
+        this.eventRatingId = eventRatingId;
     }
-    public GastronomyRating getGastronomyRating() {
-        return gastronomyRating;
+    public Long getAtmosphereRatingId() {
+        return atmosphereRatingId;
     }
-    public void setGastronomyRating(GastronomyRating gastronomyRating) {
-        this.gastronomyRating = gastronomyRating;
+    public void setAtmosphereRatingId(Long atmosphereRatingId) {
+        this.atmosphereRatingId = atmosphereRatingId;
     }
-    public LocationRating getLocationRating() {
-        return locationRating;
+    public Long getGastronomyRatingId() {
+        return gastronomyRatingId;
     }
-    public void setLocationRating(LocationRating locationRating) {
-        this.locationRating = locationRating;
+    public void setGastronomyRatingId(Long gastronomyRatingId) {
+        this.gastronomyRatingId = gastronomyRatingId;
     }
-    public PerformanceRating getPerformanceRating() {
-        return performanceRating;
+    public Long getLocationRatingId() {
+        return locationRatingId;
     }
-    public void setPerformanceRating(PerformanceRating performanceRating) {
-        this.performanceRating = performanceRating;
+    public void setLocationRatingId(Long locationRatingId) {
+        this.locationRatingId = locationRatingId;
     }
-    public RestroomRating getRestroomRating() {
-        return restroomRating;
+    public Long getPerformanceRatingId() {
+        return performanceRatingId;
     }
-    public void setRestroomRating(RestroomRating restroomRating) {
-        this.restroomRating = restroomRating;
+    public void setPerformanceRatingId(Long performanceRatingId) {
+        this.performanceRatingId = performanceRatingId;
     }
-    public SecurityRating getSecurityRating() {
-        return securityRating;
+    public Long getRestroomRatingId() {
+        return restroomRatingId;
     }
-    public void setSecurityRating(SecurityRating securityRating) {
-        this.securityRating = securityRating;
+    public void setRestroomRatingId(Long restroomRatingId) {
+        this.restroomRatingId = restroomRatingId;
     }
-    public SoundRating getSoundRating() {
-        return soundRating;
+    public Long getSecurityRatingId() {
+        return securityRatingId;
     }
-    public void setSoundRating(SoundRating soundRating) {
-        this.soundRating = soundRating;
+    public void setSecurityRatingId(Long securityRatingId) {
+        this.securityRatingId = securityRatingId;
     }
-    public WardrobeRating getWardrobeRating() {
-        return wardrobeRating;
+    public Long getSoundRatingId() {
+        return soundRatingId;
     }
-    public void setWardrobeRating(WardrobeRating wardrobeRating) {
-        this.wardrobeRating = wardrobeRating;
+    public void setSoundRatingId(Long soundRatingId) {
+        this.soundRatingId = soundRatingId;
     }
-    public double getEventAverageRating() {
-        return eventAverageRating;
+    public Long getWardrobeRatingId() {
+        return wardrobeRatingId;
     }
-    public void setEventAverageRating(double eventAverageRating) {
-        this.eventAverageRating = eventAverageRating;
+    public void setWardrobeRatingId(Long wardrobeRatingId) {
+        this.wardrobeRatingId = wardrobeRatingId;
+    }
+    public double getPersonalEventAverageRating() {
+        return personalEventAverageRating;
+    }
+    public void setPersonalEventAverageRating(double eventAverageRating) {
+        this.personalEventAverageRating = eventAverageRating;
     }
     public String getPersonalEventRatingComments() {
         return personalEventRatingComments;

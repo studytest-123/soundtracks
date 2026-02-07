@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Startseite</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+<!-- Sidebar -->
+<div class="sidebar">
+    <h4 class="sidebar-title">🎶 SoundTracks</h4>
+
+    <a th:href="@{/event/new}" class="btn btn-primary sidebar-btn">
+        ➕ Create Event
+    </a>
+
+    <a th:href="@{/review/new}" class="btn btn-secondary sidebar-btn">
+        ✍️ Create Review
+    </a>
+
+    <hr class="sidebar-divider">
+
+    <a th:href="@{/}" class="btn btn-outline-light sidebar-btn">
+        🏠 Home
+    </a>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <div class="container py-4">
+        <h6>Startseite:</h6>
+
+        <div class="row g-4">
+            <!-- User Info -->
+            <div class="col-md-4">
+                <div class="card p-3 text-center">
+                    <div class="user-image mx-auto mb-3">User Image</div>
+                    <h5 th:text="${user.userName}">User</h5>
+                    <div class="rating mb-2">
+                        <span>★ ★ ★ ★ ☆</span>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li th:text="${user.reviewCount}">Stat1</li>
+                        <li th:text="${user.eventCount}">Stat2</li>
+                        <li th:text="${user.reviewScore}">Stat3</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Latest Contributed Event -->
+            <div class="col-md-8">
+                <a th:href="@{/event/{id}(id=${latestEvent.eventId})}" class="text-decoration-none text-white">
+                    <div class="card p-3">
+                        <h5 th:text="'Latest Contributed: ' + ${latestEvent.eventName}">
+                            Event47 (latest contributed)
+                        </h5>
+                        <div class="row mt-2">
+                            <div class="col-md-4">
+                                <div class="event-image">Event Image</div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="rating mb-2">
+                                    <span>★ ★ ★ ☆ ☆</span>
+                                </div>
+                                <p th:text="${latestEvent.eventDescription}">Description (Preview)</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Event Groups -->
+        <div class="section-title">Upcoming Events</div>
+        <div class="row row-cols-1 row-cols-md-4 g-3">
+            <div class="col" th:each="event : ${upcomingEvents}">
+                <a th:href="@{/event/{id}(id=${event.eventId})}" class="text-decoration-none text-white">
+                    <div class="card p-2">
+                        <h6 th:text="${event.eventName}">Event75 (Today)</h6>
+                        <div class="event-image mb-2"></div>
+                        <div class="rating"><span>☆ ☆ ☆ ☆ ☆</span></div>
+                        <p class="small" th:text="${event.eventDescription}">Description (Preview)</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="section-title">Past Events</div>
+        <div class="row row-cols-1 row-cols-md-4 g-3">
+            <div class="col" th:each="event : ${pastEvents}">
+                <a th:href="@{/event/{id}(id=${event.eventId})}" class="text-decoration-none text-white">
+                    <div class="card p-2">
+                        <h6 th:text="${event.eventName}">Event74 (Yesterday)</h6>
+                        <div class="event-image mb-2"></div>
+                        <div class="rating"><span>★ ★ ☆ ☆ ☆</span></div>
+                        <p class="small" th:text="${event.eventDescription}">Description (Preview)</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

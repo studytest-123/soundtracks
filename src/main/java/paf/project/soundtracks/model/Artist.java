@@ -1,6 +1,12 @@
 package paf.project.soundtracks.model;
 
+import jakarta.persistence.*;
+
+//@Entity
+//@Table(name = "artist")
 public class Artist {
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long artistId;
     private String artistName;
     private String artistGenre;

@@ -14,15 +14,14 @@ public class Event {
     private Double eventPrice;
     private String eventType;
     private String eventDescription;
-    private List<Performance> eventPerformances;
-    private List<EventParticipation> eventParticipations;
+    //private List<Performance> eventPerformances;
+    //private List<EventParticipation> eventParticipations;
     
     // constructors
     public Event() {
     }
     public Event(Long eventId, String eventName, LocalDate eventDate, LocalTime eventStart, LocalTime eventEntry,
-            Location eventLocation, Double eventPrice, String eventType, String eventDescription, List<Performance> eventPerformances,
-            List<EventParticipation> eventParticipations) {
+            Location eventLocation, Double eventPrice, String eventType, String eventDescription) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDate = eventDate;
@@ -32,8 +31,8 @@ public class Event {
         this.eventPrice = eventPrice;
         this.eventType = eventType;
         this.eventDescription = eventDescription;
-        this.eventPerformances = eventPerformances;
-        this.eventParticipations = eventParticipations;
+        //this.eventPerformances = eventPerformances;
+        //this.eventParticipations = eventParticipations;
     }
     
     // getters and setters
@@ -91,6 +90,7 @@ public class Event {
     public void setEventDescription(String eventDescription) {
         this.eventDescription = eventDescription;
     }   
+    /*
     public List<Performance> getEventPerformances() {
         return eventPerformances;
     }
@@ -103,4 +103,5 @@ public class Event {
     public void setEventParticipations(List<EventParticipation> eventParticipations) {
         this.eventParticipations = eventParticipations;
     }
+    */
 }

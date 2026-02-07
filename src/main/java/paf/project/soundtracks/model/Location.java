@@ -4,7 +4,7 @@ public class Location {
     private Long locationId;
     private String locationName;
     private String locationAddress;
-    private int locationPostalCode;
+    private String locationPostalCode;
     private String locationCity;
     private String locationCountry;
     private int locationCapacity;
@@ -14,7 +14,11 @@ public class Location {
     public Location() {
     }
 
-    public Location(Long locationId, String locationName, String locationAddress, int locationPostalCode,
+    public Location(Long locationId) {
+        this.locationId = locationId;
+    }
+
+    public Location(Long locationId, String locationName, String locationAddress, String locationPostalCode,
             String locationCity, String locationCountry, int locationCapacity, String locationDescription) {
         this.locationId = locationId;
         this.locationName = locationName;
@@ -51,11 +55,11 @@ public class Location {
         this.locationAddress = locationAddress;
     }
 
-    public int getLocationPostalCode() {
+    public String getLocationPostalCode() {
         return locationPostalCode;
     }
 
-    public void setLocationPostalCode(int locationPostalCode) {
+    public void setLocationPostalCode(String locationPostalCode) {
         this.locationPostalCode = locationPostalCode;
     }
 

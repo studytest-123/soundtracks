@@ -4,20 +4,20 @@ public class SetlistItem {
     private Long setlistItemId;
     private int setlistItemOrder;
     private String trackTitle;
-    private String trackDuration;
-    private String trackNotes;
+    private double trackDuration;
+    private String trackComments;
 
     // constructors
     public SetlistItem() {
     }
 
     public SetlistItem(Long setlistItemId, int setlistItemOrder, String trackTitle,
-                       String trackDuration, String trackNotes) {
+                       double trackDuration, String trackComments) {
         this.setlistItemId = setlistItemId;
         this.setlistItemOrder = setlistItemOrder;
         this.trackTitle = trackTitle;
         this.trackDuration = trackDuration;
-        this.trackNotes = trackNotes;
+        this.trackComments = trackComments;
     }
 
     //getters and setters
@@ -39,17 +39,17 @@ public class SetlistItem {
     public void setTrackTitle(String trackTitle) {
         this.trackTitle = trackTitle;
     }
-    public String getTrackDuration() {
+    public double getTrackDuration() {
         return trackDuration;
     }
-    public void setTrackDuration(String trackDuration) {
+    public void setTrackDuration(double trackDuration) {
         this.trackDuration = trackDuration;
     }
-    public String getTrackNotes() {
-        return trackNotes;
+    public String getTrackComments() {
+        return trackComments;
     }
-    public void setTrackNotes(String trackNotes) {
-        this.trackNotes = trackNotes;
+    public void setTrackComments(String trackComments) {
+        this.trackComments = trackComments;
     }
 
 }

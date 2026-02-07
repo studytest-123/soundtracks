@@ -1,34 +1,39 @@
 package paf.project.soundtracks.model;
 
+import java.time.Duration;
 import java.util.List;
 
 public class Performance {
     private Long performanceId;
     // eventually future database links 
     private Long eventId;
-    private Artist artistId;
+    private Long artistId;
+
+    private Duration performanceDuration;
+    private String performanceType;
+    private String performanceGenre;
+    
 
     // JSON linking
-    private Artist artistObject;
+    //private Artist artistObject;
 
     // Setlist
-    private List<SetlistItem> performanceSetlist;
+    //private List<SetlistItem> performanceSetlist;
 
     // Rating
-    private PerformanceRating performanceRating;
+    // private PerformanceRating performanceRating;
 
     // constructors
     public Performance() {
     }
 
-    public Performance(Long performanceId, Long eventId, Artist artistId, Artist artistObject,
-                       List<SetlistItem> performanceSetlist, PerformanceRating performanceRating) {
+    public Performance(Long performanceId, Long eventId, Long artistId) {
         this.performanceId = performanceId;
         this.eventId = eventId;
         this.artistId = artistId;
-        this.artistObject = artistObject;
-        this.performanceSetlist = performanceSetlist;
-        this.performanceRating = performanceRating;
+        /* this.artistObject = artistObject;
+        this.performanceSetlist = performanceSetlist; */
+        //this.performanceRating = performanceRating;
     }
 
     // getters and setters
@@ -48,15 +53,15 @@ public class Performance {
         this.eventId = eventId;
     }
 
-    public Artist getArtistId() {
+    public Long getArtistId() {
         return artistId;
     }
 
-    public void setArtistId(Artist artistId) {
+    public void setArtistId(Long artistId) {
         this.artistId = artistId;
     }
 
-    public Artist getArtistObject() {
+    /* public Artist getArtistObject() {
         return artistObject;
     }
 
@@ -78,7 +83,7 @@ public class Performance {
 
     public void setPerformanceRating(PerformanceRating performanceRating) {
         this.performanceRating = performanceRating;
-    }
+    } */
 
     @Override
     public String toString() {
@@ -86,9 +91,9 @@ public class Performance {
                 "performanceId=" + performanceId +
                 ", eventId=" + eventId +
                 ", artistId=" + artistId +          
-                ", artist=" + artistObject.getArtistName() +
+                /* ", artist=" + artistObject.getArtistName() +
                 ", performanceSetlist=" + performanceSetlist +
-                ", performanceRating=" + performanceRating +
+                ", performanceRating=" + performanceRating + */
                 '}';
     }
 }

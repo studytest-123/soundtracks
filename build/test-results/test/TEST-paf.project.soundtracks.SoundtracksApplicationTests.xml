@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="paf.project.soundtracks.SoundtracksApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-13T19:45:59.050Z" hostname="ubuntutw" time="0.706">
+<testsuite name="paf.project.soundtracks.SoundtracksApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-17T20:29:15.143Z" hostname="ubuntutw" time="0.577">
   <properties/>
-  <testcase name="contextLoads()" classname="paf.project.soundtracks.SoundtracksApplicationTests" time="0.706"/>
-  <system-out><![CDATA[20:45:57.306 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [paf.project.soundtracks.SoundtracksApplicationTests]: SoundtracksApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-20:45:57.449 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration paf.project.soundtracks.SoundtracksApplication for test class paf.project.soundtracks.SoundtracksApplicationTests
+  <testcase name="contextLoads()" classname="paf.project.soundtracks.SoundtracksApplicationTests" time="0.577"/>
+  <system-out><![CDATA[21:29:11.116 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [paf.project.soundtracks.SoundtracksApplicationTests]: SoundtracksApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:29:11.259 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration paf.project.soundtracks.SoundtracksApplication for test class paf.project.soundtracks.SoundtracksApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -14,9 +14,33 @@
 
  :: Spring Boot ::                (v4.0.1)
 
-2026-01-13T20:45:57.865+01:00  INFO 322792 --- [soundtracks] [    Test worker] p.p.s.SoundtracksApplicationTests        : Starting SoundtracksApplicationTests using Java 25.0.1 with PID 322792 (started by alex in /home/alex/Documents/paf/soundtracks/soundtracks)
-2026-01-13T20:45:57.867+01:00  INFO 322792 --- [soundtracks] [    Test worker] p.p.s.SoundtracksApplicationTests        : No active profile set, falling back to 1 default profile: "default"
-2026-01-13T20:45:59.037+01:00  INFO 322792 --- [soundtracks] [    Test worker] p.p.s.SoundtracksApplicationTests        : Started SoundtracksApplicationTests in 1.435 seconds (process running for 2.848)
+2026-01-17T21:29:11.765+01:00  INFO 97180 --- [soundtracks] [    Test worker] p.p.s.SoundtracksApplicationTests        : Starting SoundtracksApplicationTests using Java 25.0.1 with PID 97180 (started by alex in /home/alex/Documents/paf/soundtracks/soundtracks)
+2026-01-17T21:29:11.767+01:00  INFO 97180 --- [soundtracks] [    Test worker] p.p.s.SoundtracksApplicationTests        : No active profile set, falling back to 1 default profile: "default"
+2026-01-17T21:29:12.557+01:00  INFO 97180 --- [soundtracks] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-17T21:29:12.594+01:00  INFO 97180 --- [soundtracks] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22 ms. Found 0 JPA repository interfaces.
+2026-01-17T21:29:13.055+01:00  INFO 97180 --- [soundtracks] [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-01-17T21:29:13.114+01:00  INFO 97180 --- [soundtracks] [    Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.0.Final
+2026-01-17T21:29:13.663+01:00  INFO 97180 --- [soundtracks] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-17T21:29:13.699+01:00  INFO 97180 --- [soundtracks] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-01-17T21:29:13.901+01:00  INFO 97180 --- [soundtracks] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2f39b534
+2026-01-17T21:29:13.902+01:00  INFO 97180 --- [soundtracks] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-01-17T21:29:13.974+01:00  INFO 97180 --- [soundtracks] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/soundtracks]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: soundtracks/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-01-17T21:29:14.417+01:00  INFO 97180 --- [soundtracks] [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-17T21:29:14.427+01:00  INFO 97180 --- [soundtracks] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-17T21:29:14.591+01:00  WARN 97180 --- [soundtracks] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-17T21:29:14.624+01:00  INFO 97180 --- [soundtracks] [    Test worker] o.s.b.w.a.WelcomePageHandlerMapping      : Adding welcome page template: index
+2026-01-17T21:29:15.129+01:00  INFO 97180 --- [soundtracks] [    Test worker] p.p.s.SoundtracksApplicationTests        : Started SoundtracksApplicationTests in 3.674 seconds (process running for 5.276)
 ]]></system-out>
   <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
 WARNING: A Java agent has been loaded dynamically (/home/alex/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.17.8/f09415827a71be7ed621c7bd02550678f28bc81c/byte-buddy-agent-1.17.8.jar)

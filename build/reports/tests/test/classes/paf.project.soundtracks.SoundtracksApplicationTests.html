@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.706s</div>
+<div class="counter">0.577s</div>
 <p>duration</p>
 </div>
 </td>
@@ -82,7 +82,7 @@
 </thead>
 <tr>
 <td class="success">contextLoads()</td>
-<td class="success">0.706s</td>
+<td class="success">0.577s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -90,8 +90,8 @@
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre id="class-stdout">20:45:57.306 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [paf.project.soundtracks.SoundtracksApplicationTests]: SoundtracksApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-20:45:57.449 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration paf.project.soundtracks.SoundtracksApplication for test class paf.project.soundtracks.SoundtracksApplicationTests
+<pre id="class-stdout">21:29:11.116 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [paf.project.soundtracks.SoundtracksApplicationTests]: SoundtracksApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:29:11.259 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration paf.project.soundtracks.SoundtracksApplication for test class paf.project.soundtracks.SoundtracksApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -102,9 +102,33 @@
 
  :: Spring Boot ::                (v4.0.1)
 
-2026-01-13T20:45:57.865+01:00  INFO 322792 --- [soundtracks] [    Test worker] p.p.s.SoundtracksApplicationTests        : Starting SoundtracksApplicationTests using Java 25.0.1 with PID 322792 (started by alex in /home/alex/Documents/paf/soundtracks/soundtracks)
-2026-01-13T20:45:57.867+01:00  INFO 322792 --- [soundtracks] [    Test worker] p.p.s.SoundtracksApplicationTests        : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2026-01-13T20:45:59.037+01:00  INFO 322792 --- [soundtracks] [    Test worker] p.p.s.SoundtracksApplicationTests        : Started SoundtracksApplicationTests in 1.435 seconds (process running for 2.848)
+2026-01-17T21:29:11.765+01:00  INFO 97180 --- [soundtracks] [    Test worker] p.p.s.SoundtracksApplicationTests        : Starting SoundtracksApplicationTests using Java 25.0.1 with PID 97180 (started by alex in /home/alex/Documents/paf/soundtracks/soundtracks)
+2026-01-17T21:29:11.767+01:00  INFO 97180 --- [soundtracks] [    Test worker] p.p.s.SoundtracksApplicationTests        : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2026-01-17T21:29:12.557+01:00  INFO 97180 --- [soundtracks] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-17T21:29:12.594+01:00  INFO 97180 --- [soundtracks] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22 ms. Found 0 JPA repository interfaces.
+2026-01-17T21:29:13.055+01:00  INFO 97180 --- [soundtracks] [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-01-17T21:29:13.114+01:00  INFO 97180 --- [soundtracks] [    Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.0.Final
+2026-01-17T21:29:13.663+01:00  INFO 97180 --- [soundtracks] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-17T21:29:13.699+01:00  INFO 97180 --- [soundtracks] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-01-17T21:29:13.901+01:00  INFO 97180 --- [soundtracks] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2f39b534
+2026-01-17T21:29:13.902+01:00  INFO 97180 --- [soundtracks] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-01-17T21:29:13.974+01:00  INFO 97180 --- [soundtracks] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/soundtracks]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: soundtracks/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-01-17T21:29:14.417+01:00  INFO 97180 --- [soundtracks] [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-17T21:29:14.427+01:00  INFO 97180 --- [soundtracks] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-17T21:29:14.591+01:00  WARN 97180 --- [soundtracks] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-17T21:29:14.624+01:00  INFO 97180 --- [soundtracks] [    Test worker] o.s.b.w.a.WelcomePageHandlerMapping      : Adding welcome page template: index
+2026-01-17T21:29:15.129+01:00  INFO 97180 --- [soundtracks] [    Test worker] p.p.s.SoundtracksApplicationTests        : Started SoundtracksApplicationTests in 3.674 seconds (process running for 5.276)
 </pre>
 <button class="clipboard-copy-btn" aria-label="Copy to clipboard" data-copy-element-id="class-stdout">Copy</button>
 </span>
@@ -129,7 +153,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 9.2.1</a> at Jan 13, 2026, 8:45:59 PM</p>
+<a href="https://www.gradle.org">Gradle 9.2.1</a> at Jan 17, 2026, 9:29:15 PM</p>
 </div>
 </div>
 </body>

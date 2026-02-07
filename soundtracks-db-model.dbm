@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.1.0-beta1" use-changelog="false" last-position="0,0" last-zoom="0.85" max-obj-count="19"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<role name="soundtracks_user"
+ password="soundtracks_pw">
+</role>
+
+<database name="soundtracks" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" layers="0" fill-color="#e1e1e1" name-color="#000000" sql-disabled="true">
+</schema>
+
+<table name="artist" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<position x="20" y="40"/>
+	<column name="artist_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="artist_name">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="artist_genre">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="artist_country">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="artist_description">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="artist_pk" type="pk-constr" table="public.artist">
+		<columns names="artist_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="event" layers="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="10" z-value="0">
+	<schema name="public"/>
+	<position x="80" y="460"/>
+	<column name="event_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="event_name">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="event_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="event_start">
+		<type name="time" length="0"/>
+	</column>
+	<column name="event_entry">
+		<type name="time" length="0"/>
+	</column>
+	<column name="event_price">
+		<type name="numeric" length="7" precision="2"/>
+	</column>
+	<column name="event_type">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="event_description">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="event_pk" type="pk-constr" table="public.event">
+		<columns names="event_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="location_id_location" index="8"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="location_fk" index="1"/>
+	</customidxs></table>
+
+<table name="location" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
+	<schema name="public"/>
+	<position x="60" y="900"/>
+	<column name="location_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="location_name">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="location_adress">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="location_postal_code">
+		<type name="varchar" length="20"/>
+	</column>
+	<column name="location_city">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="location_country">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="location_capacity">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="location_description">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="location_pk" type="pk-constr" table="public.location">
+		<columns names="location_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="performance_rating" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
+	<schema name="public"/>
+	<position x="1340" y="20"/>
+	<column name="performance_rating_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="performance_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="performance_quality">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="sound_quality">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="set_length">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="track_selection">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="visual_show">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="performance_rating_comments">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="performance_rating_pk" type="pk-constr" table="public.performance_rating">
+		<columns names="performance_rating_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="personal_event_rating_id_personal_event_rating" index="8"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="personal_event_rating_fk" index="1"/>
+	</customidxs></table>
+
+<table name="personal_event_rating" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<position x="1580" y="560"/>
+	<column name="personal_event_rating_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="personal_event_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="personal_event_rating_comments">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="personal_event_rating_pk" type="pk-constr" table="public.personal_event_rating">
+		<columns names="personal_event_rating_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="event_rating_id_event_rating" index="4"/>
+		<object name="person_id_person" index="3"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="event_rating_fk" index="2"/>
+		<object name="person_fk" index="1"/>
+	</customidxs></table>
+
+<table name="location_rating" layers="0" collapse-mode="2" max-obj-count="14" z-value="0">
+	<schema name="public"/>
+	<position x="620" y="960"/>
+	<column name="location_rating_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="location_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="location_size">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="location_area">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="location_accessibility">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="location_equipment">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="location_ambience">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="location_cleanliness">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="location_staff">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="location_rating_comments">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="location_rating_pk" type="pk-constr" table="public.location_rating">
+		<columns names="location_rating_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="location_id_location" index="10"/>
+		<object name="personal_event_rating_id_personal_event_rating" index="11"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="location_fk" index="1"/>
+		<object name="location_rating_uq" index="3"/>
+		<object name="personal_event_rating_fk" index="2"/>
+	</customidxs></table>
+
+<table name="restroom_rating" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
+	<schema name="public"/>
+	<position x="2420" y="680"/>
+	<column name="restroom_rating_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="restroom_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="restroom_cleanliness">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="restroom_accessibility">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="restroom_supplies">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="restroom_size">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="restroom_rating_comments">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="restroom_rating_pk" type="pk-constr" table="public.restroom_rating">
+		<columns names="restroom_rating_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="personal_event_rating_id_personal_event_rating" index="7"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="personal_event_rating_fk" index="1"/>
+		<object name="restroom_rating_uq" index="2"/>
+	</customidxs></table>
+
+<table name="security_rating" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<position x="2440" y="1140"/>
+	<column name="security_rating_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="security_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="staff_friendliness">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="staff_competence">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="sense_of_security">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="security_rating_comments">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="security_rating_pk" type="pk-constr" table="public.security_rating">
+		<columns names="security_rating_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="personal_event_rating_id_personal_event_rating" index="6"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="personal_event_rating_fk" index="1"/>
+		<object name="security_rating_uq" index="2"/>
+	</customidxs></table>
+
+<table name="sound_rating" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
+	<schema name="public"/>
+	<position x="1820" y="1080"/>
+	<column name="sound_rating_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="sound_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="sound_overall_quality">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="sound_loudness">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="sound_technical_issues">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="sound_room_acoustics">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="sound_rating_comments">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="sound_rating_pk" type="pk-constr" table="public.sound_rating">
+		<columns names="sound_rating_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="personal_event_rating_id_personal_event_rating" index="7"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="personal_event_rating_fk" index="1"/>
+		<object name="sound_rating_uq" index="2"/>
+	</customidxs></table>
+
+<table name="wardrobe_rating" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
+	<schema name="public"/>
+	<position x="1220" y="1080"/>
+	<column name="wardrobe_rating_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="wardrobe_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="wardrobe_price">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="wardrobe_staff_efficiency">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="wardrobe_staff_friendliness">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="wardrobe_quality">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="wardrobe_rating_comments">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="sound_rating_pk_cp" type="pk-constr" table="public.wardrobe_rating">
+		<columns names="wardrobe_rating_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="personal_event_rating_id_personal_event_rating" index="7"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="personal_event_rating_fk" index="1"/>
+		<object name="wardrobe_rating_uq" index="2"/>
+	</customidxs></table>
+
+<relationship name="location_has_many_event" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a7b984"
+	 src-table="public.location"
+	 dst-table="public.event"
+	 src-required="false" dst-required="false"/>
+
+<table name="event_rating" layers="0" collapse-mode="2" max-obj-count="13" z-value="0">
+	<schema name="public"/>
+	<position x="960" y="320"/>
+	<column name="event_rating_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="event_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="atmosphere_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="gastronomy_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="location_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="performance_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="restroom_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="security_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="sound_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="wardrobe_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<constraint name="event_rating_pk" type="pk-constr" table="public.event_rating">
+		<columns names="event_rating_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="event_id_event" index="10"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="event_fk" index="1"/>
+		<object name="event_rating_uq" index="2"/>
+	</customidxs></table>
+
+<table name="person" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<position x="860" y="720"/>
+	<column name="person_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="user_name">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="review_count">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="event_count">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="review_score">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<constraint name="person_pk" type="pk-constr" table="public.person">
+		<columns names="person_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="gastronomy_rating" layers="0" collapse-mode="2" max-obj-count="14" z-value="0">
+	<schema name="public"/>
+	<position x="2380" y="180"/>
+	<column name="gastronomy_rating_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="gastronomy_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="gastronomy_food_variety">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="gastronomy_food_quality">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="gastronomy_food_prices">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="gastronomy_drink_variety">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="gastronomy_drink_quality">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="gastronomy_drink_prices">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="gastronomy_staff_efficiency">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="gastronomy_staff_friendliness">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="gastronomy_rating_comments">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="gastronomy_rating_pk" type="pk-constr" table="public.gastronomy_rating">
+		<columns names="gastronomy_rating_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="personal_event_rating_id_personal_event_rating" index="11"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="gastronomy_rating_uq" index="2"/>
+		<object name="personal_event_rating_fk" index="1"/>
+	</customidxs></table>
+
+<relationship name="person_has_many_personal_event_rating" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a710c6"
+	 src-table="public.person"
+	 dst-table="public.personal_event_rating"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="event_rating_has_many_personal_event_rating" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#18e619"
+	 src-table="public.event_rating"
+	 dst-table="public.personal_event_rating"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="location_has_many_location_rating" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#11f6ab"
+	 src-table="public.location"
+	 dst-table="public.location_rating"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="location_rating_has_one_personal_event_rating" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#565b8f"
+	 src-table="public.personal_event_rating"
+	 dst-table="public.location_rating"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="wardrobe_rating_has_one_personal_event_rating" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#3bd4a7"
+	 src-table="public.personal_event_rating"
+	 dst-table="public.wardrobe_rating"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="sound_rating_has_one_personal_event_rating" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#b29336"
+	 src-table="public.personal_event_rating"
+	 dst-table="public.sound_rating"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="security_rating_has_one_personal_event_rating" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#0e9539"
+	 src-table="public.personal_event_rating"
+	 dst-table="public.security_rating"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="restroom_rating_has_one_personal_event_rating" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#621375"
+	 src-table="public.personal_event_rating"
+	 dst-table="public.restroom_rating"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="gastronomy_rating_has_one_personal_event_rating" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#5f7053"
+	 src-table="public.personal_event_rating"
+	 dst-table="public.gastronomy_rating"
+	 src-required="false" dst-required="false"/>
+
+<table name="atmosphere_rating" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
+	<schema name="public"/>
+	<position x="1880" y="20"/>
+	<column name="atmosphere_rating_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="atmosphere_average_rating">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="event_vibe">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="crowd_engagement">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="light_and_visuals">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="event_decorations">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="staff_friendliness">
+		<type name="numeric" length="3" precision="2"/>
+	</column>
+	<column name="atmosphere_rating_comments">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="atmosphere_rating_pk" type="pk-constr" table="public.atmosphere_rating">
+		<columns names="atmosphere_rating_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="personal_event_rating_id_personal_event_rating" index="8"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="atmosphere_rating_uq" index="2"/>
+		<object name="personal_event_rating_fk" index="1"/>
+	</customidxs></table>
+
+<table name="performance" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<position x="480" y="20"/>
+	<column name="performance_id" not-null="true"
+	 identity-type="BY DEFAULT">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="performance_duration">
+		<type name="interval" length="0"/>
+	</column>
+	<column name="performance_type">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="performance_genre">
+		<type name="varchar" length="255"/>
+	</column>
+	<constraint name="performance_pk" type="pk-constr" table="public.performance">
+		<columns names="performance_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="artist_id_artist" index="4"/>
+		<object name="event_id_event" index="5"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="artist_fk" index="1"/>
+		<object name="event_fk" index="2"/>
+	</customidxs></table>
+
+<relationship name="event_rating_has_one_event" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#e38b9f"
+	 src-table="public.event"
+	 dst-table="public.event_rating"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="artist_has_many_performance" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#640065"
+	 src-table="public.artist"
+	 dst-table="public.performance"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="event_has_many_performance" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#10c37c"
+	 src-table="public.event"
+	 dst-table="public.performance"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="atmosphere_rating_has_one_personal_event_rating" type="rel11" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#f9f06b"
+	 src-table="public.personal_event_rating"
+	 dst-table="public.atmosphere_rating"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="103.888" y="-30.953"/>
+	</label>
+</relationship>
+
+<relationship name="personal_event_rating_has_many_performance_rating" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#20052f"
+	 src-table="public.personal_event_rating"
+	 dst-table="public.performance_rating"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="performance_rating_has_many_performance" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#612ae7"
+	 src-table="public.performance_rating"
+	 dst-table="public.performance"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>

@@ -2,6 +2,7 @@ package paf.project.soundtracks.model;
 
 public class PerformanceRating {
     private Long performanceRatingId;
+    private Long performanceId;
     private double performanceAverageRating;
     private double performanceQuality;
     private double soundQuality;
@@ -14,9 +15,10 @@ public class PerformanceRating {
     // constructors
     public PerformanceRating() {
     }
-    public PerformanceRating(Long performanceRatingId, double performanceAverageRating, double performanceQuality, double soundQuality,
+    public PerformanceRating(Long performanceRatingId, Long performanceId, double performanceAverageRating, double performanceQuality, double soundQuality,
                              double setLength, double trackSelection, double visualShow, String performanceRatingComments) {
         this.performanceRatingId = performanceRatingId;
+        this.performanceId = performanceId;
         this.performanceAverageRating = performanceAverageRating;
         this.performanceQuality = performanceQuality;
         this.soundQuality = soundQuality;
@@ -33,6 +35,13 @@ public class PerformanceRating {
 
     public void setPerformanceRatingId(Long performanceRatingId) {
         this.performanceRatingId = performanceRatingId;
+    }
+    public Long getPerformanceId() {
+        return performanceId;
+    }
+
+    public void setPerformanceId(Long performanceId) {
+        this.performanceId = performanceId;
     }
 
     public double getPerformanceAverageRating() {

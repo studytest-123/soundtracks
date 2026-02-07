@@ -2,9 +2,10 @@ package paf.project.soundtracks.model;
 
 public class LocationRating {
     // future database primary key
-    private Long locationId;
+    private Long locationRatingId;
 
-    private Location ratedLocation;
+    private Long locationId;
+    //private Location ratedLocation;
     private double locationAverageRating;
     private double locationSize;
     private double locationArea;
@@ -19,11 +20,11 @@ public class LocationRating {
     public LocationRating() {
     }
 
-    public LocationRating(Long locationId, Location ratedLocation, double locationAverageRating, double locationSize,
+    public LocationRating(Long locationRatingId, Long locationId, double locationAverageRating, double locationSize,
             double locationArea, double locationAccessibility, double locationEquipment, double locationAmbience,
             double locationCleanliness, double locationStaff, String locationRatingComments) {
+        this.locationRatingId = locationRatingId;
         this.locationId = locationId;
-        this.ratedLocation = ratedLocation;
         this.locationAverageRating = locationAverageRating;
         this.locationSize = locationSize;
         this.locationArea = locationArea;
@@ -36,17 +37,17 @@ public class LocationRating {
     }
 
     // getters and setters
-    public Long getLocationId() {
+    public Long getLocationRatingId() {
+        return locationRatingId;
+    }
+    public void setLocationRatingId(Long locationRatingId) {
+        this.locationRatingId = locationRatingId;
+    }
+    public Long getLocationId(){
         return locationId;
     }
-    public void setLocationId(Long locationId) {
+    public void setLocationId(Long locationId){
         this.locationId = locationId;
-    }
-    public Location getRatedLocation() {
-        return ratedLocation;
-    }
-    public void setRatedLocation(Location ratedLocation) {
-        this.ratedLocation = ratedLocation;
     }
     public double getLocationAverageRating() {
         return locationAverageRating;

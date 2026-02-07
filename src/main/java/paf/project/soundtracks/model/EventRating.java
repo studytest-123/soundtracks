@@ -4,34 +4,35 @@ public class EventRating {
     private Long eventRatingId;
     private Long eventId;
 
-    private AtmosphereRating atmosphereRating;
-    private GastronomyRating gastronomyRating;
-    private LocationRating locationRating;
-    private PerformanceRating performanceRating;
-    private RestroomRating restroomRating;
-    private SecurityRating securityRating;
-    private SoundRating soundRating;
-    private WardrobeRating wardrobeRating;
-
     private double eventAverageRating;
+    private double atmosphereAverageRating;
+    private double gastronomyAverageRating;
+    private double locationAverageRating;
+    private double performanceAverageRating;
+    private double restroomAverageRating;
+    private double securityAverageRating;
+    private double soundAverageRating;
+    private double wardrobeAverageRating;
+
+    
 
     // constructors
     public EventRating() {
     }  
-    public EventRating(Long eventRatingId, Long eventId, AtmosphereRating atmosphereRating,
-            GastronomyRating gastronomyRating, LocationRating locationRating, PerformanceRating performanceRating,
-            RestroomRating restroomRating, SecurityRating securityRating, SoundRating soundRating,
-            WardrobeRating wardrobeRating, double eventAverageRating) {
+    public EventRating(Long eventRatingId, Long eventId, double atmosphereAverageRating,
+            double gastronomyAverageRating, double locationAverageRating, double performanceAverageRating,
+            double restroomAverageRating, double securityAverageRating, double soundAverageRating,
+            double wardrobeAverageRating, double eventAverageRating) {
         this.eventRatingId = eventRatingId;
         this.eventId = eventId;
-        this.atmosphereRating = atmosphereRating;
-        this.gastronomyRating = gastronomyRating;
-        this.locationRating = locationRating;
-        this.performanceRating = performanceRating;
-        this.restroomRating = restroomRating;
-        this.securityRating = securityRating;
-        this.soundRating = soundRating;
-        this.wardrobeRating = wardrobeRating;
+        this.atmosphereAverageRating = atmosphereAverageRating;
+        this.gastronomyAverageRating = gastronomyAverageRating;
+        this.locationAverageRating = locationAverageRating;
+        this.performanceAverageRating = performanceAverageRating;
+        this.restroomAverageRating = restroomAverageRating;
+        this.securityAverageRating = securityAverageRating;
+        this.soundAverageRating = soundAverageRating;
+        this.wardrobeAverageRating = wardrobeAverageRating;
         this.eventAverageRating = eventAverageRating;
     }
 
@@ -48,53 +49,53 @@ public class EventRating {
     public void setEventId(Long eventId) {
         this.eventId = eventId;
     }
-    public AtmosphereRating getAtmosphereRating() {
-        return atmosphereRating;
+    public double getAtmosphereAverageRating() {
+        return atmosphereAverageRating;
     }
-    public void setAtmosphereRating(AtmosphereRating atmosphereRating) {
-        this.atmosphereRating = atmosphereRating;
+    public void setAtmosphereAverageRating(double atmosphereAverageRating) {
+        this.atmosphereAverageRating = atmosphereAverageRating;
     }
-    public GastronomyRating getGastronomyRating() {
-        return gastronomyRating;
+    public double getGastronomyAverageRating() {
+        return gastronomyAverageRating;
     }
-    public void setGastronomyRating(GastronomyRating gastronomyRating) {
-        this.gastronomyRating = gastronomyRating;
+    public void setGastronomyAverageRating(double gastronomyAverageRating) {
+        this.gastronomyAverageRating = gastronomyAverageRating;
     }
-    public LocationRating getLocationRating() {
-        return locationRating;
+    public double getLocationAverageRating() {
+        return locationAverageRating;
     }
-    public void setLocationRating(LocationRating locationRating) {
-        this.locationRating = locationRating;
+    public void setLocationAverageRating(double locationAverageRating) {
+        this.locationAverageRating = locationAverageRating;
     }
-    public PerformanceRating getPerformanceRating() {
-        return performanceRating;
+    public double getPerformanceAverageRating() {
+        return performanceAverageRating;
     }
-    public void setPerformanceRating(PerformanceRating performanceRating) {
-        this.performanceRating = performanceRating;
+    public void setPerformanceAverageRating(double performanceAverageRating) {
+        this.performanceAverageRating = performanceAverageRating;
     }
-    public RestroomRating getRestroomRating() {
-        return restroomRating;
+    public double getRestroomAverageRating() {
+        return restroomAverageRating;
     }
-    public void setRestroomRating(RestroomRating restroomRating) {
-        this.restroomRating = restroomRating;
+    public void setRestroomAverageRating(double restroomAverageRating) {
+        this.restroomAverageRating = restroomAverageRating;
     }
-    public SecurityRating getSecurityRating() {
-        return securityRating;
+    public double getSecurityAverageRating() {
+        return securityAverageRating;
     }
-    public void setSecurityRating(SecurityRating securityRating) {
-        this.securityRating = securityRating;
+    public void setSecurityAverageRating(double securityAverageRating) {
+        this.securityAverageRating = securityAverageRating;
     }
-    public SoundRating getSoundRating() {
-        return soundRating;
+    public double getSoundAverageRating() {
+        return soundAverageRating;
     }
-    public void setSoundRating(SoundRating soundRating) {
-        this.soundRating = soundRating;
+    public void setSoundAverageRating(double soundAverageRating) {
+        this.soundAverageRating = soundAverageRating;
     }
-    public WardrobeRating getWardrobeRating() {
-        return wardrobeRating;
+    public double getWardrobeAverageRating() {
+        return wardrobeAverageRating;
     }
-    public void setWardrobeRating(WardrobeRating wardrobeRating) {
-        this.wardrobeRating = wardrobeRating;
+    public void setWardrobeAverageRating(double wardrobeAverageRating) {
+        this.wardrobeAverageRating = wardrobeAverageRating;
     }
     public double getEventAverageRating() {
         return eventAverageRating;

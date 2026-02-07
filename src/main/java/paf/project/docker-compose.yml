@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: soundtracks-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: soundtracks
+      POSTGRES_USER: soundtracks_user
+      POSTGRES_PASSWORD: soundtracks_pw
+    volumes:
+      - soundtracks_pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: soundtracks-pgadmin
+    restart: unless-stopped
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@soundtracks.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - postgres
+    volumes:
+      - soundtracks_pgadmin:/var/lib/pgadmin
+
+volumes:
+  soundtracks_pgdata:
+  soundtracks_pgadmin:
