@@ -3,9 +3,7 @@ package paf.project.soundtracks.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
-import org.checkerframework.checker.units.qual.C;
 
 import jakarta.persistence.*;
 
@@ -24,9 +22,14 @@ public class Event {
     private LocalTime eventStart;
     @Column(name = "event_entry")
     private LocalTime eventEntry;
-    @ManyToOne
+    
+    @ManyToOne //(fetch = FetchType.EAGER)
     @JoinColumn(name = "location_id_location")
-    private Location eventLocation;
+    private Location location;
+
+    @Transient
+    private Long locationId; // for form binding only, not persisted
+
     @Column(name = "event_price")
     private BigDecimal eventPrice;
     @Column(name = "event_type")
@@ -40,13 +43,13 @@ public class Event {
     public Event() {
     }
     public Event(Long eventId, String eventName, LocalDate eventDate, LocalTime eventStart, LocalTime eventEntry,
-            Location eventLocation, BigDecimal eventPrice, String eventType, String eventDescription) {
+            Location location, BigDecimal eventPrice, String eventType, String eventDescription) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDate = eventDate;
         this.eventStart = eventStart;
         this.eventEntry = eventEntry;
-        this.eventLocation = eventLocation;
+        this.location = location;
         this.eventPrice = eventPrice;
         this.eventType = eventType;
         this.eventDescription = eventDescription;
@@ -85,11 +88,17 @@ public class Event {
     public void setEventEntry(LocalTime eventEntry) {
         this.eventEntry = eventEntry;
     }
-    public Location getEventLocation() {
-        return eventLocation;
+    public Location getLocation() {
+        return location;
     }
-    public void setEventLocation(Location eventLocation) {
-        this.eventLocation = eventLocation;
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+    public Long getLocationId() {
+        return locationId;
+    }
+    public void setLocationId(Long locationId) {
+        this.locationId = locationId;
     }
     public BigDecimal getEventPrice() {
         return eventPrice;

@@ -1,14 +1,9 @@
 package paf.project.soundtracks.model;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
-
-import org.checkerframework.checker.units.qual.C;
 
 import jakarta.persistence.*;
 
-import java.util.List;
 
 @Entity
 @Table(name = "person")

@@ -2,8 +2,6 @@ package paf.project.soundtracks.model;
 
 import java.math.BigDecimal;
 
-import org.checkerframework.checker.units.qual.C;
-
 import jakarta.persistence.*;
 
 @Entity

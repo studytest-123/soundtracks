@@ -1,10 +1,7 @@
 package paf.project.soundtracks.model;
 
 import java.time.Duration;
-import java.util.List;
 
-import org.checkerframework.checker.units.qual.C;
-import org.checkerframework.checker.units.qual.m;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 

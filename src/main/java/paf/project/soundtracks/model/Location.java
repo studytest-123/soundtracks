@@ -1,7 +1,5 @@
 package paf.project.soundtracks.model;
 
-import org.checkerframework.checker.units.qual.C;
-
 import jakarta.persistence.*;
 
 @Entity
