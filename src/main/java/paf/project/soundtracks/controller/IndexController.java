@@ -13,10 +13,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import paf.project.soundtracks.model.Event;
 import paf.project.soundtracks.model.Person;
+import paf.project.soundtracks.repository.EventRepository;
 import paf.project.soundtracks.model.Location;
 
 @Controller
 public class IndexController {
+
+    private final EventRepository eventRepository;
+
+    public IndexController(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
+    }
 
     @GetMapping("/")
     public String index(Model model) {
@@ -27,14 +34,23 @@ public class IndexController {
         //user.setDisplayName("John Doe");
 
         // Mock latest event
-        Event latestEvent = new Event();
+        /* Event latestEvent = new Event();
         latestEvent.setEventId(47L);
         latestEvent.setEventName("Event47 (Latest Contributed)");
         latestEvent.setEventDate(LocalDate.now().minusDays(1));
-        latestEvent.setEventDescription("A high-energy night featuring top DJs and amazing visuals.");
+        latestEvent.setEventDescription("A high-energy night featuring top DJs and amazing visuals."); */
+
+        // real latest event from database (uncomment when you have data)
+        Event latestEvent = eventRepository.findById(eventRepository.count()-1).orElse(null);
+        latestEvent.getEventId();
+        latestEvent.getEventName();
+        latestEvent.getEventDate();
+        latestEvent.getEventDescription();
+
 
         // Upcoming events
         List<Event> upcomingEvents = List.of(
+            
                 //new Event(75L, "Event75 (Today)", LocalDate.now(), LocalTime.of(19, 10), LocalTime.of(20, 10), new Location(1L), 25.0, "Concert", "Today's top electronic beats.")
                 //new Event(76L, "Event76 (Tomorrow)", LocalDate.now().plusDays(1), LocalTime.of(21, 0), LocalTime.of(21, 0), new Location(2L, "Tomorrow's main stage", "456 Stage Ave", 10002, "New York", "USA", 300, "Main stage for tomorrow's events"), 0.0, "Concert", "Tomorrow's main stage."),
                 //new Event(77L, "Event77 (Tomorrow)", LocalDate.now().plusDays(1), LocalTime.of(22, 30), LocalTime.of(22, 30), new Location(3L, "House & techno fusion night", "789 Fusion Blvd", 10003, "New York", "USA", 400, "House and techno fusion night"), 0.0, "Concert", "House & techno fusion night.")
@@ -51,6 +67,7 @@ public class IndexController {
         model.addAttribute("latestEvent", latestEvent);
         model.addAttribute("upcomingEvents", upcomingEvents);
         model.addAttribute("pastEvents", pastEvents);
+        model.addAttribute("events", eventRepository.findAll()); // Add this line to pass all events to the template
 
         return "index"; // corresponds to templates/index.html
     }

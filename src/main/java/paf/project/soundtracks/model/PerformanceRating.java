@@ -1,6 +1,7 @@
 package paf.project.soundtracks.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import jakarta.persistence.*;
 
@@ -109,5 +110,32 @@ public class PerformanceRating {
     }
     public void setPerformanceRatingComments(String performanceRatingComments) {
         this.performanceRatingComments = performanceRatingComments;
+    }
+
+    public BigDecimal getAverage() {
+        BigDecimal sum = BigDecimal.ZERO;
+        int count = 0;
+
+        if (performanceQuality != null) {
+            sum = sum.add(performanceQuality);
+            count++;
+        }
+        if (soundQuality != null) {
+            sum = sum.add(soundQuality);
+            count++;
+        }
+        if (setLength != null) {
+            sum = sum.add(setLength);
+            count++;
+        }
+        if (trackSelection != null) {
+            sum = sum.add(trackSelection);
+            count++;
+        }
+        if (visualShow != null) {
+            sum = sum.add(visualShow);
+            count++;
+        }
+        return count > 0 ? sum.divide(BigDecimal.valueOf(count), 1, RoundingMode.HALF_UP) : BigDecimal.ZERO;
     }
 }

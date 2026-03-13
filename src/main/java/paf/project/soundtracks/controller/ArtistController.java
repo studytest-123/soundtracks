@@ -1,0 +1,35 @@
+package paf.project.soundtracks.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import paf.project.soundtracks.model.Artist;
+import paf.project.soundtracks.repository.ArtistRepository;
+
+@Controller
+@RequestMapping("/artist")
+public class ArtistController {
+
+    private final ArtistRepository artistRepository;
+
+    public ArtistController(ArtistRepository artistRepository) {
+        this.artistRepository = artistRepository;
+    }
+
+    @GetMapping("/new")
+    public String showCreateArtistForm(Model model) {
+
+        model.addAttribute("artist", new Artist());
+
+        return "artist-create";
+    }
+
+    @PostMapping("/new")
+    public String createArtist(@ModelAttribute Artist artist) {
+
+        artistRepository.save(artist);
+
+        return "redirect:/";
+    }
+}

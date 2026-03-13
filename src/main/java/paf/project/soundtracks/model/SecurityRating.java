@@ -1,57 +1,60 @@
 package paf.project.soundtracks.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import jakarta.persistence.*;
+import paf.project.soundtracks.model.PersonalEventRating;
 
-@Entity
-@Table(name = "security_rating")
+/* @Entity
+@Table(name = "security_rating") */
+@Embeddable
 public class SecurityRating {
-    @Id
+    /* @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "security_rating_id")
     private Long securityRatingId;
 
     @OneToOne
     @JoinColumn(name = "personal_event_rating_id_personal_event_rating")
-    private PersonalEventRating personalEventRating;
+    private Old_PersonalEventRating personalEventRating;
     
     @Column(name = "security_average_rating")
-    private BigDecimal securityAverageRating;
-    @Column(name = "staff_friendliness")
-    private BigDecimal staffFriendliness;
-    @Column(name = "staff_competence")
-    private BigDecimal staffCompetence;
-    @Column(name = "sense_of_security")
-    private BigDecimal senseOfSecurity;
-    @Column(name = "security_rating_comments")
-    private String securityRatingComments;
+    private BigDecimal securityAverageRating; */
+
+    //@Column(name = "security_staff_friendliness")
+    private BigDecimal securityStaffFriendliness;
+    //@Column(name = "security_staff_competence")
+    private BigDecimal securityStaffCompetence;
+    //@Column(name = "security_sense_of_security")
+    private BigDecimal securitySenseOfSecurity;
+    /* @Column(name = "security_rating_comments")
+    private String securityRatingComments; */
 
     // constructors
     public SecurityRating() {
     }
-    public SecurityRating(Long securityRatingId, PersonalEventRating personalEventRating, BigDecimal securityAverageRating, BigDecimal staffFriendliness,
-            BigDecimal staffCompetence, BigDecimal senseOfSecurity, String securityRatingComments) {
-        this.securityRatingId = securityRatingId;
+    public SecurityRating(BigDecimal staffFriendliness,
+            BigDecimal staffCompetence, BigDecimal senseOfSecurity) {
+        /* this.securityRatingId = securityRatingId;
         this.personalEventRating = personalEventRating;
-        this.securityAverageRating = securityAverageRating;
-        this.staffFriendliness = staffFriendliness;
-        this.staffCompetence = staffCompetence;
-        this.senseOfSecurity = senseOfSecurity;
-        this.securityRatingComments = securityRatingComments;
+        this.securityAverageRating = securityAverageRating; */
+        this.securityStaffFriendliness = staffFriendliness;
+        this.securityStaffCompetence = staffCompetence;
+        this.securitySenseOfSecurity = senseOfSecurity;
     }
 
     // getters and setters
-    public Long getSecurityRatingId() {
+    /* public Long getSecurityRatingId() {
         return securityRatingId;
     }
     public void setSecurityRatingId(Long securityRatingId) {
         this.securityRatingId = securityRatingId;
     }
-    public PersonalEventRating getPersonalEventRating() {
+    public Old_PersonalEventRating getPersonalEventRating() {
         return personalEventRating;
     }
-    public void setPersonalEventRating(PersonalEventRating personalEventRating) {
+    public void setPersonalEventRating(Old_PersonalEventRating personalEventRating) {
         this.personalEventRating = personalEventRating;
     }
     public BigDecimal getSecurityAverageRating() {
@@ -59,29 +62,50 @@ public class SecurityRating {
     }
     public void setSecurityAverageRating(BigDecimal securityAverageRating) {
         this.securityAverageRating = securityAverageRating;
+    } */
+
+    public BigDecimal getSecurityStaffFriendliness() {
+        return securityStaffFriendliness;
     }
-    public BigDecimal getStaffFriendliness() {
-        return staffFriendliness;
+    public void setSecurityStaffFriendliness(BigDecimal staffFriendliness) {
+        this.securityStaffFriendliness = staffFriendliness;
     }
-    public void setStaffFriendliness(BigDecimal staffFriendliness) {
-        this.staffFriendliness = staffFriendliness;
+    public BigDecimal getSecurityStaffCompetence() {
+        return securityStaffCompetence;
     }
-    public BigDecimal getStaffCompetence() {
-        return staffCompetence;
+    public void setSecurityStaffCompetence(BigDecimal staffCompetence) {
+        this.securityStaffCompetence = staffCompetence;
     }
-    public void setStaffCompetence(BigDecimal staffCompetence) {
-        this.staffCompetence = staffCompetence;
+    public BigDecimal getSecuritySenseOfSecurity() {
+        return securitySenseOfSecurity;
     }
-    public BigDecimal getSenseOfSecurity() {
-        return senseOfSecurity;
+    public void setSecuritySenseOfSecurity(BigDecimal senseOfSecurity) {
+        this.securitySenseOfSecurity = senseOfSecurity;
     }
-    public void setSenseOfSecurity(BigDecimal senseOfSecurity) {
-        this.senseOfSecurity = senseOfSecurity;
-    }
-    public String getSecurityRatingComments() {
+    /* public String getSecurityRatingComments() {
         return securityRatingComments;
     }
     public void setSecurityRatingComments(String securityRatingComments) {
         this.securityRatingComments = securityRatingComments;
+    } */
+
+    public BigDecimal getAverage() {
+        BigDecimal sum = BigDecimal.ZERO;
+        int count = 0;
+
+        if (securityStaffFriendliness != null) {
+            sum = sum.add(securityStaffFriendliness);
+            count++;
+        }
+        if (securityStaffCompetence != null) {
+            sum = sum.add(securityStaffCompetence);
+            count++;
+        }
+        if (securitySenseOfSecurity != null) {
+            sum = sum.add(securitySenseOfSecurity);
+            count++;
+        }
+
+        return count > 0 ? sum.divide(BigDecimal.valueOf(count), 1, RoundingMode.HALF_UP) : BigDecimal.ZERO;
     }
 }

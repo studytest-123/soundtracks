@@ -6,6 +6,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import jakarta.persistence.*;
+import paf.project.soundtracks.model.PerformanceRating;
 
 @Entity
 @Table(name = "performance")

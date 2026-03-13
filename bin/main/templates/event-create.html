@@ -12,62 +12,62 @@
 <div class="main-content">
     <div class="container py-4">
 
-        <h3 class="mb-4">➕ Create New Event</h3>
+        <h3 class="mb-4">➕ Neues Event erstellen</h3>
 
         <form th:action="@{/event/new}" th:object="${event}" method="post">
 
             <!-- Event Name -->
             <div class="mb-3">
-                <label class="form-label">Event Name</label>
+                <label class="form-label">Name des Events</label>
                 <input type="text" class="form-control"
                        th:field="*{eventName}" required>
             </div>
 
             <!-- Event Date -->
             <div class="mb-3">
-                <label class="form-label">Event Date</label>
+                <label class="form-label">Datum</label>
                 <input type="date" class="form-control"
                        th:field="*{eventDate}" required>
             </div>
 
             <!-- Event Start -->
             <div class="mb-3">
-                <label class="form-label">Event Start</label>
+                <label class="form-label">Beginn</label>
                 <input type="time" class="form-control"
                        th:field="*{eventStart}" required>
             </div>
 
             <!-- Event Entry -->
             <div class="mb-3">
-                <label class="form-label">Event Entry</label>
+                <label class="form-label">Einlass</label>
                 <input type="time" class="form-control"
                        th:field="*{eventEntry}" required>
             </div>
 
             <!-- Event Price -->
             <div class="mb-3">
-                <label class="form-label">Entry Price (€)</label>
+                <label class="form-label">Eintrittspreis (€)</label>
                 <input type="number" step="0.01" class="form-control"
                        th:field="*{eventPrice}">
             </div>
 
             <!-- Event Type -->
             <div class="mb-3">
-                <label class="form-label">Event Type</label>
+                <label class="form-label">Event-Art</label>
                 <input type="text" class="form-control"
                        th:field="*{eventType}" required>
             </div>
 
             <!-- Event Description -->
             <div class="mb-3">
-                <label class="form-label">Description</label>
+                <label class="form-label">Beschreibung</label>
                 <textarea class="form-control" rows="4"
                           th:field="*{eventDescription}"></textarea>
             </div>
 
             <!-- Location -->
             <div class="mb-3">
-                <label class="form-label">Location</label>
+                <label class="form-label">Event-Location</label>
                 <select class="form-select"
                         th:field="*{locationId}" required>
                     <option th:each="loc : ${locations}"
@@ -77,14 +77,54 @@
                 </select>
             </div>
 
+                <!-- Artists -->
+                <div class="mb-3">
+
+                    <label class="form-label">K&uuml;nstler hinzuf&uuml;gen</label>
+
+                    <div class="d-flex gap-2">
+
+                        <select id="artistSelect" class="form-select">
+
+                        <option value="">K&uuml;nstler ausw&auml;hlen...</option>
+
+                        <option th:each="artist : ${artists}"
+                                th:value="${artist.artistId}"
+                                th:text="${artist.artistName}">
+                        </option>
+
+                        </select>
+
+                        <button type="button"
+                                class="btn btn-success"
+                                onclick="addArtist()">
+
+                        K&uuml;nstler hinzuf&uuml;gen
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            <!-- Artist Container -->
+            <h5 class="mt-4">Event Lineup</h5>
+
+            <ul id="artistList" class="list-group"></ul>
+            
+            <!-- Hidden input to store selected artist IDs -->
+            <div id="artistHiddenInputs"></div>
+
+
+
             <!-- Buttons -->
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-primary">
-                    Save Event
+                    Speichern
                 </button>
 
                 <a th:href="@{/}" class="btn btn-secondary">
-                    Cancel
+                    Abbrechen
                 </a>
             </div>
 
@@ -92,5 +132,8 @@
 
     </div>
 </div>
+<!-- JavaScript for handling artist selection and display -->
+<script th:src="@{/js/event-artists.js}"></script>
+
 </body>
 </html>
