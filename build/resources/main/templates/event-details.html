@@ -15,60 +15,240 @@
 
         <!-- Navigation -->
         <a th:href="@{/}" class="btn btn-outline-light mb-3">
-            ← Back to Home
+            ← Zurück zur Startseite
         </a>
 
-        <!-- Event Header -->
         <div class="card p-4 mb-4">
-            <h2 th:text="${event.eventName}">Event Name</h2>
+    <h2 th:text="${event.eventName}">Event Name</h2>
 
-            <p class="text-muted mb-1">
-                📅 <span th:text="${event.eventDate}">2026-01-01</span>
-            </p>
+    <div class="event-image my-3">Event Bild</div>
 
-            <p class="text-muted mb-3">
-                📍 <span th:text="${event.location.locationName}">Location</span>,
-                <span th:text="${event.location.locationCity}">City</span>
-            </p>
+    <dl class="row mt-3">
 
-            <p th:text="${event.eventDescription}">
-                Event description
-            </p>
+        <!-- <dt class="col-sm-3">Event ID</dt>
+        <dd class="col-sm-9" th:text="${event.eventId}"></dd> -->
 
-            <p class="mt-3">
-                💶 Entry price:
-                <strong th:text="${event.eventPrice} + ' €'">0 €</strong>
-            </p>
-        </div>
+        <dt class="col-sm-3">Datum</dt>
+        <dd class="col-sm-9"
+            th:text="${event.eventDate != null ? #temporals.format(event.eventDate, 'dd.MM.yyyy') : '—'}">
+        </dd>
+
+        <dt class="col-sm-3">Einlass</dt>
+        <dd class="col-sm-9"
+            th:text="${event.eventEntry != null ? #temporals.format(event.eventEntry, 'HH:mm') : '—'}">
+        </dd>
+
+        <dt class="col-sm-3">Start</dt>
+        <dd class="col-sm-9"
+            th:text="${event.eventStart != null ? #temporals.format(event.eventStart, 'HH:mm') : '—'}">
+        </dd>
+
+        <dt class="col-sm-3">Eventart</dt>
+        <dd class="col-sm-9"
+            th:text="${event.eventType != null ? event.eventType : '—'}">
+        </dd>
+
+        <dt class="col-sm-3">Eintrittspreis</dt>
+        <dd class="col-sm-9"
+            th:text="${event.eventPrice != null ? event.eventPrice + ' €' : 'Free'}">
+        </dd>
+
+        <dt class="col-sm-3">Location</dt>
+        <dd class="col-sm-9"
+            th:text="${event.location != null ? event.location.locationName + ' (' + event.location.locationCity + ')' : '—'}">
+        </dd>
+
+        <!-- <dt class="col-sm-3">Capacity</dt>
+        <dd class="col-sm-9"
+            th:text="${event.location != null ? event.location.locationCapacity : '—'}">
+        </dd> -->
+
+    </dl>
+
+    <hr class="my-4">
+
+    <h5>Beschreibung</h5>
+    <p th:text="${event.eventDescription != null ? event.eventDescription : '—'}">
+        Beschreibung einf&uuml;gen
+    </p>
+
+    <div class="rating mt-3">
+        <span>★ ★ ★ ★ ★</span>
+    </div>
+    <!-- ☆ -->
+    <!-- <div class="rating mt-1"
+            th:with="rating=${eventRating.eventAverageRating}">
+
+        <span th:each="i : ${#numbers.sequence(1,5)}">
+            <span th:text="${i <= rating ? '★' : '☆'}"></span>
+        </span>
+
+    </div> -->
+</div>
+
 
         <!-- Placeholder for future features -->
-        <div class="section-title">Next steps</div>
+        <div class="section-title"></div>
 
         <div class="row g-3">
-            <div class="col-md-4">
+            <!-- Performances -->
+            <!-- <div class="col-md-4">
                 <div class="card p-3 text-center">
                     <h6>Performances</h6>
+                    
+                    <ul class="list-group">
+
+            <li class="list-group-item bg-dark text-white"
+                th:each="performance : ${performances}">
+
+                <strong th:text="${performance.artist.artistName}">
+                    Artist Name
+                </strong>
+
+                <div class="rating mt-1">
+
+                    <span th:if="${performance.performanceRating != null}"
+                          th:with="rating=${performance.performanceRating.average}">
+
+                        <span th:each="i : ${#numbers.sequence(1,5)}">
+                            <span th:text="${i <= rating ? '★' : '☆'}"></span>
+                        </span>
+
+                    </span>
+
+                    <span th:if="${performance.performanceRating == null}">
+                        ☆ ☆ ☆ ☆ ☆
+                    </span>
+
+                </div>
+                
+
+            </li>
+
+        </ul>
+        <a th:href="@{/event/{id}/performance/new(id=${event.eventId})}"
+                class="btn btn-primary btn-sm mt-3">
+                    K&uuml;nstler hinzuf&uuml;gen
+                </a>
+                </div>
+                
+            </div> -->
+            <div class="col-md-4">
+    <div class="card p-3">
+
+        <h6 class="mb-3 text-center">K&uuml;nstler</h6>
+
+        <div th:if="${#lists.isEmpty(performances)}"
+             class="text-muted text-center small mb-3">
+            tba
+        </div>
+
+        <ul class="list-group">
+
+            <li class="list-group-item bg-dark text-white d-flex justify-content-between align-items-center"
+                th:each="performance : ${performances}">
+
+                <!-- Artist -->
+                <div>
+                    <strong th:text="${performance.artist.artistName}">
+                        K&uuml;nstlername
+                    </strong>
+
+                    <div class="small text-muted"
+                         th:text="${performance.performanceGenre}">
+                    </div>
+                </div>
+
+                <!-- Rating -->
+                <div class="rating">
+
+                    <span th:if="${performance.performanceRating != null}"
+                          th:with="rating=${performance.performanceRating.average}">
+
+                        <span th:each="i : ${#numbers.sequence(1,5)}">
+                            <span th:text="${i <= rating ? '★' : '☆'}"></span>
+                        </span>
+
+                    </span>
+
+                    <span th:if="${performance.performanceRating == null}">
+                        ☆ ☆ ☆ ☆ ☆
+                    </span>
+
+                </div>
+
+            </li>
+
+        </ul>
+
+        <!-- Add artist button -->
+        <a th:href="@{/event/{id}/performance/new(id=${event.eventId})}"
+           class="btn btn-primary btn-sm mt-3">
+            + Künstler hinzufügen
+        </a>
+
+    </div>
+</div>
+
+            <!-- Reviews -->
+            <!-- <div class="col-md-4">
+                <div class="card p-3 text-center">
+                    <h6>Bewertungen</h6>
                     <p class="text-muted small">
-                        Artists & setlists coming soon
+                        Userbewertungen coming soon
                     </p>
                 </div>
-            </div>
+            </div> -->
+            <div class="col-md-4">
+    <div class="card p-3">
+
+        <h6 class="text-center mb-3">Bewertungen</h6>
+
+        <div th:if="${#lists.isEmpty(reviews)}"
+             class="text-muted text-center small">
+            bisher keine Bewertungen
+        </div>
+
+        <ul class="list-group"
+            th:if="${!#lists.isEmpty(reviews)}">
+
+            <li class="list-group-item bg-dark text-white"
+                th:each="review : ${reviews}">
+
+                <!-- user -->
+                <!-- !adding later -->
+                <strong th:text="${review.person.userName}">
+                    Username
+                </strong>
+
+                <!-- rating -->
+                <div class="rating mt-1"
+                     th:with="rating=${review.personalEventAverageRating}">
+
+                    <span th:each="i : ${#numbers.sequence(1,5)}">
+                        <span th:text="${i <= rating ? '★' : '☆'}"></span>
+                    </span>
+
+                </div>
+
+                <!-- comment -->
+                <p class="small mt-1"
+                   th:text="${review.personalEventRatingComments}">
+                </p>
+
+            </li>
+
+        </ul>
+
+    </div>
+</div>
 
             <div class="col-md-4">
                 <div class="card p-3 text-center">
-                    <h6>Reviews</h6>
-                    <p class="text-muted small">
-                        User ratings coming soon
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card p-3 text-center">
-                    <h6>Add Review</h6>
+                    <h6>Bewertung hinzufügen</h6>
                     <a th:href="@{/review/new(eventId=${event.eventId})}"
                        class="btn btn-primary btn-sm">
-                        Write Review
+                        Bewertung schreiben
                     </a>
                 </div>
             </div>

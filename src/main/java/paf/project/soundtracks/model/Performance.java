@@ -49,7 +49,7 @@ public class Performance {
     public Performance() {
     }
 
-    public Performance(Long performanceId, Event event, Artist artist, Duration performanceDuration, String performanceType, String performanceGenre) {
+    public Performance(Long performanceId, Event event, Artist artist, Duration performanceDuration, String performanceType, String performanceGenre, PerformanceRating performanceRating) {
         this.performanceId = performanceId;
         this.event = event;
         this.artist = artist;
@@ -58,7 +58,7 @@ public class Performance {
         this.performanceGenre = performanceGenre;
         /* this.artistObject = artistObject;
         this.performanceSetlist = performanceSetlist; */
-        //this.performanceRating = performanceRating;
+        this.performanceRating = performanceRating;
     }
 
     // getters and setters
@@ -118,7 +118,7 @@ public class Performance {
 
     public void setPerformanceSetlist(List<SetlistItem> performanceSetlist) {
         this.performanceSetlist = performanceSetlist;
-    }
+    } */
 
     public PerformanceRating getPerformanceRating() {
         return performanceRating;
@@ -126,7 +126,7 @@ public class Performance {
 
     public void setPerformanceRating(PerformanceRating performanceRating) {
         this.performanceRating = performanceRating;
-    } */
+    }
 
     @Override
     public String toString() {
@@ -138,8 +138,8 @@ public class Performance {
                 ", performanceType='" + performanceType + '\'' +
                 ", performanceGenre='" + performanceGenre + '\'' +
                 /* ", artistObject=" + artistObject.getArtistName() +
-                ", performanceSetlist=" + performanceSetlist +
-                ", performanceRating=" + performanceRating + */
+                ", performanceSetlist=" + performanceSetlist + */
+                ", performanceRating=" + performanceRating +
                 '}';
     }
 }

@@ -20,6 +20,8 @@ public class Person {
     private Integer eventCount;
     @Column(name = "review_score")
     private BigDecimal reviewScore;
+    @Column(name = "user_password")
+    private String password;
     /* 
     private Set<Role> personRoles = new HashSet<>();
     private List<EventParticipation> eventParticipations;
@@ -28,12 +30,13 @@ public class Person {
     public Person() {
     }
     public Person(Long personId, String userName, Integer reviewCount, Integer eventCount,
-                  BigDecimal reviewScore) {
+                  BigDecimal reviewScore, String password) {
         this.personId = personId;
         this.userName = userName;
         this.reviewCount = reviewCount;
         this.eventCount = eventCount;
         this.reviewScore = reviewScore;
+        this.password = password;
     }
 
     // getters and setters
@@ -66,6 +69,12 @@ public class Person {
     }
     public void setReviewScore(BigDecimal reviewScore) {
         this.reviewScore = reviewScore;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
     /* public Set<Role> getPersonRoles() {
         return personRoles;

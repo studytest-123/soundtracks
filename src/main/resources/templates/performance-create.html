@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Performance</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="main-content">
+    <div class="container py-4">
+
+        <!-- Back Navigation -->
+        <a th:href="@{/event/{id}(id=${event.eventId})}"
+           class="btn btn-outline-light mb-3">
+            ← Zurück zum Event
+        </a>
+
+        <div class="card p-4">
+
+            <h4 class="mb-3">
+                Künstler zu Event hinzufügen
+            </h4>
+
+            <p class="text-muted">
+                <strong th:text="${event.eventName}">Event Name</strong>
+            </p>
+
+            <form th:action="@{/event/{id}/performance/new(id=${event.eventId})}"
+                  method="post">
+
+                <!-- Artist selection -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Künstler auswählen
+                    </label>
+
+                    <select name="artistId"
+                            class="form-select"
+                            required>
+
+                        <option value="">
+                            -- Künstler wählen --
+                        </option>
+
+                        <option th:each="artist : ${artists}"
+                                th:value="${artist.artistId}"
+                                th:text="${artist.artistName}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- Optional fields -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Performance Type
+                    </label>
+
+                    <input type="text"
+                           name="performanceType"
+                           class="form-control"
+                           placeholder="z.B. DJ Set, Live Act">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Genre
+                    </label>
+
+                    <input type="text"
+                           name="performanceGenre"
+                           class="form-control"
+                           placeholder="z.B. Techno, House">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Dauer (optional)
+                    </label>
+
+                    <input type="text"
+                           name="performanceDuration"
+                           class="form-control"
+                           placeholder="z.B. PT1H30M">
+
+                    <div class="form-text">
+                        ISO-8601 Format (PT1H30M = 1h 30m)
+                    </div>
+
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex gap-2">
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        Künstler hinzufügen
+                    </button>
+
+                    <a th:href="@{/event/{id}(id=${event.eventId})}"
+                       class="btn btn-secondary">
+                        Abbrechen
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

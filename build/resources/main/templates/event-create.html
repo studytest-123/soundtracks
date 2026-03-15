@@ -77,14 +77,54 @@
                 </select>
             </div>
 
+                <!-- Artists -->
+                <div class="mb-3">
+
+                    <label class="form-label">K&uuml;nstler hinzuf&uuml;gen</label>
+
+                    <div class="d-flex gap-2">
+
+                        <select id="artistSelect" class="form-select">
+
+                        <option value="">K&uuml;nstler ausw&auml;hlen...</option>
+
+                        <option th:each="artist : ${artists}"
+                                th:value="${artist.artistId}"
+                                th:text="${artist.artistName}">
+                        </option>
+
+                        </select>
+
+                        <button type="button"
+                                class="btn btn-success"
+                                onclick="addArtist()">
+
+                        K&uuml;nstler hinzuf&uuml;gen
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            <!-- Artist Container -->
+            <h5 class="mt-4">Event Lineup</h5>
+
+            <ul id="artistList" class="list-group"></ul>
+            
+            <!-- Hidden input to store selected artist IDs -->
+            <div id="artistHiddenInputs"></div>
+
+
+
             <!-- Buttons -->
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-primary">
-                    Save Event
+                    Speichern
                 </button>
 
                 <a th:href="@{/}" class="btn btn-secondary">
-                    Cancel
+                    Abbrechen
                 </a>
             </div>
 
@@ -92,5 +132,8 @@
 
     </div>
 </div>
+<!-- JavaScript for handling artist selection and display -->
+<script th:src="@{/js/event-artists.js}"></script>
+
 </body>
 </html>

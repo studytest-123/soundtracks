@@ -157,3 +157,14 @@ a .card:hover {
     color: gold;
 }
 
+/* Event Carousel */
+.carousel-control-prev,
+.carousel-control-next{
+    width:5%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon{
+    background-color:#000;
+    border-radius:50%;
+}

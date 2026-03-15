@@ -1,74 +1,80 @@
 package paf.project.soundtracks.controller;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.RestController;
 
 import paf.project.soundtracks.model.Event;
 import paf.project.soundtracks.model.Person;
 import paf.project.soundtracks.repository.EventRepository;
-import paf.project.soundtracks.model.Location;
+import paf.project.soundtracks.repository.PersonRepository;
 
 @Controller
 public class IndexController {
 
     private final EventRepository eventRepository;
+    private final PersonRepository personRepository;
 
-    public IndexController(EventRepository eventRepository) {
+    public IndexController(EventRepository eventRepository, PersonRepository personRepository) {
         this.eventRepository = eventRepository;
+        this.personRepository = personRepository;
     }
 
     @GetMapping("/")
     public String index(Model model) {
-        // Mock user (you can later load this from database or session)
-        Person user = new Person();
+
+        // Mock user
+        /* Person user = new Person();
         user.setPersonId(1L);
-        user.setUserName("john_doe");
-        //user.setDisplayName("John Doe");
+        user.setUserName("john_doe"); */
+        Authentication auth = SecurityContextHolder
+            .getContext()
+            .getAuthentication();
 
-        // Mock latest event
-        /* Event latestEvent = new Event();
-        latestEvent.setEventId(47L);
-        latestEvent.setEventName("Event47 (Latest Contributed)");
-        latestEvent.setEventDate(LocalDate.now().minusDays(1));
-        latestEvent.setEventDescription("A high-energy night featuring top DJs and amazing visuals."); */
+        Person user;
 
-        // real latest event from database (uncomment when you have data)
-        Event latestEvent = eventRepository.findById(eventRepository.count()-1).orElse(null);
-        latestEvent.getEventId();
-        latestEvent.getEventName();
-        latestEvent.getEventDate();
-        latestEvent.getEventDescription();
+        if (auth != null && auth.isAuthenticated()
+                && !"anonymousUser".equals(auth.getName())) {
 
+            user = personRepository
+                    .findByUserName(auth.getName())
+                    .orElseThrow();
 
-        // Upcoming events
-        List<Event> upcomingEvents = List.of(
-            
-                //new Event(75L, "Event75 (Today)", LocalDate.now(), LocalTime.of(19, 10), LocalTime.of(20, 10), new Location(1L), 25.0, "Concert", "Today's top electronic beats.")
-                //new Event(76L, "Event76 (Tomorrow)", LocalDate.now().plusDays(1), LocalTime.of(21, 0), LocalTime.of(21, 0), new Location(2L, "Tomorrow's main stage", "456 Stage Ave", 10002, "New York", "USA", 300, "Main stage for tomorrow's events"), 0.0, "Concert", "Tomorrow's main stage."),
-                //new Event(77L, "Event77 (Tomorrow)", LocalDate.now().plusDays(1), LocalTime.of(22, 30), LocalTime.of(22, 30), new Location(3L, "House & techno fusion night", "789 Fusion Blvd", 10003, "New York", "USA", 400, "House and techno fusion night"), 0.0, "Concert", "House & techno fusion night.")
-        );
+        } else {
 
-        // Past events
-        List<Event> pastEvents = List.of(
-                //new Event(74L, "Event74 (Yesterday)", LocalDate.now().minusDays(1), LocalTime.of(18, 0), LocalTime.of(18, 0), new Location(4L), 0.0, "Concert", "Open-air chillout set."),
-                //new Event(72L, "Event72 (Yesterday)", LocalDate.now().minusDays(1), LocalTime.of(22, 30), LocalTime.of(22, 30), new Location(5L), 0.0, "Concert",    "DJ Awesome’s afterparty.")
-        );
+            // anonymous placeholder
+            user = new Person();
+            user.setUserName("Anonymous User");
 
-        // Pass everything to Thymeleaf
+            user.setReviewCount(0);
+            user.setEventCount(0);
+            user.setReviewScore(BigDecimal.ZERO);
+        }
+
+        // set today for reference
+        LocalDate today = LocalDate.now();
+
+        Event latestEvent = eventRepository.findTopByOrderByEventIdDesc(); // Get the latest event by ID
+
+        // upcoming events
+        List<Event> upcomingEvents = eventRepository.findTop10ByEventDateGreaterThanEqualOrderByEventDateAsc(today);
+
+        // past events
+        List<Event> pastEvents = eventRepository.findTop10ByEventDateBeforeOrderByEventDateDesc(today);
+        
+        // pass to Thymeleaf
         model.addAttribute("user", user);
         model.addAttribute("latestEvent", latestEvent);
         model.addAttribute("upcomingEvents", upcomingEvents);
         model.addAttribute("pastEvents", pastEvents);
         model.addAttribute("events", eventRepository.findAll()); // Add this line to pass all events to the template
 
-        return "index"; // corresponds to templates/index.html
+        return "index"; // returns to templates/index.html
     }
 }

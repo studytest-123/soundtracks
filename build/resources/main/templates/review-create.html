@@ -11,10 +11,10 @@
 <div class="main-content">
     <div class="container py-4">
 
-        <h3>
-            Review for:
+        <!-- <h3>
+            Bewertung f&uuml;r:
             <span th:text="${event.eventName}"></span>
-        </h3>
+        </h3> -->
 
         <form th:action="@{/review/new}" th:object="${review}" method="post">
 
@@ -23,18 +23,1017 @@
                    th:name="event.eventId"
                    th:value="${event.eventId}" />
 
-            <!-- Rating -->
+            <!-- Overall Event Rating -->
             <div class="mb-3">
-                <label class="form-label">Overall Rating (0–5)</label>
-                <input type="number"
-                       step="0.1"
-                       min="0"
-                       max="5"
-                       class="form-control"
-                       th:field="*{personalEventAverageRating}"
-                       required>
+                <!-- <label class="form-label">Event-Bewertung</label> -->
+                <div class="overall-rating">
+                    <h4>
+                        Bewertung f&uuml;r:
+                        <span th:text="|${event.eventName} in ${event.location.locationName}|"></span>
+                        <span id="overall-stars">
+                        ☆☆☆☆☆
+                        </span>
+                    </h4>
+                </div>
+
+
+                <!-- <div class="star-rating">
+                    <input type="radio" th:field="*{personalEventAverageRating}" value="5" id="personalEventAverageRating5"/>
+                    <label for="personalEventAverageRating5">★</label>
+
+                    <input type="radio" th:field="*{personalEventAverageRating}" value="4" id="personalEventAverageRating4"/>
+                    <label for="personalEventAverageRating4">★</label>
+
+                    <input type="radio" th:field="*{personalEventAverageRating}" value="3" id="personalEventAverageRating3"/>
+                    <label for="personalEventAverageRating3">★</label>
+
+                    <input type="radio" th:field="*{personalEventAverageRating}" value="2" id="personalEventAverageRating2"/>
+                    <label for="personalEventAverageRating2">★</label>
+
+                    <input type="radio" th:field="*{personalEventAverageRating}" value="1" id="personalEventAverageRating1"/>
+                    <label for="personalEventAverageRating1">★</label>
+                </div> -->
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <!-- Atmosphere -->
+                    <div class="rating-block" data-segment="atmosphere">
+                        <h4>
+                            Atmosph&auml;re
+                            <span class="segment-average">
+                            ☆☆☆☆☆
+                            </span>
+                        </h4>
+
+                        <!-- Event Vibe -->
+                        <div class="mb-3">
+                            <label>Stimmung</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{atmosphere.atmosphereEventVibe}" value="5" id="atmosphereEventVibe5"/>
+                                <label for="atmosphereEventVibe5">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereEventVibe}" value="4" id="atmosphereEventVibe4"/>
+                                <label for="atmosphereEventVibe4">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereEventVibe}" value="3" id="atmosphereEventVibe3"/>
+                                <label for="atmosphereEventVibe3">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereEventVibe}" value="2" id="atmosphereEventVibe2"/>
+                                <label for="atmosphereEventVibe2">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereEventVibe}" value="1" id="atmosphereEventVibe1"/>
+                                <label for="atmosphereEventVibe1">★</label>
+                            </div>
+                        </div>
+                        <!-- Crowd Engagement -->
+                        <div class="mb-3">
+                            <label>Publikum</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{atmosphere.atmosphereCrowdEngagement}" value="5" id="atmosphereCrowdEngagement5"/>
+                                <label for="atmosphereCrowdEngagement5">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereCrowdEngagement}" value="4" id="atmosphereCrowdEngagement4"/>
+                                <label for="atmosphereCrowdEngagement4">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereCrowdEngagement}" value="3" id="atmosphereCrowdEngagement3"/>
+                                <label for="atmosphereCrowdEngagement3">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereCrowdEngagement}" value="2" id="atmosphereCrowdEngagement2"/>
+                                <label for="atmosphereCrowdEngagement2">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereCrowdEngagement}" value="1" id="atmosphereCrowdEngagement1"/>
+                                <label for="atmosphereCrowdEngagement1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Lighting & Visuals -->
+                        <div class="mb-3">
+                            <label>Beleuchtung & Visuals</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{atmosphere.atmosphereLightAndVisuals}" value="5" id="atmosphereLightAndVisuals5"/>
+                                <label for="atmosphereLightAndVisuals5">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereLightAndVisuals}" value="4" id="atmosphereLightAndVisuals4"/>
+                                <label for="atmosphereLightAndVisuals4">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereLightAndVisuals}" value="3" id="atmosphereLightAndVisuals3"/>
+                                <label for="atmosphereLightAndVisuals3">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereLightAndVisuals}" value="2" id="atmosphereLightAndVisuals2"/>
+                                <label for="atmosphereLightAndVisuals2">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereLightAndVisuals}" value="1" id="atmosphereLightAndVisuals1"/>
+                                <label for="atmosphereLightAndVisuals1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Event Decorations -->
+                        <div class="mb-3">
+                            <label>Dekoration</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{atmosphere.atmosphereEventDecorations}" value="5" id="atmosphereEventDecorations5"/>
+                                <label for="atmosphereEventDecorations5">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereEventDecorations}" value="4" id="atmosphereEventDecorations4"/>
+                                <label for="atmosphereEventDecorations4">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereEventDecorations}" value="3" id="atmosphereEventDecorations3"/>
+                                <label for="atmosphereEventDecorations3">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereEventDecorations}" value="2" id="atmosphereEventDecorations2"/>
+                                <label for="atmosphereEventDecorations2">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereEventDecorations}" value="1" id="atmosphereEventDecorations1"/>
+                                <label for="atmosphereEventDecorations1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Staff Friendliness -->
+                        <div class="mb-3">
+                            <label>Freundlichkeit (Mitarbeiter)</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{atmosphere.atmosphereStaffFriendliness}" value="5" id="atmosphereStaffFriendliness5"/>
+                                <label for="atmosphereStaffFriendliness5">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereStaffFriendliness}" value="4" id="atmosphereStaffFriendliness4"/>
+                                <label for="atmosphereStaffFriendliness4">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereStaffFriendliness}" value="3" id="atmosphereStaffFriendliness3"/>
+                                <label for="atmosphereStaffFriendliness3">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereStaffFriendliness}" value="2" id="atmosphereStaffFriendliness2"/>
+                                <label for="atmosphereStaffFriendliness2">★</label>
+
+                                <input type="radio" th:field="*{atmosphere.atmosphereStaffFriendliness}" value="1" id="atmosphereStaffFriendliness1"/>
+                                <label for="atmosphereStaffFriendliness1">★</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Gastronomy -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="rating-block" data-segment="gastronomy">
+                        <h4>
+                            Gastronomie
+                            <span class="segment-average">
+                            ☆☆☆☆☆
+                            </span>
+                        </h4>
+
+                        <!-- Food Quality -->
+                        <div class="mb-3">
+                            <label>Qualit&auml;t (Speisen)</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodQuality}" value="5" id="gastronomyFoodQuality5"/>
+                                <label for="gastronomyFoodQuality5">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodQuality}" value="4" id="gastronomyFoodQuality4"/>
+                                <label for="gastronomyFoodQuality4">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodQuality}" value="3" id="gastronomyFoodQuality3"/>
+                                <label for="gastronomyFoodQuality3">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodQuality}" value="2" id="gastronomyFoodQuality2"/>
+                                <label for="gastronomyFoodQuality2">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodQuality}" value="1" id="gastronomyFoodQuality1"/>
+                                <label for="gastronomyFoodQuality1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Food Variety -->
+                        <div class="mb-3">
+                            <label>Vielfalt (Speisen)</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodVariety}" value="5" id="gastronomyFoodVariety5"/>
+                                <label for="gastronomyFoodVariety5">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodVariety}" value="4" id="gastronomyFoodVariety4"/>
+                                <label for="gastronomyFoodVariety4">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodVariety}" value="3" id="gastronomyFoodVariety3"/>
+                                <label for="gastronomyFoodVariety3">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodVariety}" value="2" id="gastronomyFoodVariety2"/>
+                                <label for="gastronomyFoodVariety2">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodVariety}" value="1" id="gastronomyFoodVariety1"/>
+                                <label for="gastronomyFoodVariety1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Food Prices -->
+                        <div class="mb-3">
+                            <label>Preise (Speisen)</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodPrices}" value="5" id="gastronomyFoodPrices5"/>
+                                <label for="gastronomyFoodPrices5">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodPrices}" value="4" id="gastronomyFoodPrices4"/>
+                                <label for="gastronomyFoodPrices4">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodPrices}" value="3" id="gastronomyFoodPrices3"/>
+                                <label for="gastronomyFoodPrices3">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodPrices}" value="2" id="gastronomyFoodPrices2"/>
+                                <label for="gastronomyFoodPrices2">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyFoodPrices}" value="1" id="gastronomyFoodPrices1"/>
+                                <label for="gastronomyFoodPrices1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Drink Quality -->
+                        <div class="mb-3">
+                            <label>Qualit&auml;t (Getr&auml;nke)</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkQuality}" value="5" id="gastronomyDrinkQuality5"/>
+                                <label for="gastronomyDrinkQuality5">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkQuality}" value="4" id="gastronomyDrinkQuality4"/>
+                                <label for="gastronomyDrinkQuality4">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkQuality}" value="3" id="gastronomyDrinkQuality3"/>
+                                <label for="gastronomyDrinkQuality3">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkQuality}" value="2" id="gastronomyDrinkQuality2"/>
+                                <label for="gastronomyDrinkQuality2">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkQuality}" value="1" id="gastronomyDrinkQuality1"/>
+                                <label for="gastronomyDrinkQuality1">★</label>
+                            </div>
+                        </div>  
+
+                        <!-- Drink Variety -->
+                        <div class="mb-3">
+                            <label>Vielfalt (Getr&auml;nke)</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkVariety}" value="5" id="gastronomyDrinkVariety5"/>
+                                <label for="gastronomyDrinkVariety5">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkVariety}" value="4" id="gastronomyDrinkVariety4"/>
+                                <label for="gastronomyDrinkVariety4">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkVariety}" value="3" id="gastronomyDrinkVariety3"/>
+                                <label for="gastronomyDrinkVariety3">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkVariety}" value="2" id="gastronomyDrinkVariety2"/>
+                                <label for="gastronomyDrinkVariety2">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkVariety}" value="1" id="gastronomyDrinkVariety1"/>
+                                <label for="gastronomyDrinkVariety1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Drink Prices -->
+                        <div class="mb-3">
+                            <label>Preise (Getr&auml;nke)</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkPrices}" value="5" id="gastronomyDrinkPrices5"/>
+                                <label for="gastronomyDrinkPrices5">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkPrices}" value="4" id="gastronomyDrinkPrices4"/>
+                                <label for="gastronomyDrinkPrices4">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkPrices}" value="3" id="gastronomyDrinkPrices3"/>
+                                <label for="gastronomyDrinkPrices3">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkPrices}" value="2" id="gastronomyDrinkPrices2"/>
+                                <label for="gastronomyDrinkPrices2">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyDrinkPrices}" value="1" id="gastronomyDrinkPrices1"/>
+                                <label for="gastronomyDrinkPrices1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Staff Efficiency -->
+                        <div class="mb-3">
+                            <label>Effizienz (Mitarbeiter)</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{gastronomy.gastronomyStaffEfficiency}" value="5" id="gastronomyStaffEfficiency5"/>
+                                <label for="gastronomyStaffEfficiency5">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyStaffEfficiency}" value="4" id="gastronomyStaffEfficiency4"/>
+                                <label for="gastronomyStaffEfficiency4">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyStaffEfficiency}" value="3" id="gastronomyStaffEfficiency3"/>
+                                <label for="gastronomyStaffEfficiency3">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyStaffEfficiency}" value="2" id="gastronomyStaffEfficiency2"/>
+                                <label for="gastronomyStaffEfficiency2">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyStaffEfficiency}" value="1" id="gastronomyStaffEfficiency1"/>
+                                <label for="gastronomyStaffEfficiency1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Staff Friendliness -->
+                        <div class="mb-3">
+                            <label>Freundlichkeit (Mitarbeiter)</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{gastronomy.gastronomyStaffFriendliness}" value="5" id="gastronomyStaffFriendliness5"/>
+                                <label for="gastronomyStaffFriendliness5">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyStaffFriendliness}" value="4" id="gastronomyStaffFriendliness4"/>
+                                <label for="gastronomyStaffFriendliness4">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyStaffFriendliness}" value="3" id="gastronomyStaffFriendliness3"/>
+                                <label for="gastronomyStaffFriendliness3">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyStaffFriendliness}" value="2" id="gastronomyStaffFriendliness2"/>
+                                <label for="gastronomyStaffFriendliness2">★</label>
+
+                                <input type="radio" th:field="*{gastronomy.gastronomyStaffFriendliness}" value="1" id="gastronomyStaffFriendliness1"/>
+                                <label for="gastronomyStaffFriendliness1">★</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Location -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="rating-block">
+                        <h4>
+                            Location
+                            <span class="segment-average">
+                            ☆☆☆☆☆
+                            </span>
+                        </h4>
+
+                        <!-- Location Size -->
+                        <div class="mb-3">
+                            <label>Gr&ouml;&szlig;e</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{location.locationSize}" value="5" id="locationSize5"/>
+                                <label for="locationSize5">★</label>
+
+                                <input type="radio" th:field="*{location.locationSize}" value="4" id="locationSize4"/>
+                                <label for="locationSize4">★</label>
+
+                                <input type="radio" th:field="*{location.locationSize}" value="3" id="locationSize3"/>
+                                <label for="locationSize3">★</label>
+
+                                <input type="radio" th:field="*{location.locationSize}" value="2" id="locationSize2"/>
+                                <label for="locationSize2">★</label>
+
+                                <input type="radio" th:field="*{location.locationSize}" value="1" id="locationSize1"/>
+                                <label for="locationSize1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Location Area -->
+                        <div class="mb-3">
+                            <label>Umgebung</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{location.locationArea}" value="5" id="locationArea5"/>
+                                <label for="locationArea5">★</label>
+
+                                <input type="radio" th:field="*{location.locationArea}" value="4" id="locationArea4"/>
+                                <label for="locationArea4">★</label>
+
+                                <input type="radio" th:field="*{location.locationArea}" value="3" id="locationArea3"/>
+                                <label for="locationArea3">★</label>
+
+                                <input type="radio" th:field="*{location.locationArea}" value="2" id="locationArea2"/>
+                                <label for="locationArea2">★</label>
+
+                                <input type="radio" th:field="*{location.locationArea}" value="1" id="locationArea1"/>
+                                <label for="locationArea1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Location Accessibility -->
+                        <div class="mb-3">
+                            <label>Erreichbarkeit</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{location.locationAccessibility}" value="5" id="locationAccessibility5"/>
+                                <label for="locationAccessibility5">★</label>
+
+                                <input type="radio" th:field="*{location.locationAccessibility}" value="4" id="locationAccessibility4"/>
+                                <label for="locationAccessibility4">★</label>
+
+                                <input type="radio" th:field="*{location.locationAccessibility}" value="3" id="locationAccessibility3"/>
+                                <label for="locationAccessibility3">★</label>
+
+                                <input type="radio" th:field="*{location.locationAccessibility}" value="2" id="locationAccessibility2"/>
+                                <label for="locationAccessibility2">★</label>
+
+                                <input type="radio" th:field="*{location.locationAccessibility}" value="1" id="locationAccessibility1"/>
+                                <label for="locationAccessibility1">★</label>
+                            </div>
+                        </div>
+                        
+                        <!-- location Equipment -->
+                        <div class="mb-3">
+                            <label>Ausstattung</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{location.locationEquipment}" value="5" id="locationEquipment5"/>
+                                <label for="locationEquipment5">★</label>
+
+                                <input type="radio" th:field="*{location.locationEquipment}" value="4" id="locationEquipment4"/>
+                                <label for="locationEquipment4">★</label>
+
+                                <input type="radio" th:field="*{location.locationEquipment}" value="3" id="locationEquipment3"/>
+                                <label for="locationEquipment3">★</label>
+
+                                <input type="radio" th:field="*{location.locationEquipment}" value="2" id="locationEquipment2"/>
+                                <label for="locationEquipment2">★</label>
+
+                                <input type="radio" th:field="*{location.locationEquipment}" value="1" id="locationEquipment1"/>
+                                <label for="locationEquipment1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Location Ambience -->
+                        <div class="mb-3">
+                            <label>Ambiente</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{location.locationAmbience}" value="5" id="locationAmbience5"/>
+                                <label for="locationAmbience5">★</label>
+
+                                <input type="radio" th:field="*{location.locationAmbience}" value="4" id="locationAmbience4"/>
+                                <label for="locationAmbience4">★</label>
+
+                                <input type="radio" th:field="*{location.locationAmbience}" value="3" id="locationAmbience3"/>
+                                <label for="locationAmbience3">★</label>
+
+                                <input type="radio" th:field="*{location.locationAmbience}" value="2" id="locationAmbience2"/>
+                                <label for="locationAmbience2">★</label>
+
+                                <input type="radio" th:field="*{location.locationAmbience}" value="1" id="locationAmbience1"/>
+                                <label for="locationAmbience1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Location Cleanliness -->
+                        <div class="mb-3">
+                            <label>Sauberkeit</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{location.locationCleanliness}" value="5" id="locationCleanliness5"/>
+                                <label for="locationCleanliness5">★</label>
+
+                                <input type="radio" th:field="*{location.locationCleanliness}" value="4" id="locationCleanliness4"/>
+                                <label for="locationCleanliness4">★</label>
+
+                                <input type="radio" th:field="*{location.locationCleanliness}" value="3" id="locationCleanliness3"/>
+                                <label for="locationCleanliness3">★</label>
+
+                                <input type="radio" th:field="*{location.locationCleanliness}" value="2" id="locationCleanliness2"/>
+                                <label for="locationCleanliness2">★</label>
+
+                                <input type="radio" th:field="*{location.locationCleanliness}" value="1" id="locationCleanliness1"/>
+                                <label for="locationCleanliness1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Location Staff -->
+                        <div class="mb-3">
+                            <label>Personal</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{location.locationStaff}" value="5" id="locationStaff5"/>
+                                <label for="locationStaff5">★</label>
+
+                                <input type="radio" th:field="*{location.locationStaff}" value="4" id="locationStaff4"/>
+                                <label for="locationStaff4">★</label>
+
+                                <input type="radio" th:field="*{location.locationStaff}" value="3" id="locationStaff3"/>
+                                <label for="locationStaff3">★</label>
+
+                                <input type="radio" th:field="*{location.locationStaff}" value="2" id="locationStaff2"/>
+                                <label for="locationStaff2">★</label>
+
+                                <input type="radio" th:field="*{location.locationStaff}" value="1" id="locationStaff1"/>
+                                <label for="locationStaff1">★</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restroom -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="rating-block">
+                        <h4>
+                            Sanit&auml;re Anlagen
+                            <span class="segment-average">
+                            ☆☆☆☆☆
+                            </span>
+                        </h4>
+
+                        <!-- Restroom Cleanliness -->
+                        <div class="mb-3">
+                            <label>Sauberkeit</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{restroom.restroomCleanliness}" value="5" id="restroomCleanliness5"/>
+                                <label for="restroomCleanliness5">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomCleanliness}" value="4" id="restroomCleanliness4"/>
+                                <label for="restroomCleanliness4">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomCleanliness}" value="3" id="restroomCleanliness3"/>
+                                <label for="restroomCleanliness3">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomCleanliness}" value="2" id="restroomCleanliness2"/>
+                                <label for="restroomCleanliness2">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomCleanliness}" value="1" id="restroomCleanliness1"/>
+                                <label for="restroomCleanliness1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Restroom Accessibility -->
+                        <div class="mb-3">
+                            <label>Barrierefreiheit</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{restroom.restroomAccessibility}" value="5" id="restroomAccessibility5"/>
+                                <label for="restroomAccessibility5">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomAccessibility}" value="4" id="restroomAccessibility4"/>
+                                <label for="restroomAccessibility4">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomAccessibility}" value="3" id="restroomAccessibility3"/>
+                                <label for="restroomAccessibility3">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomAccessibility}" value="2" id="restroomAccessibility2"/>
+                                <label for="restroomAccessibility2">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomAccessibility}" value="1" id="restroomAccessibility1"/>
+                                <label for="restroomAccessibility1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Restroom Supplies -->
+                        <div class="mb-3">
+                            <label>Verbrauchsmaterial</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{restroom.restroomSupplies}" value="5" id="restroomSupplies5"/>
+                                <label for="restroomSupplies5">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomSupplies}" value="4" id="restroomSupplies4"/>
+                                <label for="restroomSupplies4">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomSupplies}" value="3" id="restroomSupplies3"/>
+                                <label for="restroomSupplies3">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomSupplies}" value="2" id="restroomSupplies2"/>
+                                <label for="restroomSupplies2">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomSupplies}" value="1" id="restroomSupplies1"/>
+                                <label for="restroomSupplies1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Restroom Size -->
+                        <div class="mb-3">
+                            <label>Größe</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{restroom.restroomSize}" value="5" id="restroomSize5"/>
+                                <label for="restroomSize5">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomSize}" value="4" id="restroomSize4"/>
+                                <label for="restroomSize4">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomSize}" value="3" id="restroomSize3"/>
+                                <label for="restroomSize3">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomSize}" value="2" id="restroomSize2"/>
+                                <label for="restroomSize2">★</label>
+
+                                <input type="radio" th:field="*{restroom.restroomSize}" value="1" id="restroomSize1"/>
+                                <label for="restroomSize1">★</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            <div class="row">
+                <!-- Security -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="rating-block">
+                        <h4>
+                        Sicherheit
+                        <span class="segment-average">
+                        ☆☆☆☆☆
+                        </span>
+                        </h4>
+
+                        <!-- Security Friendliness -->
+                        <div class="mb-3">
+                            <label>Freundlichkeit (Sicherheitspersonal)</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{security.securityStaffFriendliness}" value="5" id="securityStaffFriendliness5"/>
+                                <label for="securityStaffFriendliness5">★</label>
+
+                                <input type="radio" th:field="*{security.securityStaffFriendliness}" value="4" id="securityStaffFriendliness4"/>
+                                <label for="securityStaffFriendliness4">★</label>
+
+                                <input type="radio" th:field="*{security.securityStaffFriendliness}" value="3" id="securityStaffFriendliness3"/>
+                                <label for="securityStaffFriendliness3">★</label>
+
+                                <input type="radio" th:field="*{security.securityStaffFriendliness}" value="2" id="securityStaffFriendliness2"/>
+                                <label for="securityStaffFriendliness2">★</label>
+
+                                <input type="radio" th:field="*{security.securityStaffFriendliness}" value="1" id="securityStaffFriendliness1"/>
+                                <label for="securityStaffFriendliness1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Security Competence-->
+                        <div class="mb-3">
+                            <label>Kompetenz (Sicherheitspersonal)</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{security.securityStaffCompetence}" value="5" id="securityStaffCompetence5"/>
+                                <label for="securityStaffCompetence5">★</label>
+
+                                <input type="radio" th:field="*{security.securityStaffCompetence}" value="4" id="securityStaffCompetence4"/>
+                                <label for="securityStaffCompetence4">★</label>
+
+                                <input type="radio" th:field="*{security.securityStaffCompetence}" value="3" id="securityStaffCompetence3"/>
+                                <label for="securityStaffCompetence3">★</label>
+
+                                <input type="radio" th:field="*{security.securityStaffCompetence}" value="2" id="securityStaffCompetence2"/>
+                                <label for="securityStaffCompetence2">★</label>
+
+                                <input type="radio" th:field="*{security.securityStaffCompetence}" value="1" id="securityStaffCompetence1"/>
+                                <label for="securityStaffCompetence1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Sense of Security -->
+                        <div class="mb-3">
+                            <label>Sicherheitsgef&uuml;hl</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{security.securitySenseOfSecurity}" value="5" id="securitySenseOfSecurity5"/>
+                                <label for="securitySenseOfSecurity5">★</label>
+
+                                <input type="radio" th:field="*{security.securitySenseOfSecurity}" value="4" id="securitySenseOfSecurity4"/>
+                                <label for="securitySenseOfSecurity4">★</label>
+
+                                <input type="radio" th:field="*{security.securitySenseOfSecurity}" value="3" id="securitySenseOfSecurity3"/>
+                                <label for="securitySenseOfSecurity3">★</label>
+
+                                <input type="radio" th:field="*{security.securitySenseOfSecurity}" value="2" id="securitySenseOfSecurity2"/>
+                                <label for="securitySenseOfSecurity2">★</label>
+
+                                <input type="radio" th:field="*{security.securitySenseOfSecurity}" value="1" id="securitySenseOfSecurity1"/>
+                                <label for="securitySenseOfSecurity1">★</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sound -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="rating-block">
+                        <h4>
+                        Sound
+                        <span class="segment-average">
+                        ☆☆☆☆☆
+                        </span>
+                        </h4>
+
+                        <!-- Sound OverallQuality -->
+                        <div class="mb-3">
+                            <label>Qualit&auml;t</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{sound.soundOverallQuality}" value="5" id="soundOverallQuality5"/>
+                                <label for="soundOverallQuality5">★</label>
+
+                                <input type="radio" th:field="*{sound.soundOverallQuality}" value="4" id="soundOverallQuality4"/>
+                                <label for="soundOverallQuality4">★</label>
+
+                                <input type="radio" th:field="*{sound.soundOverallQuality}" value="3" id="soundOverallQuality3"/>
+                                <label for="soundOverallQuality3">★</label>
+
+                                <input type="radio" th:field="*{sound.soundOverallQuality}" value="2" id="soundOverallQuality2"/>
+                                <label for="soundOverallQuality2">★</label>
+
+                                <input type="radio" th:field="*{sound.soundOverallQuality}" value="1" id="soundOverallQuality1"/>
+                                <label for="soundOverallQuality1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Sound Loudness -->
+                        <div class="mb-3">
+                            <label>Lautst&auml;rke</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{sound.soundLoudness}" value="5" id="soundLoudness5"/>
+                                <label for="soundLoudness5">★</label>
+
+                                <input type="radio" th:field="*{sound.soundLoudness}" value="4" id="soundLoudness4"/>
+                                <label for="soundLoudness4">★</label>
+
+                                <input type="radio" th:field="*{sound.soundLoudness}" value="3" id="soundLoudness3"/>
+                                <label for="soundLoudness3">★</label>
+
+                                <input type="radio" th:field="*{sound.soundLoudness}" value="2" id="soundLoudness2"/>
+                                <label for="soundLoudness2">★</label>
+
+                                <input type="radio" th:field="*{sound.soundLoudness}" value="1" id="soundLoudness1"/>
+                                <label for="soundLoudness1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Sound Technical Issues -->
+                        <div class="mb-3">
+                            <label>Technische Probleme</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{sound.soundTechnicalIssues}" value="5" id="soundTechnicalIssues5"/>
+                                <label for="soundTechnicalIssues5">★</label>
+
+                                <input type="radio" th:field="*{sound.soundTechnicalIssues}" value="4" id="soundTechnicalIssues4"/>
+                                <label for="soundTechnicalIssues4">★</label>
+
+                                <input type="radio" th:field="*{sound.soundTechnicalIssues}" value="3" id="soundTechnicalIssues3"/>
+                                <label for="soundTechnicalIssues3">★</label>
+
+                                <input type="radio" th:field="*{sound.soundTechnicalIssues}" value="2" id="soundTechnicalIssues2"/>
+                                <label for="soundTechnicalIssues2">★</label>
+
+                                <input type="radio" th:field="*{sound.soundTechnicalIssues}" value="1" id="soundTechnicalIssues1"/>
+                                <label for="soundTechnicalIssues1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Sound Room Acoustics -->
+                        <div class="mb-3">
+                            <label>Raumakustik</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{sound.soundRoomAcoustics}" value="5" id="soundRoomAcoustics5"/>
+                                <label for="soundRoomAcoustics5">★</label>
+
+                                <input type="radio" th:field="*{sound.soundRoomAcoustics}" value="4" id="soundRoomAcoustics4"/>
+                                <label for="soundRoomAcoustics4">★</label>
+
+                                <input type="radio" th:field="*{sound.soundRoomAcoustics}" value="3" id="soundRoomAcoustics3"/>
+                                <label for="soundRoomAcoustics3">★</label>
+
+                                <input type="radio" th:field="*{sound.soundRoomAcoustics}" value="2" id="soundRoomAcoustics2"/>
+                                <label for="soundRoomAcoustics2">★</label>
+
+                                <input type="radio" th:field="*{sound.soundRoomAcoustics}" value="1" id="soundRoomAcoustics1"/>
+                                <label for="soundRoomAcoustics1">★</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wardrobe -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="rating-block">
+                        <h4>
+                        Garderobe
+                        <span class="segment-average">
+                        ☆☆☆☆☆
+                        </span>
+                        </h4>
+
+                        <!-- Wardrobe Price -->
+                        <div class="mb-3">
+                            <label>Preis</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{wardrobe.wardrobePrice}" value="5" id="wardrobePrice5"/>
+                                <label for="wardrobePrice5">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobePrice}" value="4" id="wardrobePrice4"/>
+                                <label for="wardrobePrice4">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobePrice}" value="3" id="wardrobePrice3"/>
+                                <label for="wardrobePrice3">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobePrice}" value="2" id="wardrobePrice2"/>
+                                <label for="wardrobePrice2">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobePrice}" value="1" id="wardrobePrice1"/>
+                                <label for="wardrobePrice1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Wardrobe Staff Efficiency -->
+                        <div class="mb-3">
+                            <label>Effizienz (Bedienung)</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{wardrobe.wardrobeStaffEfficiency}" value="5" id="wardrobeStaffEfficiency5"/>
+                                <label for="wardrobeStaffEfficiency5">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobeStaffEfficiency}" value="4" id="wardrobeStaffEfficiency4"/>
+                                <label for="wardrobeStaffEfficiency4">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobeStaffEfficiency}" value="3" id="wardrobeStaffEfficiency3"/>
+                                <label for="wardrobeStaffEfficiency3">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobeStaffEfficiency}" value="2" id="wardrobeStaffEfficiency2"/>
+                                <label for="wardrobeStaffEfficiency2">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobeStaffEfficiency}" value="1" id="wardrobeStaffEfficiency1"/>
+                                <label for="wardrobeStaffEfficiency1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Wardrobe Staff Friendliness -->
+                        <div class="mb-3">
+                            <label>Freundlichkeit (Bedienung)</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{wardrobe.wardrobeStaffFriendliness}" value="5" id="wardrobeStaffFriendliness5"/>
+                                <label for="wardrobeStaffFriendliness5">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobeStaffFriendliness}" value="4" id="wardrobeStaffFriendliness4"/>
+                                <label for="wardrobeStaffFriendliness4">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobeStaffFriendliness}" value="3" id="wardrobeStaffFriendliness3"/>
+                                <label for="wardrobeStaffFriendliness3">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobeStaffFriendliness}" value="2" id="wardrobeStaffFriendliness2"/>
+                                <label for="wardrobeStaffFriendliness2">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobeStaffFriendliness}" value="1" id="wardrobeStaffFriendliness1"/>
+                                <label for="wardrobeStaffFriendliness1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Wardrobe Quality -->
+                        <div class="mb-3">
+                            <label>Qualit&auml;t</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{wardrobe.wardrobeQuality}" value="5" id="wardrobeQuality5"/>
+                                <label for="wardrobeQuality5">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobeQuality}" value="4" id="wardrobeQuality4"/>
+                                <label for="wardrobeQuality4">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobeQuality}" value="3" id="wardrobeQuality3"/>
+                                <label for="wardrobeQuality3">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobeQuality}" value="2" id="wardrobeQuality2"/>
+                                <label for="wardrobeQuality2">★</label>
+
+                                <input type="radio" th:field="*{wardrobe.wardrobeQuality}" value="1" id="wardrobeQuality1"/>
+                                <label for="wardrobeQuality1">★</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performances -->
+                <h5 class="mt-4">Performances</h5>
+
+                <div th:each="performance, stat : ${performances}"
+                    class="card p-3 mb-3">
+
+                    <h6 th:text="${performance.artist.artistName}">
+                        K&uuml;nstlername
+                    </h6>
+
+                    <input type="hidden"
+                        th:name="'performanceRatings[' + ${stat.index} + '].performanceId'"
+                        th:value="${performance.performanceId}" />
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-2">
+                            <label>Performance Qualit&auml;t</label>
+                            <input type="number" min="1" max="5"
+                                th:name="'performanceRatings[' + ${stat.index} + '].performanceQuality'"
+                                class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+                            <label>Sound Quality</label>
+                            <input type="number" min="1" max="5"
+                                th:name="'performanceRatings[' + ${stat.index} + '].soundQuality'"
+                                class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+                            <label>Set Length</label>
+                            <input type="number" min="1" max="5"
+                                th:name="'performanceRatings[' + ${stat.index} + '].setLength'"
+                                class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+                            <label>Track Selection</label>
+                            <input type="number" min="1" max="5"
+                                th:name="'performanceRatings[' + ${stat.index} + '].trackSelection'"
+                                class="form-control">
+                        </div>
+
+                        <div class="col-md-12 mb-2">
+                            <label>Visual Show</label>
+                            <input type="number" min="1" max="5"
+                                th:name="'performanceRatings[' + ${stat.index} + '].visualShow'"
+                                class="form-control">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <!-- Performance -->
+            <!-- <div class="mb-4">
+                <label class="form-label">Performance</label>
+                <div class="star-rating">
+                    <input type="radio" th:field="*{performanceRating}" value="5" id="performance5"/>
+                    <label for="performance5">★</label>
+
+                    <input type="radio" th:field="*{performanceRating}" value="4" id="performance4"/>
+                    <label for="performance4">★</label>
+
+                    <input type="radio" th:field="*{performanceRating}" value="3" id="performance3"/>
+                    <label for="performance3">★</label>
+
+                    <input type="radio" th:field="*{performanceRating}" value="2" id="performance2"/>
+                    <label for="performance2">★</label>
+
+                    <input type="radio" th:field="*{performanceRating}" value="1" id="performance1"/>
+                    <label for="performance1">★</label>
+                </div>
+            </div> -->
+
+            <!-- Restroom -->
+            <!-- <div class="mb-4">
+                <label class="form-label">Toilette</label>
+                <div class="star-rating">
+                    <input type="radio" th:field="*{restroomRating}" value="5" id="restroom5"/>
+                    <label for="restroom5">★</label>
+
+                    <input type="radio" th:field="*{restroomRating}" value="4" id="restroom4"/>
+                    <label for="restroom4">★</label>
+
+                    <input type="radio" th:field="*{restroomRating}" value="3" id="restroom3"/>
+                    <label for="restroom3">★</label>
+
+                    <input type="radio" th:field="*{restroomRating}" value="2" id="restroom2"/>
+                    <label for="restroom2">★</label>
+
+                    <input type="radio" th:field="*{restroomRating}" value="1" id="restroom1"/>
+                    <label for="restroom1">★</label>
+                </div>
+            </div> -->
+
+            <!-- Security -->
+            <!-- <div class="mb-4">
+                <label class="form-label">Security</label>
+                <div class="star-rating">
+                    <input type="radio" th:field="*{securityRating}" value="5" id="security5"/>
+                    <label for="security5">★</label>
+
+                    <input type="radio" th:field="*{securityRating}" value="4" id="security4"/>
+                    <label for="security4">★</label>
+
+                    <input type="radio" th:field="*{securityRating}" value="3" id="security3"/>
+                    <label for="security3">★</label>
+
+                    <input type="radio" th:field="*{securityRating}" value="2" id="security2"/>
+                    <label for="security2">★</label>
+
+                    <input type="radio" th:field="*{securityRating}" value="1" id="security1"/>
+                    <label for="security1">★</label>
+                </div>
+            </div> -->
+
+            <!-- Sound -->
+            <!-- <div class="mb-4">
+                <label class="form-label">Sound</label>
+                <div class="star-rating">
+                    <input type="radio" th:field="*{soundRating}" value="5" id="sound5"/>
+                    <label for="sound5">★</label>
+
+                    <input type="radio" th:field="*{soundRating}" value="4" id="sound4"/>
+                    <label for="sound4">★</label>
+
+                    <input type="radio" th:field="*{soundRating}" value="3" id="sound3"/>
+                    <label for="sound3">★</label>
+
+                    <input type="radio" th:field="*{soundRating}" value="2" id="sound2"/>
+                    <label for="sound2">★</label>
+
+                    <input type="radio" th:field="*{soundRating}" value="1" id="sound1"/>
+                    <label for="sound1">★</label>
+                </div>
+            </div> -->
+
+            <!-- Wardrobe -->
+            <!-- <div class="mb-4">
+                <label class="form-label">Garderobe</label>
+                <div class="star-rating">
+                    <input type="radio" th:field="*{wardrobeRating}" value="5" id="wardrobe5"/>
+                    <label for="wardrobe5">★</label>
+
+                    <input type="radio" th:field="*{wardrobeRating}" value="4" id="wardrobe4"/>
+                    <label for="wardrobe4">★</label>
+
+                    <input type="radio" th:field="*{wardrobeRating}" value="3" id="wardrobe3"/>
+                    <label for="wardrobe3">★</label>
+
+                    <input type="radio" th:field="*{wardrobeRating}" value="2" id="wardrobe2"/>
+                    <label for="wardrobe2">★</label>
+
+                    <input type="radio" th:field="*{wardrobeRating}" value="1" id="wardrobe1"/>
+                    <label for="wardrobe1">★</label>
+                </div>
+            </div> -->
+            <!-- </div> -->
             <!-- Comment -->
             <div class="mb-3">
                 <label class="form-label">Comment</label>
@@ -57,6 +1056,54 @@
 
     </div>
 </div>
+<!-- <script>
+
+document.querySelectorAll(".rating-block").forEach(block => {
+
+    const radios = block.querySelectorAll("input[type=radio]");
+
+    radios.forEach(radio => {
+
+        radio.addEventListener("change", () => {
+
+            const values = [];
+
+            const groups = {};
+
+            radios.forEach(r => {
+                if (!groups[r.name]) {
+                    groups[r.name] = [];
+                }
+                groups[r.name].push(r);
+            });
+
+            Object.values(groups).forEach(group => {
+                const checked = group.find(r => r.checked);
+                if (checked) {
+                    values.push(parseInt(checked.value));
+                }
+            });
+
+            if (values.length === 0) return;
+
+            const avg = values.reduce((a,b) => a+b,0) / values.length;
+
+            const stars = Math.round(avg);
+
+            const starString =
+                "★★★★★".slice(0, stars) +
+                "☆☆☆☆☆".slice(0, 5 - stars);
+
+            block.querySelector(".segment-average").textContent = starString;
+
+        });
+
+    });
+
+});
+
+</script> -->
+<script th:src="@{/js/review-rating.js}"></script>
 
 </body>
 </html>

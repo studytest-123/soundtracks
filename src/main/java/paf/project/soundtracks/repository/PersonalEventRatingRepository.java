@@ -10,4 +10,6 @@ import paf.project.soundtracks.model.PersonalEventRating;
 public interface PersonalEventRatingRepository extends JpaRepository<PersonalEventRating, Long> {
     // Custom query method to find reviews by event
     List<PersonalEventRating> findByEvent(Event event);
+
+    List<PersonalEventRating> findByEvent_EventId(Long eventId);
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="UTF-8">
+<title>K&uuml;nstler erstellen</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<div class="main-content">
+
+<div class="container py-4">
+
+<h3>K&uuml;nstler erstellen</h3>
+
+<form th:action="@{/artist/new}" th:object="${artist}" method="post">
+
+<div class="mb-3">
+<label class="form-label">K&uuml;nstlername</label>
+<input type="text" class="form-control" th:field="*{artistName}" required>
+</div>
+
+<div class="mb-3">
+<label class="form-label">Genre</label>
+<input type="text" class="form-control" th:field="*{artistGenre}">
+</div>
+
+<div class="mb-3">
+<label class="form-label">Land</label>
+<input type="text" class="form-control" th:field="*{artistCountry}">
+</div>
+
+<div class="mb-3">
+<label class="form-label">Beschreibung</label>
+<textarea class="form-control" rows="4" th:field="*{artistDescription}"></textarea>
+</div>
+
+<button type="submit" class="btn btn-primary">
+Speichern
+</button>
+
+<a th:href="@{/}" class="btn btn-secondary">
+Abbrechen
+</a>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>

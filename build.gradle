@@ -6,7 +6,7 @@ plugins {
 
 group = 'paf.project'
 version = '0.0.1-SNAPSHOT'
-description = 'Demo project for Spring Boot'
+description = 'Soundtracks Project for Spring Boot'
 
 java {
 	toolchain {
@@ -24,12 +24,16 @@ dependencies {
 	
 	// Thymeleaf 
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	
 	// JPA + Hibernate
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
 	// PostgreSQL Driver
 	runtimeOnly 'org.postgresql:postgresql'
+
+	// SpringBoot Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

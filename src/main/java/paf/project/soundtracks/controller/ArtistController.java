@@ -17,6 +17,7 @@ public class ArtistController {
         this.artistRepository = artistRepository;
     }
 
+    /* create artist form */
     @GetMapping("/new")
     public String showCreateArtistForm(Model model) {
 
@@ -25,6 +26,7 @@ public class ArtistController {
         return "artist-create";
     }
 
+    /* submit form */
     @PostMapping("/new")
     public String createArtist(@ModelAttribute Artist artist) {
 
