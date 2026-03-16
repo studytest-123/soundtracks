@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 
 import jakarta.persistence.*;
 //import paf.project.soundtracks.model.backup.Old_PersonalEventRating;
+import paf.project.soundtracks.util.RatingUtils;
 
 /* @Entity
 @Table(name = "location_rating") */
@@ -130,13 +131,26 @@ public class LocationRating {
     public void setLocationRatingComments(String locationRatingComments) {
         this.locationRatingComments = locationRatingComments;
     } */
+    
+    // domain-logic methods
     public BigDecimal getAverage() {
+        return RatingUtils.average(
+            locationSize,
+            locationArea,
+            locationAccessibility,
+            locationEquipment,
+            locationAmbience,
+            locationCleanliness,
+            locationStaff
+        );
+    }
+        //public BigDecimal getAverage() {
         /* if (locationSize == null || locationArea == null || locationAccessibility == null || locationEquipment == null ||
             locationAmbience == null || locationCleanliness == null || locationStaff == null) 
             {
                 return BigDecimal.ZERO;
             } */
-        BigDecimal sum = BigDecimal.ZERO;
+        /* BigDecimal sum = BigDecimal.ZERO;
         int count = 0;
 
         if (locationSize != null) {
@@ -168,5 +182,5 @@ public class LocationRating {
             count++;
         }
         return count > 0 ? sum.divide(BigDecimal.valueOf(count), 1, RoundingMode.HALF_UP) : BigDecimal.ZERO;
-    }
+    } */
 }

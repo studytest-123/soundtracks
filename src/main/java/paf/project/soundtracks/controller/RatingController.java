@@ -4,7 +4,8 @@ import paf.project.soundtracks.model.Event;
 import paf.project.soundtracks.model.Performance;
 import paf.project.soundtracks.model.EventRating;
 import paf.project.soundtracks.model.Artist;
-import paf.project.soundtracks.model.SetlistItem;
+//import paf.project.soundtracks.model.SetlistItem;
+import paf.project.soundtracks.observer.RatingSubject;
 import paf.project.soundtracks.model.PersonalEventRating;
 import paf.project.soundtracks.model.PerformanceRating;
 import paf.project.soundtracks.model.Person;
@@ -39,17 +40,20 @@ public class RatingController {
     private final PersonalEventRatingRepository personalEventRatingRepository;
     private final PerformanceRepository performanceRepository;
     private final PersonRepository personRepository;
+    private final RatingSubject ratingSubject;
 
     public RatingController(EventRepository eventRepository,
                            EventRatingRepository eventRatingRepository,
                            PersonalEventRatingRepository personalEventRatingRepository,
                            PerformanceRepository performanceRepository,
-                           PersonRepository personRepository) {
+                           PersonRepository personRepository,
+                           RatingSubject ratingSubject) {
         this.eventRepository = eventRepository;
         this.eventRatingRepository = eventRatingRepository;
         this.personalEventRatingRepository = personalEventRatingRepository;
         this.performanceRepository = performanceRepository;
         this.personRepository = personRepository;
+        this.ratingSubject = ratingSubject;
     }
 
     /* ======================
@@ -60,7 +64,7 @@ public class RatingController {
         Event event = eventRepository.findById(eventId)
             .orElseThrow(() -> new IllegalArgumentException("Invalid event ID: " + eventId));
         
-            List<Performance> performances = performanceRepository.findByEvent_EventId(eventId);
+            List<Performance> performances = performanceRepository.findByEvent(event);
         PersonalEventRating review = new PersonalEventRating();
         review.setEvent(event);
 
@@ -103,9 +107,11 @@ public class RatingController {
 
         review.setPerson(person);
 
-        review.calculateOverallRating();
+        //review.calculateOverallRating();
 
         personalEventRatingRepository.save(review);
+
+        ratingSubject.notifyObservers(review);
 
         return "redirect:/event/" + review.getEvent().getEventId();
     }

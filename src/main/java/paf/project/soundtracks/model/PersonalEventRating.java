@@ -184,7 +184,7 @@ public class PersonalEventRating {
 
 
     // method to calculate average rating based on individual ratings
-    public void calculateOverallRating() {
+   /*  public void calculateOverallRating() {
         BigDecimal sum =
                 atmosphere.getAverage()
                 .add(gastronomy.getAverage())
@@ -197,7 +197,7 @@ public class PersonalEventRating {
                 int divisor = 7; // Start with 7 for the fixed ratings
 
                 // Include performance average if present
-        if (!performanceRatings.isEmpty()) {
+        if (performanceRatings != null && !performanceRatings.isEmpty()) {
             BigDecimal performanceAvg = performanceRatings.stream()
                     .map(PerformanceRating::getAverage)
                     .reduce(BigDecimal.ZERO, BigDecimal::add)
@@ -211,7 +211,7 @@ public class PersonalEventRating {
 
             this.personalEventAverageRating =
                     sum.divide(BigDecimal.valueOf(divisor), 2, RoundingMode.HALF_UP);
-        } /* else {
+        } */ /* else {
             this.personalEventAverageRating =
                     sum.divide(BigDecimal.valueOf(5), 2, RoundingMode.HALF_UP);
         }

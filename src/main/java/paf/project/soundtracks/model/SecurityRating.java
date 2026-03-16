@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 
 import jakarta.persistence.*;
 import paf.project.soundtracks.model.PersonalEventRating;
+import paf.project.soundtracks.util.RatingUtils;
 
 /* @Entity
 @Table(name = "security_rating") */
@@ -89,7 +90,16 @@ public class SecurityRating {
         this.securityRatingComments = securityRatingComments;
     } */
 
+    // domain-logic methods
     public BigDecimal getAverage() {
+        return RatingUtils.average(
+            securityStaffFriendliness,
+            securityStaffCompetence,
+            securitySenseOfSecurity
+        );
+    }
+    
+    /* public BigDecimal getAverage() {
         BigDecimal sum = BigDecimal.ZERO;
         int count = 0;
 
@@ -107,5 +117,5 @@ public class SecurityRating {
         }
 
         return count > 0 ? sum.divide(BigDecimal.valueOf(count), 1, RoundingMode.HALF_UP) : BigDecimal.ZERO;
-    }
+    } */
 }

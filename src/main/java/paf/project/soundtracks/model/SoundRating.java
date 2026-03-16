@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 
 import jakarta.persistence.*;
 import paf.project.soundtracks.model.PersonalEventRating;
+import paf.project.soundtracks.util.RatingUtils;
 
 /* @Entity
 @Table(name = "sound_rating") */
@@ -99,7 +100,18 @@ public class SoundRating {
         this.soundRatingComments = soundRatingComments;
     } */
 
+
+    // domain-logic methods
     public BigDecimal getAverage() {
+        return RatingUtils.average(
+            soundOverallQuality,
+            soundLoudness,
+            soundTechnicalIssues,
+            soundRoomAcoustics
+        );
+    }
+    
+    /* public BigDecimal getAverage() {
         BigDecimal sum = BigDecimal.ZERO;
         int count = 0;
 
@@ -121,5 +133,5 @@ public class SoundRating {
         }
 
         return count > 0 ? sum.divide(BigDecimal.valueOf(count), 1, RoundingMode.HALF_UP) : BigDecimal.ZERO;
-    }    
+    } */    
 }

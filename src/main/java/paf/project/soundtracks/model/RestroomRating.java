@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 
 import jakarta.persistence.*;
 //import paf.project.soundtracks.model.backup.Old_PersonalEventRating;
+import paf.project.soundtracks.util.RatingUtils;
 
 /* @Entity
 @Table(name = "restroom_rating") */
@@ -99,7 +100,17 @@ public class RestroomRating {
     public void setRestroomRatingComments(String restroomRatingComments) {
         this.restroomRatingComments = restroomRatingComments;
     } */
+
+    // domain-logic methods
     public BigDecimal getAverage() {
+        return RatingUtils.average(
+            restroomCleanliness,
+            restroomAccessibility,
+            restroomSupplies,
+            restroomSize
+        );
+    }
+    /* public BigDecimal getAverage() {
         BigDecimal sum = BigDecimal.ZERO;
         int count = 0;
 
@@ -121,5 +132,5 @@ public class RestroomRating {
         }
 
         return count > 0 ? sum.divide(BigDecimal.valueOf(count), 1, RoundingMode.HALF_UP) : BigDecimal.ZERO;
-    }
+    } */
 }

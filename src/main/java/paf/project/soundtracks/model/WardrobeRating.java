@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 
 import jakarta.persistence.*;
 import paf.project.soundtracks.model.PersonalEventRating;
+import paf.project.soundtracks.util.RatingUtils;
 
 /* @Entity
 @Table(name = "wardrobe_rating") */
@@ -100,8 +101,17 @@ public class WardrobeRating {
         this.wardrobeRatingComments = wardrobeRatingComments;
     } */
 
+    // domain-logic methods
+    public BigDecimal getAverage() {
+        return RatingUtils.average(
+            wardrobePrice,
+            wardrobeStaffEfficiency,
+            wardrobeStaffFriendliness,
+            wardrobeQuality
+        );
+    }
         // method to calculate average rating
-        public BigDecimal getAverage() {
+        /* public BigDecimal getAverage() {
         BigDecimal sum = BigDecimal.ZERO;
         int count = 0;
         if (wardrobePrice != null) {
@@ -121,5 +131,5 @@ public class WardrobeRating {
             count++;
         }
         return count > 0 ? sum.divide(BigDecimal.valueOf(count), 1, RoundingMode.HALF_UP) : BigDecimal.ZERO;
-    }
+    } */
 }

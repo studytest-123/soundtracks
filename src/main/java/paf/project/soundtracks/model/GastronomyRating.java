@@ -7,6 +7,7 @@ import java.math.RoundingMode;
 
 import jakarta.persistence.*;
 import paf.project.soundtracks.model.PersonalEventRating;
+import paf.project.soundtracks.util.RatingUtils;
 
 /* @Entity
 @Table(name = "gastronomy_rating") */
@@ -138,7 +139,20 @@ public class GastronomyRating {
         this.gastronomyRatingComments = gastronomyRatingComments;
     } */
 
+    // domain-logic methods
     public BigDecimal getAverage() {
+        return RatingUtils.average(
+            gastronomyFoodVariety,
+            gastronomyFoodQuality,
+            gastronomyFoodPrices,
+            gastronomyDrinkVariety,
+            gastronomyDrinkQuality,
+            gastronomyDrinkPrices,
+            gastronomyStaffEfficiency,
+            gastronomyStaffFriendliness
+        );
+    }
+    //public BigDecimal getAverage() {
     
         // Check if any of the ratings are null to avoid NullPointerException
         /* if (gastronomyFoodVariety == null || gastronomyFoodQuality == null || gastronomyFoodPrices == null ||
@@ -148,7 +162,7 @@ public class GastronomyRating {
                 return BigDecimal.ZERO;
             } */
 
-        BigDecimal sum = BigDecimal.ZERO;
+        /* BigDecimal sum = BigDecimal.ZERO;
         int count = 0;
 
         if (gastronomyFoodVariety != null) {
@@ -184,7 +198,7 @@ public class GastronomyRating {
             count++;
         }
         return count > 0 ? sum.divide(BigDecimal.valueOf(count), 1, RoundingMode.HALF_UP) : BigDecimal.ZERO;
-    }
+    } */
 }
 
     

@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 
 import jakarta.persistence.*;
 import paf.project.soundtracks.model.PersonalEventRating;
+import paf.project.soundtracks.util.RatingUtils;
 
 @Embeddable
 public class AtmosphereRating {
@@ -103,6 +104,15 @@ public class AtmosphereRating {
 
     // domain-logic methods
     public BigDecimal getAverage() {
+        return RatingUtils.average(
+            atmosphereEventVibe,
+            atmosphereCrowdEngagement,
+            atmosphereLightAndVisuals,
+            atmosphereEventDecorations,
+            atmosphereStaffFriendliness
+        );
+    }
+    /* public BigDecimal getAverage() {
         BigDecimal sum = BigDecimal.ZERO;
         int count = 0;
 
@@ -127,5 +137,5 @@ public class AtmosphereRating {
             count++;
         }
         return count > 0 ? sum.divide(BigDecimal.valueOf(count), 1, RoundingMode.HALF_UP) : BigDecimal.ZERO;
-    }
+    } */
 }

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import jakarta.persistence.*;
+import paf.project.soundtracks.util.RatingUtils;
 
 @Entity
 @Table(name = "performance_rating")
@@ -112,7 +113,18 @@ public class PerformanceRating {
         this.performanceRatingComments = performanceRatingComments;
     }
 
+
+    // domain-logic methods
     public BigDecimal getAverage() {
+        return RatingUtils.average(
+            performanceQuality,
+            soundQuality,
+            setLength,
+            trackSelection,
+            visualShow
+        );
+    }
+    /* public BigDecimal getAverage() {
         BigDecimal sum = BigDecimal.ZERO;
         int count = 0;
 
@@ -137,5 +149,5 @@ public class PerformanceRating {
             count++;
         }
         return count > 0 ? sum.divide(BigDecimal.valueOf(count), 1, RoundingMode.HALF_UP) : BigDecimal.ZERO;
-    }
+    } */
 }

@@ -11,5 +11,5 @@ import paf.project.soundtracks.model.EventRating;
 public interface EventRatingRepository extends JpaRepository<EventRating, Long> {
     Optional<EventRating> findByEvent(Event event);
     
-    EventRating findByEvent_EventId(Long eventId);
+    //EventRating findByEvent(Event event);
 }

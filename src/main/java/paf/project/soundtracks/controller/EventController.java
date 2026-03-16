@@ -87,9 +87,9 @@ public class EventController {
         Event event = eventRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Event not found: " + id));
 
-        List<Performance> performances = performanceRepository.findByEvent_EventId(id);
+        List<Performance> performances = performanceRepository.findByEvent(event);
 
-        List<PersonalEventRating> reviews = personalEventRatingRepository.findByEvent_EventId(id);
+        List<PersonalEventRating> reviews = personalEventRatingRepository.findByEvent(event);
 
         model.addAttribute("event", event);
         model.addAttribute("performances", performances);
