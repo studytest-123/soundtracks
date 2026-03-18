@@ -180,12 +180,17 @@ public class RatingController {
         //System.out.println("Atmosphere AFTER fix: " + review.getAtmosphere());
         //review.calculateOverallRating();
 
-        // 🔥 ALSO REQUIRED: prevent null crashes
+        // prevent null crashes
         review.initializeEmbeddeds();
 
+        // save review
         personalEventRatingRepository.save(review);
 
+        // notify observers 
         ratingSubject.notifyObservers(review);
+
+        // save persistent changes from observers
+        personalEventRatingRepository.save(review);
 
         return "redirect:/event/" + review.getEvent().getEventId();
     }

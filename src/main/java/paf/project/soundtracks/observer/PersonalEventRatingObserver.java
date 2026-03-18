@@ -18,12 +18,62 @@ import org.slf4j.LoggerFactory;
 @Order(2)
 public class PersonalEventRatingObserver implements RatingObserver {
 
-    private static final Logger log = LoggerFactory.getLogger(PersonalEventRatingObserver.class);
+    //private static final Logger log = LoggerFactory.getLogger(PersonalEventRatingObserver.class);
 
     @Override
     public void update(PersonalEventRating review) {
 
-        log.info("atmosphere: " + review.getAtmosphere().getAverage());
+        /* BigDecimal atmosphere = review.getAtmosphere().getAverage();
+        BigDecimal gastronomy = review.getGastronomy().getAverage();
+        BigDecimal location = review.getLocation().getAverage();
+        BigDecimal restroom = review.getRestroom().getAverage();
+        BigDecimal security = review.getSecurity().getAverage();
+        BigDecimal sound = review.getSound().getAverage();
+        BigDecimal wardrobe = review.getWardrobe().getAverage(); */
+
+        // store segment averages
+        /* review.setAtmosphereAverage(atmosphere);
+        review.setGastronomyAverage(gastronomy);
+        review.setLocationAverage(location);
+        review.setRestroomAverage(restroom);
+        review.setSecurityAverage(security);
+        review.setSoundAverage(sound);
+        review.setWardrobeAverage(wardrobe); */
+
+        // calculate overall average
+        review.setAtmosphereAverage(review.getAtmosphere().getAverage());
+        review.setGastronomyAverage(review.getGastronomy().getAverage());
+        review.setLocationAverage(review.getLocation().getAverage());
+        review.setRestroomAverage(review.getRestroom().getAverage());
+        review.setSecurityAverage(review.getSecurity().getAverage());
+        review.setSoundAverage(review.getSound().getAverage());
+        review.setWardrobeAverage(review.getWardrobe().getAverage());
+
+        BigDecimal sum = BigDecimal.ZERO;
+        int divisor = 0;
+
+        /* BigDecimal sum = BigDecimal.ZERO;
+        int divisor = 0; */
+
+        sum = sum.add(review.getAtmosphereCalculated()); divisor++;
+        sum = sum.add(review.getGastronomyCalculated()); divisor++;
+        sum = sum.add(review.getLocationCalculated()); divisor++;
+        sum = sum.add(review.getRestroomCalculated()); divisor++;
+        sum = sum.add(review.getSecurityCalculated()); divisor++;
+        sum = sum.add(review.getSoundCalculated()); divisor++;
+        sum = sum.add(review.getWardrobeCalculated()); divisor++;
+
+        /* if (review.getPerformanceAverage() != null) {
+        sum = sum.add(review.getPerformanceAverage());
+        divisor++;
+} */
+
+        review.setPersonalEventAverageRating(
+                sum.divide(BigDecimal.valueOf(divisor), 2, RoundingMode.HALF_UP)
+        );
+
+        //reviewRepository.save(review);
+        /* log.info("atmosphere: " + review.getAtmosphere().getAverage());
         log.info("gastronomy: " + review.getGastronomy().getAverage());
         log.info("location: " + review.getLocation().getAverage());
         log.info("restroom: " + review.getRestroom().getAverage());
@@ -36,7 +86,7 @@ public class PersonalEventRatingObserver implements RatingObserver {
                 .divide(
                         BigDecimal.valueOf(review.getPerformanceRatings().size()),
                         2,
-                        RoundingMode.HALF_UP));
+                        RoundingMode.HALF_UP)); */
 
         /* BigDecimal sum =
                 review.getAtmosphere().getAverage()
@@ -46,7 +96,7 @@ public class PersonalEventRatingObserver implements RatingObserver {
                 .add(review.getSecurity().getAverage())
                 .add(review.getSound().getAverage())
                 .add(review.getWardrobe().getAverage()); */
-        BigDecimal sum = BigDecimal.ZERO;
+        /* BigDecimal sum = BigDecimal.ZERO;
 
         sum = sum.add(review.getAtmosphere().getAverage());
         sum = sum.add(review.getGastronomy().getAverage());
@@ -86,5 +136,6 @@ if (review.getPerformanceRatings() != null && !review.getPerformanceRatings().is
 
         review.setPersonalEventAverageRating(
                 sum.divide(BigDecimal.valueOf(divisor), 2, RoundingMode.HALF_UP));
+    } */
     }
 }

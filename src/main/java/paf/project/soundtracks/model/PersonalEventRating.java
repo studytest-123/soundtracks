@@ -24,9 +24,9 @@ public class PersonalEventRating {
     @ManyToOne
     @JoinColumn(name = "person_id_person")
     private Person person;
-    @ManyToOne
+    /* @ManyToOne
     @JoinColumn(name = "event_rating_id_event_rating")
-    private EventRating eventRating;
+    private EventRating eventRating; */
     @ManyToOne
     @JoinColumn(name = "event_id_event")
     private Event event;
@@ -74,15 +74,36 @@ public class PersonalEventRating {
     private BigDecimal personalEventAverageRating;
 
     private String personalEventRatingComments;
+    /* private BigDecimal performanceAverage; */
+    @Column(name = "atmosphere_average_rating")
+    private BigDecimal atmosphereAverage;
+
+    @Column(name = "gastronomy_average_rating")
+    private BigDecimal gastronomyAverage;
+
+    @Column(name = "location_average_rating")
+    private BigDecimal locationAverage;
+
+    @Column(name = "restroom_average_rating")
+    private BigDecimal restroomAverage;
+
+    @Column(name = "security_average_rating")
+    private BigDecimal securityAverage;
+
+    @Column(name = "sound_average_rating")
+    private BigDecimal soundAverage;
+
+    @Column(name = "wardrobe_average_rating")
+    private BigDecimal wardrobeAverage;
 
     // constructors
     public PersonalEventRating() {
     }  
 
-    public PersonalEventRating(Long personalEventRatingId, Person person, EventRating eventRating, Event event, AtmosphereRating atmosphere, GastronomyRating gastronomy, LocationRating location, List<PerformanceRating> performanceRatings, RestroomRating restroom, SecurityRating security, SoundRating sound, WardrobeRating wardrobe, BigDecimal personalEventAverageRating, String personalEventRatingComments) {
+    public PersonalEventRating(Long personalEventRatingId, Person person, /* EventRating eventRating,  */Event event, AtmosphereRating atmosphere, GastronomyRating gastronomy, LocationRating location, List<PerformanceRating> performanceRatings, RestroomRating restroom, SecurityRating security, SoundRating sound, WardrobeRating wardrobe, BigDecimal personalEventAverageRating, String personalEventRatingComments) {
         this.personalEventRatingId = personalEventRatingId;
         this.person = person;
-        this.eventRating = eventRating;
+        /* this.eventRating = eventRating; */
         this.event = event;
         this.atmosphere = atmosphere;
         this.gastronomy = gastronomy;
@@ -109,12 +130,12 @@ public class PersonalEventRating {
     public void setPerson(Person person) {
         this.person = person;
     }
-    public EventRating getEventRating() {
+    /* public EventRating getEventRating() {
         return eventRating;
     }
     public void setEventRating(EventRating eventRating) {
         this.eventRating = eventRating;
-    }
+    } */
     public Event getEvent() {
         return event;
     }
@@ -181,6 +202,83 @@ public class PersonalEventRating {
     public void setPersonalEventRatingComments(String personalEventRatingComments) {
         this.personalEventRatingComments = personalEventRatingComments;
     }
+
+    public BigDecimal getAtmosphereAverage() {
+        return atmosphereAverage;
+    }
+    public void setAtmosphereAverage(BigDecimal atmosphereAverage) {
+        this.atmosphereAverage = atmosphereAverage;
+    }
+    public BigDecimal getGastronomyAverage() {
+        return gastronomyAverage;
+    }
+    public void setGastronomyAverage(BigDecimal gastronomyAverage) {
+        this.gastronomyAverage = gastronomyAverage;
+    }
+    public BigDecimal getLocationAverage() {
+        return locationAverage;
+    }
+    public void setLocationAverage(BigDecimal locationAverage) {
+        this.locationAverage = locationAverage;
+    }
+    public BigDecimal getRestroomAverage() {
+        return restroomAverage;
+    }
+    public void setRestroomAverage(BigDecimal restroomAverage) {
+        this.restroomAverage = restroomAverage;
+    }
+    public BigDecimal getSecurityAverage() {
+        return securityAverage;
+    }
+    public void setSecurityAverage(BigDecimal securityAverage) {
+        this.securityAverage = securityAverage;
+    }
+    public BigDecimal getSoundAverage() {
+        return soundAverage;
+    }
+    public void setSoundAverage(BigDecimal soundAverage) {
+        this.soundAverage = soundAverage;
+    }
+    public BigDecimal getWardrobeAverage() {
+        return wardrobeAverage;
+    }
+    public void setWardrobeAverage(BigDecimal wardrobeAverage) {
+        this.wardrobeAverage = wardrobeAverage;
+    }
+
+
+    // getters for calculated averages (used in observer)
+    public BigDecimal getAtmosphereCalculated() {
+    return atmosphere != null ? atmosphere.getAverage() : BigDecimal.ZERO;
+    }
+
+    public BigDecimal getGastronomyCalculated() {
+        return gastronomy != null ? gastronomy.getAverage() : BigDecimal.ZERO;
+    }
+
+    public BigDecimal getLocationCalculated() {
+        return location != null ? location.getAverage() : BigDecimal.ZERO;
+    }
+
+    public BigDecimal getRestroomCalculated() {
+        return restroom != null ? restroom.getAverage() : BigDecimal.ZERO;
+    }
+
+    public BigDecimal getSecurityCalculated() {
+        return security != null ? security.getAverage() : BigDecimal.ZERO;
+    }
+
+    public BigDecimal getSoundCalculated() {
+        return sound != null ? sound.getAverage() : BigDecimal.ZERO;
+    }
+
+    public BigDecimal getWardrobeCalculated() {
+        return wardrobe != null ? wardrobe.getAverage() : BigDecimal.ZERO;
+    }
+
+    /* public BigDecimal getPerformanceAverage() {
+        return performanceAverage; // <- stored value from observer
+    } */
 
     public void initializeEmbeddeds() {
     //System.out.println("PersonalEventRatingModel CALLED");   

@@ -64,10 +64,10 @@
                     <div class="user-image mx-auto mb-3">Bild</div>
                     <h5 th:text="${user.userName}">User</h5>
                     <div class="rating mb-2">
-                        <span>★ ★ ★ ★ ☆</span>
+                        <!-- <span>★ ★ ★ ★ ☆</span> -->
                     </div>
                     <ul class="list-unstyled">
-                        <li th:text="${user.reviewCount}">Stat1</li>
+                        <li th:text="'Bewertungen: ' + ${user.reviewCount}">Stat1</li>
                         <li th:text="${user.eventCount}">Stat2</li>
                         <li th:text="${user.reviewScore}">Stat3</li>
                     </ul>
@@ -89,7 +89,7 @@
             <div class="col-md-8">
                 <a th:href="@{/event/{id}(id=${latestEvent.eventId})}" class="text-decoration-none text-white">
                     <div class="card p-3">
-                        <h5 th:text="'Neuestes Event: ' + ${latestEvent.eventName} + ' @ ' + ${latestEvent.Location.locationName}">
+                        <h5 th:text="'Neustes Event: ' + ${latestEvent.eventName} + ' @ ' + ${latestEvent.Location.locationName}">
                             latest event
                         </h5>
                         <div class="row mt-2">
