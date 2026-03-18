@@ -3,10 +3,16 @@ package paf.project.soundtracks.controller;
 import paf.project.soundtracks.model.Event;
 import paf.project.soundtracks.model.Performance;
 import paf.project.soundtracks.model.EventRating;
+import paf.project.soundtracks.model.GastronomyRating;
 import paf.project.soundtracks.model.Artist;
+import paf.project.soundtracks.model.AtmosphereRating;
 //import paf.project.soundtracks.model.SetlistItem;
 import paf.project.soundtracks.observer.RatingSubject;
 import paf.project.soundtracks.model.PersonalEventRating;
+import paf.project.soundtracks.model.RestroomRating;
+import paf.project.soundtracks.model.SecurityRating;
+import paf.project.soundtracks.model.SoundRating;
+import paf.project.soundtracks.model.WardrobeRating;
 import paf.project.soundtracks.model.PerformanceRating;
 import paf.project.soundtracks.model.Person;
 import paf.project.soundtracks.repository.EventRepository;
@@ -27,6 +33,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import paf.project.soundtracks.model.Location;
+import paf.project.soundtracks.model.LocationRating;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -56,6 +64,23 @@ public class RatingController {
         this.ratingSubject = ratingSubject;
     }
 
+    // 🔥 ADD THIS HERE
+    @ModelAttribute("review")
+    public PersonalEventRating initReview() {
+        System.out.println("INIT REVIEW CALLED");
+
+        PersonalEventRating review = new PersonalEventRating();
+
+        review.setAtmosphere(new AtmosphereRating());
+        review.setGastronomy(new GastronomyRating());
+        review.setLocation(new LocationRating());
+        review.setRestroom(new RestroomRating());
+        review.setSecurity(new SecurityRating());
+        review.setSound(new SoundRating());
+        review.setWardrobe(new WardrobeRating());
+
+        return review;
+    }
     /* ======================
        SHOW CREATE EVENT FORM
        ====================== */
@@ -68,6 +93,16 @@ public class RatingController {
         PersonalEventRating review = new PersonalEventRating();
         review.setEvent(event);
 
+        // initialize category ratings
+        /* review.setAtmosphere(new AtmosphereRating());
+        review.setGastronomy(new GastronomyRating());
+        review.setLocation(new LocationRating());
+        review.setRestroom(new RestroomRating());
+        review.setSecurity(new SecurityRating());
+        review.setSound(new SoundRating());
+        review.setWardrobe(new WardrobeRating()); */
+
+        // adding attributes to model
         model.addAttribute("review", review);
         model.addAttribute("event", event);
         model.addAttribute("performances", performances);
@@ -93,8 +128,19 @@ public class RatingController {
     } */
 
     @PostMapping("/new")
-    public String saveReview(@ModelAttribute PersonalEventRating review) {
+    public String saveReview(@ModelAttribute("review") PersonalEventRating review, @RequestParam("eventId") Long eventId) {
+        System.out.println("POST HIT");
 
+
+        // 🔥 FIX: reload event
+        Event event = eventRepository.findById(eventId)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid event ID: " + eventId));
+
+        review.setEvent(event);
+
+        System.out.println("Event AFTER fix: " + review.getEvent());
+
+        // Authentication and Person association
         Authentication auth = SecurityContextHolder
         .getContext()
         .getAuthentication();
@@ -105,9 +151,37 @@ public class RatingController {
         .findByUserName(username)
         .orElseThrow();
 
+        System.out.println("Atmosphere BEFORE fix: " + review.getAtmosphere());
+
         review.setPerson(person);
 
+        // setting default values for null category ratings
+        /* if (review.getAtmosphere() == null)
+        review.setAtmosphere(new AtmosphereRating());
+
+        if (review.getGastronomy() == null)
+            review.setGastronomy(new GastronomyRating());
+
+        if (review.getLocation() == null)
+            review.setLocation(new LocationRating());
+
+        if (review.getRestroom() == null)
+            review.setRestroom(new RestroomRating());
+
+        if (review.getSecurity() == null)
+            review.setSecurity(new SecurityRating());
+
+        if (review.getSound() == null)
+            review.setSound(new SoundRating());
+
+        if (review.getWardrobe() == null)
+            review.setWardrobe(new WardrobeRating()); */
+
+        //System.out.println("Atmosphere AFTER fix: " + review.getAtmosphere());
         //review.calculateOverallRating();
+
+        // 🔥 ALSO REQUIRED: prevent null crashes
+        review.initializeEmbeddeds();
 
         personalEventRatingRepository.save(review);
 

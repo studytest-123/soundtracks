@@ -182,6 +182,16 @@ public class PersonalEventRating {
         this.personalEventRatingComments = personalEventRatingComments;
     }
 
+    public void initializeEmbeddeds() {
+    //System.out.println("PersonalEventRatingModel CALLED");   
+    if (atmosphere == null) atmosphere = new AtmosphereRating();
+    if (gastronomy == null) gastronomy = new GastronomyRating();
+    if (location == null) location = new LocationRating();
+    if (restroom == null) restroom = new RestroomRating();
+    if (security == null) security = new SecurityRating();
+    if (sound == null) sound = new SoundRating();
+    if (wardrobe == null) wardrobe = new WardrobeRating();
+}
 
     // method to calculate average rating based on individual ratings
    /*  public void calculateOverallRating() {

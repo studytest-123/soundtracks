@@ -112,7 +112,7 @@ public class PerformanceRating {
     public void setPerformanceRatingComments(String performanceRatingComments) {
         this.performanceRatingComments = performanceRatingComments;
     }
-
+    
 
     // domain-logic methods
     public BigDecimal getAverage() {
@@ -124,6 +124,8 @@ public class PerformanceRating {
             visualShow
         );
     }
+
+
     /* public BigDecimal getAverage() {
         BigDecimal sum = BigDecimal.ZERO;
         int count = 0;
