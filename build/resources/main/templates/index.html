@@ -68,8 +68,8 @@
                     </div>
                     <ul class="list-unstyled">
                         <li th:text="'Bewertungen: ' + ${user.reviewCount}">Stat1</li>
-                        <li th:text="${user.eventCount}">Stat2</li>
-                        <li th:text="${user.reviewScore}">Stat3</li>
+                        <li th:text="'Event-Teilnahmen: ' + ${user.eventCount}">Stat2</li>
+                        <li th:text="'Bewertungsscore: ' + ${user.reviewScore}">Stat3</li>
                     </ul>
                     <!-- <div sec:authorize="isAnonymous()">
                         <a th:href="@{/login}" class="btn btn-primary btn-sm">Login</a>

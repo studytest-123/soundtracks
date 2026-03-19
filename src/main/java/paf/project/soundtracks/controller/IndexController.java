@@ -60,13 +60,14 @@ public class IndexController {
         // set today for reference
         LocalDate today = LocalDate.now();
 
-        Event latestEvent = eventRepository.findTopByOrderByEventIdDesc(); // Get the latest event by ID
+        // Get the latest event by ID
+        Event latestEvent = eventRepository.findTopByOrderByEventIdDesc(); 
 
         // upcoming events
-        List<Event> upcomingEvents = eventRepository.findTop10ByEventDateGreaterThanEqualOrderByEventDateAsc(today);
+        List<Event> upcomingEvents = eventRepository.findByEventDateGreaterThanEqualOrderByEventDateAsc(today);
 
         // past events
-        List<Event> pastEvents = eventRepository.findTop10ByEventDateBeforeOrderByEventDateDesc(today);
+        List<Event> pastEvents = eventRepository.findByEventDateBeforeOrderByEventDateDesc(today);
         
         // pass to Thymeleaf
         model.addAttribute("user", user);

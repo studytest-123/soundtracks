@@ -1,10 +1,12 @@
 package paf.project.soundtracks.controller;
 
 import paf.project.soundtracks.model.Event;
+import paf.project.soundtracks.model.EventRating;
 import paf.project.soundtracks.model.Performance;
 import paf.project.soundtracks.model.PersonalEventRating;
 import paf.project.soundtracks.model.Artist;
 import paf.project.soundtracks.repository.ArtistRepository;
+import paf.project.soundtracks.repository.EventRatingRepository;
 import paf.project.soundtracks.repository.EventRepository;
 import paf.project.soundtracks.repository.LocationRepository;
 import paf.project.soundtracks.repository.PerformanceRepository;
@@ -20,7 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import paf.project.soundtracks.model.Location;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/event")
@@ -31,15 +37,18 @@ public class EventController {
     private final LocationRepository locationRepository;
     private final PerformanceRepository performanceRepository;
     private final PersonalEventRatingRepository personalEventRatingRepository;
+    private final EventRatingRepository eventRatingRepository;  
 
-    public EventController(EventRepository eventRepository, ArtistRepository artistRepository, LocationRepository locationRepository, PerformanceRepository performanceRepository, PersonalEventRatingRepository personalEventRatingRepository) {
+    public EventController(EventRepository eventRepository, ArtistRepository artistRepository, LocationRepository locationRepository, PerformanceRepository performanceRepository, PersonalEventRatingRepository personalEventRatingRepository, EventRatingRepository eventRatingRepository) {
         this.eventRepository = eventRepository;
         this.artistRepository = artistRepository;
         this.locationRepository = locationRepository;
         this.performanceRepository = performanceRepository;
         this.personalEventRatingRepository = personalEventRatingRepository;
+        this.eventRatingRepository = eventRatingRepository;
     }
 
+    
     // create event form
     @GetMapping("/new")
     public String showCreateEventForm(Model model) {
@@ -80,6 +89,11 @@ public class EventController {
         return "redirect:/event/" + savedEvent.getEventId();
     }
     
+    // helper method to safely handle null ratings
+    private BigDecimal safe(BigDecimal value) {
+            return value != null ? value : BigDecimal.ZERO;
+    }
+
     // event details
     @GetMapping("/{id}")
     //@RequestMapping("/event")
@@ -91,9 +105,31 @@ public class EventController {
 
         List<PersonalEventRating> reviews = personalEventRatingRepository.findByEvent(event);
 
+        EventRating eventRating = eventRatingRepository.findByEvent(event)
+            .orElse(new EventRating()); // return empty EventRating if not found to avoid null pointer
+
+        if(eventRating != null) {
+            Map<String, BigDecimal> segments = Map.of(
+                "Atmosphäre", safe(eventRating.getAtmosphereAverageRating()),
+                "Gastronomie", safe(eventRating.getGastronomyAverageRating()),
+                "Location", safe(eventRating.getLocationAverageRating()),
+                "Sanitärbereich", safe(eventRating.getRestroomAverageRating()),
+                "Security", safe(eventRating.getSecurityAverageRating()),
+                "Sound", safe(eventRating.getSoundAverageRating()),
+                "Garderobe", safe(eventRating.getWardrobeAverageRating())
+             );
+             model.addAttribute("segments", segments);
+        }
+        
+        boolean hasRating = eventRating != null
+            && eventRating.getEventAverageRating() != null
+            && event.getEventDate().isBefore(LocalDate.now());
+
+        model.addAttribute("hasRating", hasRating);
         model.addAttribute("event", event);
         model.addAttribute("performances", performances);
         model.addAttribute("reviews", reviews);
+        model.addAttribute("eventRating", eventRating);
 
         //debugging
         /* System.out.println("EVENT: " + event.getEventName());

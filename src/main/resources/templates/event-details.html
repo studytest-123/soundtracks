@@ -20,6 +20,14 @@
 
         <div class="card p-4 mb-4">
     <h2 th:text="${event.eventName}">Event Name</h2>
+    <!-- Overall Rating -->
+    <div class="rating mt-1" th:if="${hasRating}">
+
+        <span th:each="i : ${#numbers.sequence(1,5)}">
+            <span th:text="${i <= rating ? '★' : '☆'}"></span>
+        </span>
+
+    </div>
 
     <div class="event-image my-3">Event Bild</div>
 
@@ -72,25 +80,48 @@
         Beschreibung einf&uuml;gen
     </p>
 
-    <div class="rating mt-3">
+    <!-- <div class="rating mt-3">
         <span>★ ★ ★ ★ ★</span>
-    </div>
-    <!-- ☆ -->
-    <!-- <div class="rating mt-1"
-            th:with="rating=${eventRating.eventAverageRating}">
-
-        <span th:each="i : ${#numbers.sequence(1,5)}">
-            <span th:text="${i <= rating ? '★' : '☆'}"></span>
-        </span>
-
     </div> -->
+    <!-- ☆ -->
+    <!-- <div th:if="${eventRating != null}"> -->
+    
+    
+
+    <!-- Segment Ratings -->
+    <div class="row text-center" th:if="${hasRating}">
+
+        <div class="col" th:each="seg : ${segments}">
+            
+            <!-- Segment Name -->
+            <div class="small text" th:text="${seg.key}"></div>
+
+            <!-- Stars -->
+            <div class="star-rating">
+
+                <div th:with="rounded=${seg.value != null ? seg.value.intValue() : 0}">
+
+                    <!-- filled -->
+                    <span th:each="i : ${#numbers.sequence(1, rounded)}">★</span>
+
+                    <!-- empty -->
+                    <span th:each="i : ${#numbers.sequence(1, 5 - rounded)}">☆</span>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+<!-- </div> -->
 </div>
 
 
         <!-- Placeholder for future features -->
         <div class="section-title"></div>
 
-        <div class="row g-3">
+        <div class="row g-3 align-items-stretch">
             <!-- Performances -->
             <!-- <div class="col-md-4">
                 <div class="card p-3 text-center">
@@ -133,10 +164,18 @@
                 </div>
                 
             </div> -->
-            <div class="col-md-4">
-    <div class="card p-3">
+            <div class="col-md-4 d-flex">
+    <div class="card p-3 w-100 d-flex flex-column">
 
-        <h6 class="mb-3 text-center">K&uuml;nstler</h6>
+    <h6 class="mb-2 text-center">Künstler</h6>
+
+    <!-- BUTTON directly under title -->
+     
+    <a th:if="${event.future}" th:href="@{/event/{id}/performance/new(id=${event.eventId})}"
+       class="btn btn-primary btn-sm mb-3">
+        + Künstler hinzufügen
+    </a>
+     
 
         <div th:if="${#lists.isEmpty(performances)}"
              class="text-muted text-center small mb-3">
@@ -182,10 +221,10 @@
         </ul>
 
         <!-- Add artist button -->
-        <a th:href="@{/event/{id}/performance/new(id=${event.eventId})}"
+        <!-- <a th:href="@{/event/{id}/performance/new(id=${event.eventId})}"
            class="btn btn-primary btn-sm mt-3">
             + Künstler hinzufügen
-        </a>
+        </a> -->
 
     </div>
 </div>
@@ -199,10 +238,18 @@
                     </p>
                 </div>
             </div> -->
-            <div class="col-md-4">
-    <div class="card p-3">
+            <div class="col-md-8 d-flex">
+    <div class="card p-3 w-100 d-flex flex-column">
 
-        <h6 class="text-center mb-3">Bewertungen</h6>
+    <h6 class="text-center mb-2">Bewertungen</h6>
+
+    <!-- BUTTON under title -->
+    <a th:if="${event.past}"
+       th:href="@{/review/new(eventId=${event.eventId})}"
+       class="btn btn-primary btn-sm mb-3"
+       disabled>
+        Bewertung erstellen
+    </a>
 
         <div th:if="${#lists.isEmpty(reviews)}"
              class="text-muted text-center small">
@@ -243,15 +290,14 @@
     </div>
 </div>
 
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <div class="card p-3 text-center">
                     <h6>Bewertung hinzufügen</h6>
-                    <a th:href="@{/review/new(eventId=${event.eventId})}"
-                       class="btn btn-primary btn-sm">
+                    <a th:if="${event.past}"th:href="@{/review/new(eventId=${event.eventId})}" class="btn btn-primary btn-sm">
                         Bewertung schreiben
                     </a>
                 </div>
-            </div>
+            </div> -->
         </div>
 
     </div>

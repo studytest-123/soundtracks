@@ -5,16 +5,16 @@ import org.springframework.stereotype.Component;
 
 import paf.project.soundtracks.model.Person;
 import paf.project.soundtracks.model.PersonalEventRating;
-import paf.project.soundtracks.repository.PersonalEventRatingRepository;
+//import paf.project.soundtracks.repository.PersonalEventRatingRepository;
 
 @Component
 @Order(4)
 public class UserStatisticsObserver implements RatingObserver {
 
-    private final PersonalEventRatingRepository reviewRepository;
+    //private final PersonalEventRatingRepository reviewRepository;
 
-    public UserStatisticsObserver(PersonalEventRatingRepository reviewRepository) {
-        this.reviewRepository = reviewRepository;
+    public UserStatisticsObserver(/* PersonalEventRatingRepository reviewRepository */) {
+        /* this.reviewRepository = reviewRepository; */
     }
 
     @Override
@@ -22,9 +22,11 @@ public class UserStatisticsObserver implements RatingObserver {
 
         Person person = review.getPerson();
 
-        long count = reviewRepository.countByPerson(person);
+        /* long count = reviewRepository.countByPerson(person);
 
-        person.setReviewCount((int) count);
+        person.setReviewCount((int) count); */
+        person.setReviewCount(person.getReviewCount() + 1);
+
 
     }
 }

@@ -48,7 +48,7 @@ public class EventRatingObserver implements RatingObserver {
                 .divide(BigDecimal.valueOf(filtered.size()), 2, RoundingMode.HALF_UP);
 }
 
-        // 🔥 MAIN LOGIC: recalculate and update EventRating whenever a PersonalEventRating is created or updated
+        // MAIN LOGIC: recalculate and update EventRating whenever a PersonalEventRating is created or updated
         @Override
         public void update(PersonalEventRating review) {
 
@@ -142,8 +142,8 @@ public class EventRatingObserver implements RatingObserver {
                                 .toList())
                 );
 
-                
+                // move to service layer 
                 // saving
-                eventRatingRepository.save(eventRating);
+                //eventRatingRepository.save(eventRating);
         }
 }

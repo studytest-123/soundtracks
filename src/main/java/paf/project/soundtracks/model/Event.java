@@ -118,18 +118,17 @@ public class Event {
     public void setEventDescription(String eventDescription) {
         this.eventDescription = eventDescription;
     }   
-    /*
-    public List<Performance> getEventPerformances() {
-        return eventPerformances;
+    
+    // helper method 
+    public boolean isPast() {
+        return eventDate != null && eventDate.isBefore(LocalDate.now());
     }
-    public void setEventPerformances(List<Performance> eventPerformances) {
-        this.eventPerformances = eventPerformances;
+
+    public boolean isFuture() {
+        return eventDate != null && !eventDate.isBefore(LocalDate.now());
     }
-    public List<EventParticipation> getEventParticipations() {
-        return eventParticipations;
-    }
-    public void setEventParticipations(List<EventParticipation> eventParticipations) {
-        this.eventParticipations = eventParticipations;
-    }
-    */
+
+    /* public boolean isReviewed() {
+        return eventRating != null;
+    } */
 }

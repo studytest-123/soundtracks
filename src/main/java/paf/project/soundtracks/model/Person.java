@@ -15,11 +15,11 @@ public class Person {
     @Column(name = "user_name")
     private String userName;
     @Column(name = "review_count")
-    private Integer reviewCount;
+    private Integer reviewCount = 0;
     @Column(name = "event_count") 
-    private Integer eventCount;
+    private Integer eventCount = 0;
     @Column(name = "review_score")
-    private BigDecimal reviewScore;
+    private BigDecimal reviewScore = BigDecimal.ZERO;
     @Column(name = "user_password")
     private String password;
     /* 

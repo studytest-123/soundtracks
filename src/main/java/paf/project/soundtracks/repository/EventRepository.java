@@ -10,7 +10,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     Event findTopByOrderByEventIdDesc(); // latest event by ID (sql query parsing)
 
-    List<Event> findTop10ByEventDateGreaterThanEqualOrderByEventDateAsc(LocalDate date); // upcoming events (sql query parsing)
+    List<Event> findByEventDateGreaterThanEqualOrderByEventDateAsc(LocalDate date); // upcoming events (sql query parsing)
 
-    List<Event> findTop10ByEventDateBeforeOrderByEventDateDesc(LocalDate date); // past events (sql query parsing)
+    List<Event> findByEventDateBeforeOrderByEventDateDesc(LocalDate date); // past events (sql query parsing)
 }
