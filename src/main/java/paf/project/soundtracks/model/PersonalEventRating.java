@@ -1,18 +1,17 @@
 package paf.project.soundtracks.model;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
-import paf.project.soundtracks.model.GastronomyRating;
+/* import paf.project.soundtracks.model.GastronomyRating;
 import paf.project.soundtracks.model.LocationRating;
 import paf.project.soundtracks.model.PerformanceRating;
 import paf.project.soundtracks.model.RestroomRating;
 import paf.project.soundtracks.model.SecurityRating;
-import paf.project.soundtracks.model.SoundRating;
-import paf.project.soundtracks.model.WardrobeRating;
+import paf.project.soundtracks.model.MerchandiseRating;
+import paf.project.soundtracks.model.WardrobeRating; */
 
 @Entity
 @Table(name = "personal_event_rating")
@@ -45,6 +44,9 @@ public class PersonalEventRating {
     //private BigDecimal performanceRating;
 
     @Embedded
+    private MerchandiseRating merchandise = new MerchandiseRating();
+
+    @Embedded
     private RestroomRating restroom = new RestroomRating();
 
     @Embedded
@@ -58,10 +60,6 @@ public class PersonalEventRating {
     @Embedded
     private SoundRating sound = new SoundRating();
 
-    /* this.wardrobePrice = wardrobePrice;
-        this.wardrobeStaffEfficiency = wardrobeStaffEfficiency;
-        this.wardrobeStaffFriendliness = wardrobeStaffFriendliness;
-        this.wardrobeQuality = wardrobeQuality; */
     @Embedded
     @AttributeOverrides({
         @AttributeOverride(name = "wardrobePrice", column = @Column(name = "wardrobe_price")),
@@ -100,14 +98,14 @@ public class PersonalEventRating {
     public PersonalEventRating() {
     }  
 
-    public PersonalEventRating(Long personalEventRatingId, Person person, /* EventRating eventRating,  */Event event, AtmosphereRating atmosphere, GastronomyRating gastronomy, LocationRating location, List<PerformanceRating> performanceRatings, RestroomRating restroom, SecurityRating security, SoundRating sound, WardrobeRating wardrobe, BigDecimal personalEventAverageRating, String personalEventRatingComments) {
+    public PersonalEventRating(Long personalEventRatingId, Person person, Event event, AtmosphereRating atmosphere, GastronomyRating gastronomy, LocationRating location, MerchandiseRating merchandise, List<PerformanceRating> performanceRatings, RestroomRating restroom, SecurityRating security, SoundRating sound, WardrobeRating wardrobe, BigDecimal personalEventAverageRating, String personalEventRatingComments) {
         this.personalEventRatingId = personalEventRatingId;
         this.person = person;
-        /* this.eventRating = eventRating; */
         this.event = event;
         this.atmosphere = atmosphere;
         this.gastronomy = gastronomy;
         this.location = location;
+        this.merchandise = merchandise;
         this.performanceRatings = performanceRatings;
         this.restroom = restroom;
         this.security = security;
@@ -130,12 +128,6 @@ public class PersonalEventRating {
     public void setPerson(Person person) {
         this.person = person;
     }
-    /* public EventRating getEventRating() {
-        return eventRating;
-    }
-    public void setEventRating(EventRating eventRating) {
-        this.eventRating = eventRating;
-    } */
     public Event getEvent() {
         return event;
     }
@@ -159,6 +151,12 @@ public class PersonalEventRating {
     }
     public void setLocation(LocationRating location) {
         this.location = location;
+    }
+    public MerchandiseRating getMerchandise() {
+        return merchandise;
+    }
+    public void setMerchandise(MerchandiseRating merchandise) {
+        this.merchandise = merchandise;
     }
     public List<PerformanceRating> getPerformanceRatings() {
         return performanceRatings;
@@ -260,6 +258,10 @@ public class PersonalEventRating {
         return location != null ? location.getAverage() : BigDecimal.ZERO;
     }
 
+    public BigDecimal getMerchandiseCalculated() {
+        return merchandise != null ? merchandise.getAverage() : BigDecimal.ZERO;
+    }
+
     public BigDecimal getRestroomCalculated() {
         return restroom != null ? restroom.getAverage() : BigDecimal.ZERO;
     }
@@ -285,142 +287,12 @@ public class PersonalEventRating {
     if (atmosphere == null) atmosphere = new AtmosphereRating();
     if (gastronomy == null) gastronomy = new GastronomyRating();
     if (location == null) location = new LocationRating();
+    if (merchandise == null) merchandise = new MerchandiseRating();
     if (restroom == null) restroom = new RestroomRating();
     if (security == null) security = new SecurityRating();
     if (sound == null) sound = new SoundRating();
     if (wardrobe == null) wardrobe = new WardrobeRating();
 }
 
-    // method to calculate average rating based on individual ratings
-   /*  public void calculateOverallRating() {
-        BigDecimal sum =
-                atmosphere.getAverage()
-                .add(gastronomy.getAverage())
-                .add(location.getAverage())
-                .add(restroom.getAverage())
-                .add(security.getAverage())
-                .add(sound.getAverage())
-                .add(wardrobe.getAverage());
-
-                int divisor = 7; // Start with 7 for the fixed ratings
-
-                // Include performance average if present
-        if (performanceRatings != null && !performanceRatings.isEmpty()) {
-            BigDecimal performanceAvg = performanceRatings.stream()
-                    .map(PerformanceRating::getAverage)
-                    .reduce(BigDecimal.ZERO, BigDecimal::add)
-                    .divide(BigDecimal.valueOf(performanceRatings.size()),
-                            2,
-                            RoundingMode.HALF_UP);
-
-            sum = sum.add(performanceAvg);
-            divisor++; // Increment divisor for the performance rating
-        }
-
-            this.personalEventAverageRating =
-                    sum.divide(BigDecimal.valueOf(divisor), 2, RoundingMode.HALF_UP);
-        } */ /* else {
-            this.personalEventAverageRating =
-                    sum.divide(BigDecimal.valueOf(5), 2, RoundingMode.HALF_UP);
-        }
-
-        this.personalEventAverageRating = sum.divide(BigDecimal.valueOf(8), 1, RoundingMode.HALF_UP);
-    }
- */
-    /* public void calculatePersonalEventAverageRating() {
-        BigDecimal totalRating = BigDecimal.ZERO;
-        int ratingCount = 0;
-
-        if (atmosphereRating != null) {
-            totalRating = totalRating.add(atmosphereRating);
-            ratingCount++;
-        }
-        if (gastronomyRating != null) {
-            totalRating = totalRating.add(gastronomyRating);
-            ratingCount++;
-        }
-        if (locationRating != null) {
-            totalRating = totalRating.add(locationRating);
-            ratingCount++;
-        }
-        if (performanceRating != null) {
-            totalRating = totalRating.add(performanceRating);
-            ratingCount++;
-        }
-        if (restroomRating != null) {
-            totalRating = totalRating.add(restroomRating);
-            ratingCount++;
-        }
-        if (securityRating != null) {
-            totalRating = totalRating.add(securityRating);
-            ratingCount++;
-        }
-        if (soundRating != null) {
-            totalRating = totalRating.add(soundRating);
-            ratingCount++;
-        }
-        if (wardrobeRating != null) {
-            totalRating = totalRating.add(wardrobeRating);
-            ratingCount++;
-        }
-
-        if (ratingCount > 0) {
-            this.personalEventAverageRating = totalRating.divide(BigDecimal.valueOf(ratingCount), 2, RoundingMode.HALF_UP);
-        } else {
-            this.personalEventAverageRating = BigDecimal.ZERO;
-        }
-    } */
-
-    /* 
-    public AtmosphereRating getAtmosphereRating() {
-        return atmosphereRating;
-    }
-    public void setAtmosphereRating(AtmosphereRating atmosphereRating) {
-        this.atmosphereRating = atmosphereRating;
-    }
-    public GastronomyRating getGastronomyRating() {
-        return gastronomyRating;
-    }
-    public void setGastronomyRating(GastronomyRating gastronomyRating) {
-        this.gastronomyRating = gastronomyRating;
-    }
-    public LocationRating getLocationRating() {
-        return locationRating;
-    }
-    public void setLocationRating(LocationRating locationRating) {
-        this.locationRating = locationRating;
-    }
-    public PerformanceRating getPerformanceRating() {
-        return performanceRating;
-    }
-    public void setPerformanceRating(PerformanceRating performanceRating) {
-        this.performanceRating = performanceRating;
-    }
-    public RestroomRating getRestroomRating() {
-        return restroomRating;
-    }
-    public void setRestroomRating(RestroomRating restroomRating) {
-        this.restroomRating = restroomRating;
-    }
-    public SecurityRating getSecurityRating() {
-        return securityRating;
-    }
-    public void setSecurityRating(SecurityRating securityRating) {
-        this.securityRating = securityRating;
-    }
-    public SoundRating getSoundRating() {
-        return soundRating;
-    }
-    public void setSoundRating(SoundRating soundRating) {
-        this.soundRating = soundRating;
-    }
-    public WardrobeRating getWardrobeRating() {
-        return wardrobeRating;
-    }
-    public void setWardrobeRating(WardrobeRating wardrobeRating) {
-        this.wardrobeRating = wardrobeRating;
-    }
-        this.locationRatingId = locationRatingId;
-    } */
     
 }

@@ -509,6 +509,139 @@
                     </div>
                 </div>
 
+                <!-- Merchandise -->
+                 <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="rating-block">
+                        <h4>
+                            Merchandise
+                            <span class="segment-average">
+                            ☆☆☆☆☆
+                            </span>
+                        </h4>
+
+                        <!-- Merchandise Quality -->
+                        <div class="mb-3">
+                            <label>Qualit&auml;t</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{merchandise.merchandiseOverallQuality}" value="5" id="merchandiseQuality5"/>
+                                <label for="merchandiseQuality5">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandiseOverallQuality}" value="4" id="merchandiseQuality4"/>
+                                <label for="merchandiseQuality4">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandiseOverallQuality}" value="3" id="merchandiseQuality3"/>
+                                <label for="merchandiseQuality3">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandiseOverallQuality}" value="2" id="merchandiseQuality2"/>
+                                <label for="merchandiseQuality2">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandiseOverallQuality}" value="1" id="merchandiseQuality1"/>
+                                <label for="merchandiseQuality1">★</label>
+                            </div>
+                        </div>
+
+                        <!-- Merchandise Variety -->
+                        <div class="mb-3">
+                            <label>Vielfalt</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{merchandise.merchandiseVariety}" value="5" id="merchandiseVariety5"/>
+                                <label for="merchandiseVariety5">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandiseVariety}" value="4" id="merchandiseVariety4"/>
+                                <label for="merchandiseVariety4">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandiseVariety}" value="3" id="merchandiseVariety3"/>
+                                <label for="merchandiseVariety3">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandiseVariety}" value="2" id="merchandiseVariety2"/>
+                                <label for="merchandiseVariety2">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandiseVariety}" value="1" id="merchandiseVariety1"/>
+                                <label for="merchandiseVariety1">★</label>
+                            </div>
+                        </div>
+
+                        
+                        <!-- Merchandise Prices -->
+                        <div class="mb-3">
+                            <label>Preise</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{merchandise.merchandisePrices}" value="5" id="merchandisePrices5"/>
+                                <label for="merchandisePrices5">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandisePrices}" value="4" id="merchandisePrices4"/>
+                                <label for="merchandisePrices4">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandisePrices}" value="3" id="merchandisePrices3"/>
+                                <label for="merchandisePrices3">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandisePrices}" value="2" id="merchandisePrices2"/>
+                                <label for="merchandisePrices2">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandisePrices}" value="1" id="merchandisePrices1"/>
+                                <label for="merchandisePrices1">★</label>
+                            </div>
+                        </div>
+                            <!-- Merchandise Staff -->
+                        <div class="mb-3">
+                            <label>Personal</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{merchandise.merchandiseStaffEfficiency}" value="5" id="merchandiseStaff5"/>
+                                <label for="merchandiseStaff5">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandiseStaffEfficiency}" value="4" id="merchandiseStaff4"/>
+                                <label for="merchandiseStaff4">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandiseStaffEfficiency}" value="3" id="merchandiseStaff3"/>
+                                <label for="merchandiseStaff3">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandiseStaffEfficiency}" value="2" id="merchandiseStaff2"/>
+                                <label for="merchandiseStaff2">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandiseStaffEfficiency}" value="1" id="merchandiseStaff1"/>
+                                <label for="merchandiseStaff1">★</label>
+                            </div>
+                        </div>
+                        <!-- Payment Methods -->
+                         <div class="mb-3">
+                            <label>Bezahlmethoden</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{merchandise.merchandisePaymentMethods}" value="5" id="merchandisePaymentMethods5"/>
+                                <label for="merchandisePaymentMethods5">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandisePaymentMethods}" value="4" id="merchandisePaymentMethods4"/>
+                                <label for="merchandisePaymentMethods4">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandisePaymentMethods}" value="3" id="merchandisePaymentMethods3"/>
+                                <label for="merchandisePaymentMethods3">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandisePaymentMethods}" value="2" id="merchandisePaymentMethods2"/>
+                                <label for="merchandisePaymentMethods2">★</label>
+
+                                <input type="radio" th:field="*{merchandise.merchandisePaymentMethods}" value="1" id="merchandisePaymentMethods1"/>
+                                <label for="merchandisePaymentMethods1">★</label>
+                            </div>
+                        </div>  
+                        <!-- Merchandise Availability -->
+                         <div class="mb-3">
+                            <label>Verfügbarkeit</label>
+                            <div class="star-rating">
+                                <input type="radio" th:field="*{merchandise.merchandiseAvailability}" value="5" id="merchandiseAvailability5"/>
+                                <label for="merchandiseAvailability5">★</label>
+                                <input type="radio" th:field="*{merchandise.merchandiseAvailability}" value="4" id="merchandiseAvailability4"/>
+                                <label for="merchandiseAvailability4">★</label>
+                                <input type="radio" th:field="*{merchandise.merchandiseAvailability}" value="3" id="merchandiseAvailability3"/>
+                                <label for="merchandiseAvailability3">★</label>
+                                <input type="radio" th:field="*{merchandise.merchandiseAvailability}" value="2" id="merchandiseAvailability2"/>
+                                <label for="merchandiseAvailability2">★</label>
+                                <input type="radio" th:field="*{merchandise.merchandiseAvailability}" value="1" id="merchandiseAvailability1"/>
+                                <label for="merchandiseAvailability1">★</label>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+            <div class="row">
                 <!-- Restroom -->
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="rating-block">
@@ -604,9 +737,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
+            
                 <!-- Security -->
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="rating-block">
@@ -873,6 +1005,15 @@
                         </div>
                     </div>
                 </div>
+                <!-- Event Comment -->
+                 <!-- <div class="row"> -->
+                    <div class="mb-3">
+                        <label class="form-label">Eventkommentar</label>
+                        <textarea class="form-control"
+                                rows="4"
+                                th:field="*{personalEventRatingComments}"></textarea>
+                    </div>
+                 <!-- </div> -->
 
                 <!-- Performances -->
                 <h5 class="mt-4">Performances</h5>
@@ -884,49 +1025,195 @@
                         K&uuml;nstlername
                     </h6>
 
-                    <input type="hidden"
+                    <!-- <input type="hidden"
                         th:name="'performanceRatings[' + ${stat.index} + '].performanceId'"
-                        th:value="${performance.performanceId}" />
+                        th:value="${performance.performanceId}" /> -->
 
                     <div class="row">
 
-                        <div class="col-md-6 mb-2">
-                            <label>Performance Qualit&auml;t</label>
-                            <input type="number" min="1" max="5"
-                                th:name="'performanceRatings[' + ${stat.index} + '].performanceQuality'"
-                                class="form-control">
+                        <div class="col-md-6 mb-3">
+                            <label>Performance</label>
+                            <div class="star-rating">
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].performanceQuality'"
+                                    th:id="'perfQuality5_' + ${stat.index}"
+                                    value="5"/>
+                                <label th:for="'perfQuality5_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].performanceQuality'"
+                                    th:id="'perfQuality4_' + ${stat.index}"
+                                    value="4"/>
+                                <label th:for="'perfQuality4_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].performanceQuality'"
+                                    th:id="'perfQuality3_' + ${stat.index}"
+                                    value="3"/>
+                                <label th:for="'perfQuality3_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].performanceQuality'"
+                                    th:id="'perfQuality2_' + ${stat.index}"
+                                    value="2"/>
+                                <label th:for="'perfQuality2_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].performanceQuality'"
+                                    th:id="'perfQuality1_' + ${stat.index}"
+                                    value="1"/>
+                                <label th:for="'perfQuality1_' + ${stat.index}">★</label>
+                            </div>
                         </div>
 
-                        <div class="col-md-6 mb-2">
-                            <label>Sound Quality</label>
-                            <input type="number" min="1" max="5"
-                                th:name="'performanceRatings[' + ${stat.index} + '].soundQuality'"
-                                class="form-control">
+                        <div class="col-md-6 mb-3">
+                            <label>Sound</label>
+                            <div class="star-rating">
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].soundQuality'"
+                                    th:id="'soundQuality5_' + ${stat.index}"
+                                    value="5"/>
+                                <label th:for="'soundQuality5_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].soundQuality'"
+                                    th:id="'soundQuality4_' + ${stat.index}"
+                                    value="4"/>
+                                <label th:for="'soundQuality4_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].soundQuality'"
+                                    th:id="'soundQuality3_' + ${stat.index}"
+                                    value="3"/>
+                                <label th:for="'soundQuality3_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].soundQuality'"
+                                    th:id="'soundQuality2_' + ${stat.index}"
+                                    value="2"/>
+                                <label th:for="'soundQuality2_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].soundQuality'"
+                                    th:id="'soundQuality1_' + ${stat.index}"
+                                    value="1"/>
+                                <label th:for="'soundQuality1_' + ${stat.index}">★</label>
+                            </div>
                         </div>
 
-                        <div class="col-md-6 mb-2">
-                            <label>Set Length</label>
-                            <input type="number" min="1" max="5"
-                                th:name="'performanceRatings[' + ${stat.index} + '].setLength'"
-                                class="form-control">
+                        <div class="col-md-6 mb-3">
+                            <label>Dauer</label>
+                            <div class="star-rating">
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].setLength'"
+                                    th:id="'setLength5_' + ${stat.index}"
+                                    value="5"/>
+                                <label th:for="'setLength5_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].setLength'"
+                                    th:id="'setLength4_' + ${stat.index}"
+                                    value="4"/>
+                                <label th:for="'setLength4_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].setLength'"
+                                    th:id="'setLength3_' + ${stat.index}"
+                                    value="3"/>
+                                <label th:for="'setLength3_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].setLength'"
+                                    th:id="'setLength2_' + ${stat.index}"
+                                    value="2"/>
+                                <label th:for="'setLength2_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].setLength'"
+                                    th:id="'setLength1_' + ${stat.index}"
+                                    value="1"/>
+                                <label th:for="'setLength1_' + ${stat.index}">★</label>
+                            </div>
                         </div>
 
-                        <div class="col-md-6 mb-2">
-                            <label>Track Selection</label>
-                            <input type="number" min="1" max="5"
-                                th:name="'performanceRatings[' + ${stat.index} + '].trackSelection'"
-                                class="form-control">
+                        <div class="col-md-6 mb-3">
+                            <label>Setlist</label>
+                            <div class="star-rating">
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].trackSelection'"
+                                    th:id="'trackSelection5_' + ${stat.index}"
+                                    value="5"/>
+                                <label th:for="'trackSelection5_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].trackSelection'"
+                                    th:id="'trackSelection4_' + ${stat.index}"
+                                    value="4"/>
+                                <label th:for="'trackSelection4_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].trackSelection'"
+                                    th:id="'trackSelection3_' + ${stat.index}"
+                                    value="3"/>
+                                <label th:for="'trackSelection3_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].trackSelection'"
+                                    th:id="'trackSelection2_' + ${stat.index}"
+                                    value="2"/>
+                                <label th:for="'trackSelection2_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].trackSelection'"
+                                    th:id="'trackSelection1_' + ${stat.index}"
+                                    value="1"/>
+                                <label th:for="'trackSelection1_' + ${stat.index}">★</label>
+                            </div>
                         </div>
 
-                        <div class="col-md-12 mb-2">
-                            <label>Visual Show</label>
-                            <input type="number" min="1" max="5"
-                                th:name="'performanceRatings[' + ${stat.index} + '].visualShow'"
-                                class="form-control">
+                        <div class="col-md-12 mb-3">
+                            <label>Show</label>
+                            <div class="star-rating">
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].visualShow'"
+                                    th:id="'visualShow5_' + ${stat.index}"
+                                    value="5"/>
+                                <label th:for="'visualShow5_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].visualShow'"
+                                    th:id="'visualShow4_' + ${stat.index}"
+                                    value="4"/>
+                                <label th:for="'visualShow4_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].visualShow'"
+                                    th:id="'visualShow3_' + ${stat.index}"
+                                    value="3"/>
+                                <label th:for="'visualShow3_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].visualShow'"
+                                    th:id="'visualShow2_' + ${stat.index}"
+                                    value="2"/>
+                                <label th:for="'visualShow2_' + ${stat.index}">★</label>
+
+                                <input type="radio"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].visualShow'"
+                                    th:id="'visualShow1_' + ${stat.index}"
+                                    value="1"/>
+                                <label th:for="'visualShow1_' + ${stat.index}">★</label>
+                            </div>
                         </div>
 
                     </div>
-
+                    <!-- Performance Comment -->
+                        <!-- <div class="mb-3"> -->
+                            <label class="form-label">Performancekommentar</label>
+                            <textarea class="form-control"
+                                    rows="4"
+                                    th:name="'performanceRatings[' + ${stat.index} + '].performanceRatingComments'"></textarea>
+                        <!-- </div> -->
                 </div>
 
             <!-- Performance -->
@@ -1034,22 +1321,15 @@
                 </div>
             </div> -->
             <!-- </div> -->
-            <!-- Comment -->
-            <div class="mb-3">
-                <label class="form-label">Comment</label>
-                <textarea class="form-control"
-                          rows="4"
-                          th:field="*{personalEventRatingComments}">
-                </textarea>
-            </div>
+            
 
             <button type="submit" class="btn btn-primary">
-                Submit Review
+                Bewertung speichern
             </button>
 
             <a th:href="@{/event/{id}(id=${event.eventId})}"
                class="btn btn-secondary">
-                Cancel
+                Abbrechen
             </a>
 
         </form>
