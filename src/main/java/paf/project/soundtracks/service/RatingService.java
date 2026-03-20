@@ -55,6 +55,10 @@ public class RatingService {
         // save initial state
         reviewRepository.save(review);
 
+
+        // debug
+        System.out.println("Before observers");
+        
         // run observers (pure logic)
         ratingSubject.notifyObservers(review);
 

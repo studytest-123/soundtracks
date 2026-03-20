@@ -112,6 +112,11 @@ public class AtmosphereRating {
             atmosphereStaffFriendliness
         );
     }
+
+    /* public double getAveragesafe() {
+        if(all fields null) return 0;
+        return getAverage();
+    } */
     /* public BigDecimal getAverage() {
         BigDecimal sum = BigDecimal.ZERO;
         int count = 0;

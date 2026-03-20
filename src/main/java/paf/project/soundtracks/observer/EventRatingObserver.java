@@ -51,7 +51,7 @@ public class EventRatingObserver implements RatingObserver {
         // MAIN LOGIC: recalculate and update EventRating whenever a PersonalEventRating is created or updated
         @Override
         public void update(PersonalEventRating review) {
-
+                System.out.println("Observer called");
                 // Fetch the associated event
                 Event event = eventRepository.findById(review.getEvent().getEventId())
                 .orElseThrow();
@@ -142,8 +142,8 @@ public class EventRatingObserver implements RatingObserver {
                                 .toList())
                 );
 
-                // move to service layer 
+                
                 // saving
-                //eventRatingRepository.save(eventRating);
+                eventRatingRepository.save(eventRating);
         }
 }

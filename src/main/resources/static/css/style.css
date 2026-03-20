@@ -45,7 +45,7 @@ body {
 
 /* ====== main content area ====== */
 .main-content {
-    margin-left: 250px; /* makes room for sidebar */
+    margin-left: 250px; /* for sidebar */
     padding: 0;
 }
 
@@ -155,6 +155,10 @@ a .card:hover {
 .segment-average {
     float: right;
     color: gold;
+}
+
+.rating-block div > div {
+    min-width: 140px;
 }
 
 /* Event Carousel */

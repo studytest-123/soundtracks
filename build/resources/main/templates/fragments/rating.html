@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- star rating fragment -->
+<div th:fragment="stars(fieldName, idPrefix)">
+
+    <div class="star-rating">
+
+        <input type="radio" th:name="${fieldName}" th:id="${idPrefix + '5'}" value="5"/>
+        <label th:for="${idPrefix + '5'}">★</label>
+
+        <input type="radio" th:name="${fieldName}" th:id="${idPrefix + '4'}" value="4"/>
+        <label th:for="${idPrefix + '4'}">★</label>
+
+        <input type="radio" th:name="${fieldName}" th:id="${idPrefix + '3'}" value="3"/>
+        <label th:for="${idPrefix + '3'}">★</label>
+
+        <input type="radio" th:name="${fieldName}" th:id="${idPrefix + '2'}" value="2"/>
+        <label th:for="${idPrefix + '2'}">★</label>
+
+        <input type="radio" th:name="${fieldName}" th:id="${idPrefix + '1'}" value="1"/>
+        <label th:for="${idPrefix + '1'}">★</label>
+
+    </div>
+    <!-- <div class="star-rating">
+
+        <input type="radio" th:name="${fieldName}" th:id="${idPrefix + '5'}" value="5"/>
+        <label th:for="${idPrefix + '5'}">★</label>
+
+        <input type="radio" th:name="${fieldName}" th:id="${idPrefix + '4'}" value="4"/>
+        <label th:for="${idPrefix + '4'}">★</label>
+
+        <input type="radio" th:name="${fieldName}" th:id="${idPrefix + '3'}" value="3"/>
+        <label th:for="${idPrefix + '3'}">★</label>
+
+        <input type="radio" th:name="${fieldName}" th:id="${idPrefix + '2'}" value="2"/>
+        <label th:for="${idPrefix + '2'}">★</label>
+
+        <input type="radio" th:name="${fieldName}" th:id="${idPrefix + '1'}" value="1"/>
+        <label th:for="${idPrefix + '1'}">★</label>
+
+    </div> -->
+
+</div>
+
+</body>
+</html>

@@ -96,6 +96,7 @@ public class PersonalEventRating {
 
     // constructors
     public PersonalEventRating() {
+        //initializeEmbeddeds();
     }  
 
     public PersonalEventRating(Long personalEventRatingId, Person person, Event event, AtmosphereRating atmosphere, GastronomyRating gastronomy, LocationRating location, MerchandiseRating merchandise, List<PerformanceRating> performanceRatings, RestroomRating restroom, SecurityRating security, SoundRating sound, WardrobeRating wardrobe, BigDecimal personalEventAverageRating, String personalEventRatingComments) {
@@ -135,24 +136,36 @@ public class PersonalEventRating {
         this.event = event;
     }
     public AtmosphereRating getAtmosphere() {
+        if(atmosphere == null) {
+            atmosphere = new AtmosphereRating();
+        }
         return atmosphere;
     }
     public void setAtmosphere(AtmosphereRating atmosphere) {
         this.atmosphere = atmosphere;
     }
     public GastronomyRating getGastronomy() {
+        if(gastronomy == null) {
+            gastronomy = new GastronomyRating();
+        }
         return gastronomy;
     }
     public void setGastronomy(GastronomyRating gastronomy) {
         this.gastronomy = gastronomy;
     }
     public LocationRating getLocation() {
+        if(location == null) {
+            location = new LocationRating();
+        }
         return location;
     }
     public void setLocation(LocationRating location) {
         this.location = location;
     }
     public MerchandiseRating getMerchandise() {
+        if (merchandise == null) {
+            merchandise = new MerchandiseRating();
+        }
         return merchandise;
     }
     public void setMerchandise(MerchandiseRating merchandise) {
@@ -165,24 +178,36 @@ public class PersonalEventRating {
         this.performanceRatings = performanceRatings;
     }
     public RestroomRating getRestroom() {
+        if(restroom == null) {
+            restroom = new RestroomRating();
+        }
         return restroom;
     }
     public void setRestroom(RestroomRating restroom) {
         this.restroom = restroom;
     }
     public SecurityRating getSecurity() {
+        if(security == null) {
+            security = new SecurityRating();
+        }
         return security;
     }
     public void setSecurity(SecurityRating security) {
         this.security = security;
     }
     public SoundRating getSound() {
+        if(sound == null) {
+            sound = new SoundRating();
+        }
         return sound;
     }
     public void setSound(SoundRating sound) {
         this.sound = sound;
     }
     public WardrobeRating getWardrobe() {
+        if (wardrobe == null) {
+            wardrobe = new WardrobeRating();
+        }
         return wardrobe;
     }
     public void setWardrobe(WardrobeRating wardrobe) {

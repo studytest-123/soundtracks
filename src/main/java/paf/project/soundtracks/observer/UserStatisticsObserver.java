@@ -22,9 +22,6 @@ public class UserStatisticsObserver implements RatingObserver {
 
         Person person = review.getPerson();
 
-        /* long count = reviewRepository.countByPerson(person);
-
-        person.setReviewCount((int) count); */
         person.setReviewCount(person.getReviewCount() + 1);
 
 
