@@ -18,6 +18,10 @@ public class PerformanceRating {
     @JoinColumn(name = "personal_event_rating_id_personal_event_rating") 
     private PersonalEventRating personalEventRating;
 
+    @ManyToOne
+    @JoinColumn(name = "performance_id")
+    private Performance performance;
+
     private BigDecimal performanceAverageRating;
     private BigDecimal performanceQuality;
     private BigDecimal soundQuality;
@@ -30,10 +34,11 @@ public class PerformanceRating {
     // constructors
     public PerformanceRating() {
     }
-    public PerformanceRating(Long performanceRatingId, PersonalEventRating personalEventRating, BigDecimal performanceAverageRating, BigDecimal performanceQuality, BigDecimal soundQuality,
+    public PerformanceRating(Long performanceRatingId, PersonalEventRating personalEventRating, Performance performance, BigDecimal performanceAverageRating, BigDecimal performanceQuality, BigDecimal soundQuality,
                              BigDecimal setLength, BigDecimal trackSelection, BigDecimal visualShow, String performanceRatingComments) {
         this.performanceRatingId = performanceRatingId;
         this.personalEventRating = personalEventRating;
+        this.performance = performance;
         this.performanceAverageRating = performanceAverageRating;
         this.performanceQuality = performanceQuality;
         this.soundQuality = soundQuality;
@@ -59,7 +64,14 @@ public class PerformanceRating {
         this.personalEventRating = personalEventRating;
     }
 
-    public BigDecimal getPerformanceAverageRating() {
+    public Performance getPerformance() {
+        return performance;
+    }
+
+    public void setPerformance(Performance performance) {
+        this.performance = performance;
+    }
+        public BigDecimal getPerformanceAverageRating() {
         return performanceAverageRating;
     }
     

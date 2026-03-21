@@ -21,6 +21,7 @@ public class PersonalEventRatingObserver implements RatingObserver {
         review.setSecurityAverage(review.getSecurityCalculated());
         review.setSoundAverage(review.getSoundCalculated());
         review.setWardrobeAverage(review.getWardrobeCalculated());
+        review.setMerchandiseAverage(review.getMerchandiseCalculated());
         /* review.setAtmosphereAverage(review.getAtmosphere().getAverage());
         review.setGastronomyAverage(review.getGastronomy().getAverage());
         review.setLocationAverage(review.getLocation().getAverage());
@@ -39,6 +40,7 @@ public class PersonalEventRatingObserver implements RatingObserver {
         sum = sum.add(review.getSecurityCalculated()); divisor++;
         sum = sum.add(review.getSoundCalculated()); divisor++;
         sum = sum.add(review.getWardrobeCalculated()); divisor++;
+        sum = sum.add(review.getMerchandiseCalculated()); divisor++;
 
         review.setPersonalEventAverageRating(
                 sum.divide(BigDecimal.valueOf(divisor), 2, RoundingMode.HALF_UP)

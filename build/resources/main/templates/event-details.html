@@ -24,7 +24,7 @@
     <div class="rating mt-1" th:if="${hasRating}">
 
         <span th:each="i : ${#numbers.sequence(1,5)}">
-            <span th:text="${i <= rating ? '★' : '☆'}"></span>
+            <span th:text="${i <= (rating != null ? rating.intValue() : 0) ? '★' : '☆'}"></span>
         </span>
 
     </div>
@@ -178,7 +178,7 @@
      
 
         <div th:if="${#lists.isEmpty(performances)}"
-             class="text-muted text-center small mb-3">
+             class="text-center small mb-3">
             tba
         </div>
 
@@ -199,7 +199,7 @@
                 </div>
 
                 <!-- Rating -->
-                <div class="rating">
+                <!-- <div class="rating">
 
                     <span th:if="${performance.performanceRating != null}"
                           th:with="rating=${performance.performanceRating.average}">
@@ -214,7 +214,7 @@
                         ☆ ☆ ☆ ☆ ☆
                     </span>
 
-                </div>
+                </div> -->
 
             </li>
 
@@ -252,40 +252,673 @@
     </a>
 
         <div th:if="${#lists.isEmpty(reviews)}"
-             class="text-muted text-center small">
+             class="text-center small">
             bisher keine Bewertungen
         </div>
 
-        <ul class="list-group"
+
+        <div th:each="review, stat : ${reviews}"
+     class="list-group-item list-group-item-action bg-dark text-white mb-2"
+     style="cursor:pointer"
+     data-bs-toggle="modal"
+     th:attr="data-bs-target='#reviewModal-' + ${stat.index}">
+
+    <div class="d-flex align-items-center gap-2">
+        <span th:text="${review.person.userName}">Review [[${stat.index + 1}]]</span>
+
+        <!-- stars -->
+        <span th:each="i : ${#numbers.sequence(1,5)}"
+              th:text="${i <= review.personalEventAverageRating ? '★' : '☆'}">
+        </span>
+    </div>
+</div>
+        <!-- <ul class="list-group"
             th:if="${!#lists.isEmpty(reviews)}">
 
             <li class="list-group-item bg-dark text-white"
-                th:each="review : ${reviews}">
+                th:each="review : ${reviews}"> -->
 
                 <!-- user -->
                 <!-- !adding later -->
-                <strong th:text="${review.person.userName}">
+                <!-- <strong th:text="${review.person.userName}">
                     Username
-                </strong>
+                </strong> -->
 
                 <!-- rating -->
-                <div class="rating mt-1"
+                <!-- <div class="rating mt-1"
                      th:with="rating=${review.personalEventAverageRating}">
 
                     <span th:each="i : ${#numbers.sequence(1,5)}">
                         <span th:text="${i <= rating ? '★' : '☆'}"></span>
                     </span>
 
-                </div>
+                </div> -->
 
                 <!-- comment -->
-                <p class="small mt-1"
+                <!-- <p class="small mt-1"
                    th:text="${review.personalEventRatingComments}">
                 </p>
 
             </li>
 
-        </ul>
+        </ul> -->
+<!-- Accordion -->
+ <!-- <div class="accordion mt-4" id="reviewAccordion">
+
+    <div th:each="review, stat : ${reviews}" class="accordion-item">
+ -->
+        <!-- HEADER -->
+        <!-- <h2 class="accordion-header">
+
+            <button class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    th:attr="data-bs-target='#review-' + ${stat.index}">
+ -->
+                <!-- Summary -->
+                <!-- <div class="d-flex justify-content-between w-100">
+
+                    <span>
+                        Review #<span th:text="${stat.index + 1}"></span>
+                    </span>
+ -->
+                    <!-- Overall stars -->
+                   <!--  <span>
+                        <span th:each="i : ${#numbers.sequence(1,5)}"
+                              th:text="${i <= review.personalEventAverageRating ? '★' : '☆'}">
+                        </span>
+                    </span>
+
+                </div>
+
+            </button>
+        </h2>
+ -->
+        <!-- BODY -->
+        <!-- <div th:id="'review-' + ${stat.index}"
+             class="accordion-collapse collapse"
+             data-bs-parent="#reviewAccordion">
+
+            <div class="accordion-body">
+ -->
+                <!-- SEGMENTS -->
+               <!--  <div class="d-flex flex-wrap gap-3 mb-3">
+
+                    <div>
+                        <div class="small">Atmosphere</div>
+                        <span th:text="${review.atmosphereAverage}"></span>
+                    </div>
+
+                    <div>
+                        <div class="small">Sound</div>
+                        <span th:text="${review.soundAverage}"></span>
+                    </div> -->
+
+                    <!-- add others same way -->
+
+              <!--   </div> -->
+
+                <!-- COMMENT -->
+             <!--    <div class="mb-3">
+                    <strong>Comment:</strong>
+                    <p th:text="${review.personalEventRatingComments}"></p>
+                </div>
+ -->
+                <!-- PERFORMANCES -->
+                <!-- <div th:each="perf : ${review.performanceRatings}" 
+                     class="card p-3 mb-2">
+
+                    <h6 th:text="${perf.performance.artist.artistName}"></h6>
+
+                    <div class="d-flex gap-3 flex-wrap">
+
+                        <div>
+                            Performance:
+                            <span th:text="${perf.performanceQuality}"></span>
+                        </div>
+
+                        <div>
+                            Sound:
+                            <span th:text="${perf.soundQuality}"></span>
+                        </div>
+
+                        <div>
+                            Setlist:
+                            <span th:text="${perf.trackSelection}"></span>
+                        </div>
+
+                    </div>
+
+                    <p class="mt-2"
+                       th:text="${perf.performanceRatingComments}"></p>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div> -->
+
+<!-- Accordion End -->
+ <!-- modal popup -->
+  <div th:each="review, stat : ${reviews}">
+
+    <div class="modal fade"
+         th:id="'reviewModal-' + ${stat.index}"
+         tabindex="-1">
+
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark text-white">
+
+                <!-- HEADER -->
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <span th:text="'Bewertung von: ' + ${review.person.userName}">Review [[${stat.index + 1}]]</span>
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white"
+                            data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- BODY -->
+                <div class="modal-body">
+
+                    <!-- segments -->
+                    <div class="card p-3 mb-3">
+
+                        <!-- SEGMENT HEADER -->
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <h6 class="mb-0">Atmosph&auml;re</h6>
+                            <span th:each="i : ${#numbers.sequence(1,5)}"
+                                th:text="${i <= review.atmosphereAverage ? '★' : '☆'}"></span>
+                        </div>
+
+                        <!-- SUBSEGMENTS -->
+                        <div class="d-flex flex-wrap gap-3">
+
+                            <!-- Vibe -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Stimmung</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.atmosphere.atmosphereEventVibe ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Crowd -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Publikum</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.atmosphere.atmosphereCrowdEngagement ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Light & Visuals -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Beleuchtung & Visuals</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.atmosphere.atmosphereLightAndVisuals ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Decorations -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Dekoration</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.atmosphere.atmosphereEventDecorations ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Staff Friendliness -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Freundlichkeit (Mitarbeiter)</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.atmosphere.atmosphereStaffFriendliness ? '★' : '☆'}"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card p-3 mb-3">
+
+                        <!-- SEGMENT HEADER -->
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <h6 class="mb-0">Gastronomie</h6>
+                            <span th:each="i : ${#numbers.sequence(1,5)}"
+                                th:text="${i <= review.gastronomyAverage ? '★' : '☆'}"></span>
+                        </div>
+
+                        <!-- SUBSEGMENTS -->
+                        <div class="d-flex flex-wrap gap-3">
+
+                            <!-- Food Quality -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Qualit&auml;t (Speisen)</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.gastronomy.gastronomyFoodQuality ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Food Variety -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Vielfalt (Speisen)</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.gastronomy.gastronomyFoodVariety ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Food Prices -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Preise (Speisen)</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.gastronomy.gastronomyFoodPrices ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Drink Quality -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Qualit&auml;t (Getr&auml;nke)</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.gastronomy.gastronomyDrinkQuality ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Drink Variety -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Vielfalt (Getr&auml;nke)</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.gastronomy.gastronomyDrinkVariety ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Drink Prices -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Preise (Getr&auml;nke)</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.gastronomy.gastronomyDrinkPrices ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Staff efficiency -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Effizienz (Mitarbeiter)</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.gastronomy.gastronomyStaffEfficiency ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Staff Friendliness -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Freundlichkeit (Mitarbeiter)</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.gastronomy.gastronomyStaffFriendliness ? '★' : '☆'}"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card p-3 mb-3">
+
+                        <!-- SEGMENT HEADER -->
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <h6 class="mb-0">Location</h6>
+                            <span th:each="i : ${#numbers.sequence(1,5)}"
+                                th:text="${i <= review.locationAverage ? '★' : '☆'}"></span>
+                        </div>
+
+                        <!-- SUBSEGMENTS -->
+                        <div class="d-flex flex-wrap gap-3">
+
+                            <!-- Size -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Gr&ouml;&szlig;e</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.location.locationSize ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Area -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Umgebung</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.location.locationArea ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Accessibility -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Erreichbarkeit</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.location.locationAccessibility ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Equipment -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Ausstattung</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.location.locationEquipment ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Ambience -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Ambiente</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.location.locationAmbience ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Cleanliness -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Sauberkeit</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.location.locationCleanliness ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Staff -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Personal</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.location.locationStaff ? '★' : '☆'}"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card p-3 mb-3">
+
+                        <!-- SEGMENT HEADER -->
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <h6 class="mb-0">Merchandise</h6>
+                            <span th:each="i : ${#numbers.sequence(1,5)}"
+                                th:text="${i <= review.merchandiseAverage ? '★' : '☆'}"></span>
+                        </div>
+
+                        <!-- SUBSEGMENTS -->
+                        <div class="d-flex flex-wrap gap-3">
+
+                            <!-- Quality -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Qualit&auml;t</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.merchandise.merchandiseOverallQuality ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Variety -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Vielfalt</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.merchandise.merchandiseVariety ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Prices -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Preise</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.merchandise.merchandisePrices ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Staff Efficiency-->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Effizienz (Mitarbieter)</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.merchandise.merchandiseStaffEfficiency ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Payment -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Bezahlmethoden</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.merchandise.merchandisePaymentMethods ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Availability -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Verf&uuml;gbarkeit</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.merchandise.merchandiseAvailability ? '★' : '☆'}"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card p-3 mb-3">
+
+                        <!-- SEGMENT HEADER -->
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <h6 class="mb-0">Sanitärbereich</h6>
+                            <span th:each="i : ${#numbers.sequence(1,5)}"
+                                th:text="${i <= review.restroomAverage ? '★' : '☆'}"></span>
+                        </div>
+
+                        <!-- SUBSEGMENTS -->
+                        <div class="d-flex flex-wrap gap-3">
+
+                            <!-- Cleanliness -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Sauberkeit</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.restroom.restroomCleanliness ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Accessibility -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Barrierefreiheit</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.restroom.restroomAccessibility ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Supplies -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Verbrauchsmaterial</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.restroom.restroomSupplies ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Size -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Gr&ouml;&szlig;e</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.restroom.restroomSize ? '★' : '☆'}"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card p-3 mb-3">
+
+                        <!-- SEGMENT HEADER -->
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <h6 class="mb-0">Sicherheit</h6>
+                            <span th:each="i : ${#numbers.sequence(1,5)}"
+                                th:text="${i <= review.securityAverage ? '★' : '☆'}"></span>
+                        </div>
+
+                        <!-- SUBSEGMENTS -->
+                        <div class="d-flex flex-wrap gap-3">
+
+                            <!-- Staff friendliness -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Freundlichkeit (Sicherheitspersonal)</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.security.securityStaffFriendliness ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Staff Competence -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Kompetenz (Sicherheitspersonal)</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.security.securityStaffCompetence ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- sense of security -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Sicherheitsgef&uuml;hl</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.security.securitySenseOfSecurity ? '★' : '☆'}"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card p-3 mb-3">
+
+                        <!-- SEGMENT HEADER -->
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <h6 class="mb-0">Sound</h6>
+                            <span th:each="i : ${#numbers.sequence(1,5)}"
+                                th:text="${i <= review.soundAverage ? '★' : '☆'}"></span>
+                        </div>
+
+                        <!-- SUBSEGMENTS -->
+                        <div class="d-flex flex-wrap gap-3">
+
+                            <!-- Quality -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Quali&auml;t</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.sound.soundOverallQuality ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Loudness -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Lautst&auml;rke</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.sound.soundLoudness ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Technical Issues -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Technische Probleme</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.sound.soundTechnicalIssues ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Room Acoustics -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Raumakustik</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.sound.soundRoomAcoustics ? '★' : '☆'}"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card p-3 mb-3">
+
+                        <!-- SEGMENT HEADER -->
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <h6 class="mb-0">Garderobe</h6>
+                            <span th:each="i : ${#numbers.sequence(1,5)}"
+                                th:text="${i <= review.wardrobeAverage ? '★' : '☆'}"></span>
+                        </div>
+
+                        <!-- SUBSEGMENTS -->
+                        <div class="d-flex flex-wrap gap-3">
+
+                            <!-- Price -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Preis</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.wardrobe.wardrobePrice ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Staff Efficiency -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Effizienz (Mitarbeiter)</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.wardrobe.wardrobeStaffEfficiency ? '★' : '☆'}"></span>
+                            </div>
+
+                            <!-- Staff friendliness -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Freundlichkeit (Mitarbeiter)</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.wardrobe.wardrobeStaffFriendliness ? '★' : '☆'}"></span>
+                            </div>
+
+
+                            <!-- Quality -->
+                            <div class="d-flex align-items-center gap-2">
+                                <span>Qualit&auml;t</span>
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                    th:text="${i <= review.wardrobe.wardrobeQuality ? '★' : '☆'}"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                        
+                    <!-- </div> -->
+
+                    <!-- COMMENT -->
+                    <div class="card p-3 mb-3">
+                        <h6>Eventkommentar</h6>
+                        <p th:text="${review.personalEventRatingComments}"></p>
+                    </div>
+
+                    <!-- PERFORMANCES -->
+                    <div th:each="perf : ${review.performanceRatings}"
+                         class="card p-3 mb-3">
+
+                        <!-- <h6 th:text="${perf.performance.artist.artistName}"></h6> -->
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <h6 th:text="${perf.performance.artist.artistName}" class="mb-0"></h6>
+                            <span th:each="i : ${#numbers.sequence(1,5)}"
+                                th:text="${i <= perf.performanceAverageRating ? '★' : '☆'}"></span>
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-3">
+
+                            <div>
+                                Performance
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                      th:text="${i <= perf.performanceQuality ? '★' : '☆'}"></span>
+                            </div>
+
+                            <div>
+                                Sound
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                      th:text="${i <= perf.soundQuality ? '★' : '☆'}"></span>
+                            </div>
+
+                            <div>
+                                Dauer
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                      th:text="${i <= perf.setLength ? '★' : '☆'}"></span>
+                            </div>
+
+                            <div>
+                                Setlist
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                      th:text="${i <= perf.trackSelection ? '★' : '☆'}"></span>
+                            </div>
+
+                            <div>
+                                Show
+                                <span th:each="i : ${#numbers.sequence(1,5)}"
+                                      th:text="${i <= perf.visualShow ? '★' : '☆'}"></span>
+                            </div>
+                        </div>
+
+                        <!-- <div> -->
+                            <!-- <h6>Performancekommentar</h6> -->
+                            <p th:text="${perf.performanceRatingComments}"></p>
+                        <!-- </div> -->
+                        <!-- <p class="mt-2"
+                           th:text="${perf.performanceRatingComments}"></p> -->
+
+                    </div>
+
+                </div>
+
+                <!-- FOOTER -->
+                <div class="modal-footer">
+                    <button class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Schließen
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+  <!-- modal end-->
 
     </div>
 </div>
@@ -302,6 +935,7 @@
 
     </div>
 </div>
-
+<!-- Accordion js -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

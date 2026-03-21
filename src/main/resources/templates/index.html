@@ -57,10 +57,10 @@
 <!-- Main Content -->
 <div class="main-content">
     <div class="container py-4">
-        <div class="row g-4">
+        <div class="row g-4 align-items-stretch">
             <!-- User Info -->
             <div class="col-md-4">
-                <div class="card p-3 text-center">
+                <div class="card p-3 text-center h-100">
                     <div class="user-image mx-auto mb-3">Bild</div>
                     <h5 th:text="${user.userName}">User</h5>
                     <div class="rating mb-2">
@@ -85,12 +85,14 @@
                 </div>
             </div>
 
-            <!-- Latest Event -->
+            <!-- Latest Reviewed Event -->
             <div class="col-md-8">
-                <a th:href="@{/event/{id}(id=${latestEvent.eventId})}" class="text-decoration-none text-white">
-                    <div class="card p-3">
-                        <h5 th:text="'Neustes Event: ' + ${latestEvent.eventName} + ' @ ' + ${latestEvent.Location.locationName}">
-                            latest event
+                <a th:if="${latestReviewedEvent != null}"
+                th:href="@{/event/{id}(id=${latestReviewedEvent.eventId})}"
+                class="text-decoration-none text-white d-block h-100">
+                    <div class="card p-3 h-100">
+                        <h5 th:text="'Letztes bewertetes Event: ' + ${latestReviewedEvent.eventName} + ' @ ' + ${latestReviewedEvent.Location.locationName} + ' (' + ${latestReviewedEvent.eventDate} + ') '">
+                            latest reviewd event
                         </h5>
                         <div class="row mt-2">
                             <div class="col-md-4">
@@ -100,28 +102,13 @@
                                 <!-- <div class="rating mb-2">
                                     <span>★ ★ ★ ☆ ☆</span>
                                 </div> -->
-                                <p th:text="${latestEvent.eventDescription}">Beschreibung (Vorschau)</p>
+                                <p th:text="${latestReviewedEvent.eventDescription}">Beschreibung (Vorschau)</p>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
         </div>
-
-        <!-- Event Groups -->
-        <!-- <div class="section-title">Upcoming Events</div>
-        <div class="row row-cols-1 row-cols-md-4 g-3">
-            <div class="col" th:each="event : ${upcomingEvents}">
-                <a th:href="@{/event/{id}(id=${event.eventId})}" class="text-decoration-none text-white">
-                    <div class="card p-2">
-                        <h6 th:text="${event.eventName}">Event75 (Today)</h6>
-                        <div class="event-image mb-2"></div>
-                        <div class="rating"><span>☆ ☆ ☆ ☆ ☆</span></div>
-                        <p class="small" th:text="${event.eventDescription}">Description (Preview)</p>
-                    </div>
-                </a>
-            </div>
-        </div> -->
 
         <div class="section-title">Bevorstehende Events</div>
 
@@ -134,17 +121,18 @@
             <div class="carousel-item"
                  th:classappend="${i == 0} ? 'active'">
 
-                <div class="row row-cols-1 row-cols-md-4 g-3">
+                <div class="row row-cols-1 row-cols-md-4 g-3 align-items-stretch">
 
                     <div class="col"
                          th:each="event : ${upcomingEvents.subList(i, T(java.lang.Math).min(i+4, upcomingEvents.size()))}">
 
                         <a th:href="@{/event/{id}(id=${event.eventId})}"
-                           class="text-decoration-none text-white">
+                           class="d-block h-100 text-decoration-none text-white">
 
-                            <div class="card p-2">
+                            <div class="card p-2 h-100 d-flex flex-column">
 
-                                <h6 th:text="${event.eventName}"></h6>
+                                <h6 th:text="${event.eventName} + ' @ ' + ${event.location.locationName}"></h6>
+                                <h6 th:text="${event.eventDate}"></h6>
 
                                 <div class="event-image mb-2"></div>
 
@@ -188,20 +176,6 @@
 
 </div>
 
-        <!-- <div class="section-title">Past Events</div>
-            <div class="row row-cols-1 row-cols-md-4 g-3">
-                <div class="col" th:each="event : ${pastEvents}">
-                    <a th:href="@{/event/{id}(id=${event.eventId})}" class="text-decoration-none text-white">
-                        <div class="card p-2">
-                            <h6 th:text="${event.eventName}">Event74 (Yesterday)</h6>
-                            <div class="event-image mb-2"></div>
-                            <div class="rating"><span>★ ★ ☆ ☆ ☆</span></div>
-                            <p class="small" th:text="${event.eventDescription}">Description (Preview)</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div> -->
         <div class="section-title">Vergangene Events</div>
 
 <div id="pastEventsCarousel" class="carousel slide">
@@ -213,17 +187,18 @@
             <div class="carousel-item"
                  th:classappend="${i == 0} ? 'active'">
 
-                <div class="row row-cols-1 row-cols-md-4 g-3">
+                <div class="row row-cols-1 row-cols-md-4 g-3 align-items-stretch">
 
                     <div class="col"
                          th:each="event : ${pastEvents.subList(i, T(java.lang.Math).min(i+4, pastEvents.size()))}">
 
                         <a th:href="@{/event/{id}(id=${event.eventId})}"
-                           class="text-decoration-none text-white">
+                           class="d-block h-100 text-decoration-none text-white">
 
-                            <div class="card p-2">
+                            <div class="card p-2 h-100 d-flex flex-column">
 
-                                <h6 th:text="${event.eventName}"></h6>
+                                <h6 th:text="${event.eventName} + ' @ ' + ${event.location.locationName}"></h6>
+                                <h6 th:text="${event.eventDate}"></h6>
 
                                 <div class="event-image mb-2"></div>
 
@@ -274,7 +249,7 @@
         <div class="modal-content bg-dark text-white">
 
             <div class="modal-header">
-                <h5 class="modal-title">Select Event to Review</h5>
+                <h5 class="modal-title">Event ausw&auml;hlen</h5>
                 <button type="button" class="btn-close btn-close-white"
                         data-bs-dismiss="modal"></button>
             </div>
@@ -283,13 +258,13 @@
 
                 <div class="list-group">
 
-                    <a th:each="event : ${events}"
+                    <a th:each="event : ${pastEvents}"
                        th:href="@{/review/new(eventId=${event.eventId})}"
                        class="list-group-item list-group-item-action bg-secondary text-white">
 
-                        <strong th:text="${event.eventName}">Event Name</strong>
+                        <strong th:text="${event.eventName} + ' @ ' + ${event.location.locationName}">Event</strong>
                         <br>
-                        <small th:text="${event.eventDate}">Date</small>
+                        <small th:text="${event.eventDate}">Datum</small>
 
                     </a>
 

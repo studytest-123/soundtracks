@@ -12,18 +12,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import paf.project.soundtracks.model.Event;
 import paf.project.soundtracks.model.Person;
+import paf.project.soundtracks.model.PersonalEventRating;
 import paf.project.soundtracks.repository.EventRepository;
 import paf.project.soundtracks.repository.PersonRepository;
+import paf.project.soundtracks.repository.PersonalEventRatingRepository;
 
 @Controller
 public class IndexController {
 
     private final EventRepository eventRepository;
     private final PersonRepository personRepository;
+    private final PersonalEventRatingRepository personalEventRatingRepository;
 
-    public IndexController(EventRepository eventRepository, PersonRepository personRepository) {
+    public IndexController(EventRepository eventRepository, PersonRepository personRepository, PersonalEventRatingRepository personalEventRatingRepository) {
         this.eventRepository = eventRepository;
         this.personRepository = personRepository;
+        this.personalEventRatingRepository = personalEventRatingRepository;
     }
 
     @GetMapping("/")
@@ -63,6 +67,17 @@ public class IndexController {
         // Get the latest event by ID
         Event latestEvent = eventRepository.findTopByOrderByEventIdDesc(); 
 
+        // latest reviewed event
+        PersonalEventRating latestReview = personalEventRatingRepository.findTopByOrderByPersonalEventRatingIdDesc();
+
+        Event latestReviewedEvent = null;
+
+        if (latestReview != null) {
+            latestReviewedEvent = latestReview.getEvent();
+        }
+
+    
+
         // upcoming events
         List<Event> upcomingEvents = eventRepository.findByEventDateGreaterThanEqualOrderByEventDateAsc(today);
 
@@ -71,10 +86,11 @@ public class IndexController {
         
         // pass to Thymeleaf
         model.addAttribute("user", user);
+        model.addAttribute("latestReviewedEvent", latestReviewedEvent);
         model.addAttribute("latestEvent", latestEvent);
         model.addAttribute("upcomingEvents", upcomingEvents);
         model.addAttribute("pastEvents", pastEvents);
-        model.addAttribute("events", eventRepository.findAll()); // Add this line to pass all events to the template
+        model.addAttribute("events", eventRepository.findAll());
 
         return "index"; // returns to templates/index.html
     }

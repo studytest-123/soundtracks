@@ -48,7 +48,7 @@ public class EventRatingObserver implements RatingObserver {
                 .divide(BigDecimal.valueOf(filtered.size()), 2, RoundingMode.HALF_UP);
 }
 
-        // MAIN LOGIC: recalculate and update EventRating whenever a PersonalEventRating is created or updated
+        // recalculate and update EventRating
         @Override
         public void update(PersonalEventRating review) {
                 System.out.println("Observer called");
@@ -129,6 +129,12 @@ public class EventRatingObserver implements RatingObserver {
                 eventRating.setWardrobeAverageRating(
                         average(reviews.stream()
                                 .map(r -> r.getWardrobe().getAverage())
+                                .toList())
+                );
+
+                eventRating.setMerchandiseAverageRating(
+                        average(reviews.stream()
+                                .map(r -> r.getMerchandise().getAverage())
                                 .toList())
                 );
 

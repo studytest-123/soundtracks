@@ -12,15 +12,9 @@ public interface PersonalEventRatingRepository extends JpaRepository<PersonalEve
     // Custom query method to find reviews by event
     List<PersonalEventRating> findByEvent(Event event);
 
-    //List<PersonalEventRating> findByEvent_EventId(Long eventId);
-
-    //long countByPersonPersonId(Long personId);
-
     long countByPerson(Person person);
 
-    //long countByPerson(Person person);
+    // for latest reviewed event card
+    PersonalEventRating findTopByOrderByPersonalEventRatingIdDesc();
 
-    //long countByPersonPersonId(Long personId);
-
-    //long countByPerson(Person person);
 }

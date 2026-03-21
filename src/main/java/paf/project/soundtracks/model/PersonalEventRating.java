@@ -39,7 +39,7 @@ public class PersonalEventRating {
     @Embedded
     private LocationRating location = new LocationRating();
 
-    @OneToMany(mappedBy = "personalEventRating", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "personalEventRating", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<PerformanceRating> performanceRatings = new ArrayList<>();
     //private BigDecimal performanceRating;
 
@@ -94,9 +94,11 @@ public class PersonalEventRating {
     @Column(name = "wardrobe_average_rating")
     private BigDecimal wardrobeAverage;
 
+    @Column(name = "merchandise_average_rating")
+    private BigDecimal merchandiseAverage;
+
     // constructors
     public PersonalEventRating() {
-        //initializeEmbeddeds();
     }  
 
     public PersonalEventRating(Long personalEventRatingId, Person person, Event event, AtmosphereRating atmosphere, GastronomyRating gastronomy, LocationRating location, MerchandiseRating merchandise, List<PerformanceRating> performanceRatings, RestroomRating restroom, SecurityRating security, SoundRating sound, WardrobeRating wardrobe, BigDecimal personalEventAverageRating, String personalEventRatingComments) {
@@ -267,6 +269,12 @@ public class PersonalEventRating {
     }
     public void setWardrobeAverage(BigDecimal wardrobeAverage) {
         this.wardrobeAverage = wardrobeAverage;
+    }
+    public BigDecimal getMerchandiseAverage() {
+        return merchandiseAverage;
+    }
+    public void setMerchandiseAverage(BigDecimal merchandiseAverage) {
+        this.merchandiseAverage = merchandiseAverage;
     }
 
 

@@ -24,6 +24,7 @@ public class EventRating {
     private BigDecimal securityAverageRating;
     private BigDecimal soundAverageRating;
     private BigDecimal wardrobeAverageRating;
+    private BigDecimal merchandiseAverageRating;
 
     
 
@@ -33,7 +34,7 @@ public class EventRating {
     public EventRating(Long eventRatingId, Event event, BigDecimal atmosphereAverageRating,
             BigDecimal gastronomyAverageRating, BigDecimal locationAverageRating, BigDecimal performanceAverageRating,
             BigDecimal restroomAverageRating, BigDecimal securityAverageRating, BigDecimal soundAverageRating,
-            BigDecimal wardrobeAverageRating, BigDecimal eventAverageRating) {
+            BigDecimal wardrobeAverageRating, BigDecimal eventAverageRating, BigDecimal merchandiseAveragerating) {
         this.eventRatingId = eventRatingId;
         this.event = event;
         this.atmosphereAverageRating = atmosphereAverageRating;
@@ -45,6 +46,7 @@ public class EventRating {
         this.soundAverageRating = soundAverageRating;
         this.wardrobeAverageRating = wardrobeAverageRating;
         this.eventAverageRating = eventAverageRating;
+        this.merchandiseAverageRating = merchandiseAveragerating;
     }
 
     // getters and setters
@@ -113,6 +115,12 @@ public class EventRating {
     }
     public void setEventAverageRating(BigDecimal eventAverageRating) {
         this.eventAverageRating = eventAverageRating;
+    }
+    public BigDecimal getMerchandiseAverageRating() {
+        return merchandiseAverageRating;
+    }
+    public void setMerchandiseAverageRating(BigDecimal merchandiseAverageRating) {
+        this.merchandiseAverageRating = merchandiseAverageRating;
     }
     /* public EventRating orElseGet(Object object) {
         // TODO Auto-generated method stub

@@ -1,36 +1,17 @@
 package paf.project.soundtracks.model;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import jakarta.persistence.*;
-import paf.project.soundtracks.model.PersonalEventRating;
 import paf.project.soundtracks.util.RatingUtils;
 
 @Embeddable
 public class AtmosphereRating {
-    /* @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "atmosphere_rating_id")
-    private Long atmosphereRatingId; */
-
-    /* @OneToOne
-    @JoinColumn(name = "personal_event_rating_id_personal_event_rating")
-    private Old_PersonalEventRating personalEventRating;
-    @Column(name = "atmosphere_average_rating")
-    private BigDecimal atmosphereAverageRating; */
-    //@Column(name = "atmosphere_event_vibe")
+   
     private BigDecimal atmosphereEventVibe;
-    //@Column(name = "atmosphere_crowd_engagement")
     private BigDecimal atmosphereCrowdEngagement;
-    //@Column(name = "atmosphere_light_and_visuals")
     private BigDecimal atmosphereLightAndVisuals;
-    //@Column(name = "atmosphere_event_decorations")
     private BigDecimal atmosphereEventDecorations;
-    //@Column(name = "atmosphere_staff_friendliness")
     private BigDecimal atmosphereStaffFriendliness;
-   /*  @Column(name = "atmosphere_rating_comments")
-    private String atmosphereRatingComments; */
 
     // constructors
     public AtmosphereRating() {
@@ -47,24 +28,6 @@ public class AtmosphereRating {
 
     // getters and setters
 
-    /* public Long getAtmosphereRatingId() {
-        return atmosphereRatingId;
-    }
-    public void setAtmosphereRatingId(Long atmosphereRatingId) {
-        this.atmosphereRatingId = atmosphereRatingId;
-    }
-    public Old_PersonalEventRating getPersonalEventRating() {
-        return personalEventRating;
-    }
-    public void setPersonalEventRating(Old_PersonalEventRating personalEventRating) {
-        this.personalEventRating = personalEventRating;
-    }
-    public BigDecimal getAtmosphereAverageRating() {
-        return atmosphereAverageRating;
-    }
-    public void setAtmosphereAverageRating(BigDecimal atmosphereAverageRating) {
-        this.atmosphereAverageRating = atmosphereAverageRating;
-    } */
     public BigDecimal getAtmosphereEventVibe() {
         return atmosphereEventVibe;
     }
@@ -95,12 +58,6 @@ public class AtmosphereRating {
     public void setAtmosphereStaffFriendliness(BigDecimal atmosphereStaffFriendliness) {
         this.atmosphereStaffFriendliness = atmosphereStaffFriendliness;
     }
-   /*  public String getAtmosphereRatingComments() {
-        return atmosphereRatingComments;
-    }
-    public void setAtmosphereRatingComments(String atmosphereRatingComments) {
-        this.atmosphereRatingComments = atmosphereRatingComments;
-    } */
 
     // domain-logic methods
     public BigDecimal getAverage() {
@@ -112,35 +69,4 @@ public class AtmosphereRating {
             atmosphereStaffFriendliness
         );
     }
-
-    /* public double getAveragesafe() {
-        if(all fields null) return 0;
-        return getAverage();
-    } */
-    /* public BigDecimal getAverage() {
-        BigDecimal sum = BigDecimal.ZERO;
-        int count = 0;
-
-        if (atmosphereEventVibe != null) {
-            sum = sum.add(atmosphereEventVibe);
-            count++;
-        }
-        if (atmosphereCrowdEngagement != null) {
-            sum = sum.add(atmosphereCrowdEngagement);
-            count++;
-        }
-        if (atmosphereLightAndVisuals != null) {
-            sum = sum.add(atmosphereLightAndVisuals);
-            count++;
-        }
-        if (atmosphereEventDecorations != null) {
-            sum = sum.add(atmosphereEventDecorations);
-            count++;
-        }
-        if (atmosphereStaffFriendliness != null) {
-            sum = sum.add(atmosphereStaffFriendliness);
-            count++;
-        }
-        return count > 0 ? sum.divide(BigDecimal.valueOf(count), 1, RoundingMode.HALF_UP) : BigDecimal.ZERO;
-    } */
 }
