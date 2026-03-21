@@ -110,26 +110,4 @@ public class WardrobeRating {
             wardrobeQuality
         );
     }
-        // method to calculate average rating
-        /* public BigDecimal getAverage() {
-        BigDecimal sum = BigDecimal.ZERO;
-        int count = 0;
-        if (wardrobePrice != null) {
-            sum = sum.add(wardrobePrice);
-            count++;
-        }
-        if (wardrobeStaffEfficiency != null) {
-            sum = sum.add(wardrobeStaffEfficiency);
-            count++;
-        }
-        if (wardrobeStaffFriendliness != null) {
-            sum = sum.add(wardrobeStaffFriendliness);
-            count++;
-        }
-        if (wardrobeQuality != null) {
-            sum = sum.add(wardrobeQuality);
-            count++;
-        }
-        return count > 0 ? sum.divide(BigDecimal.valueOf(count), 1, RoundingMode.HALF_UP) : BigDecimal.ZERO;
-    } */
 }

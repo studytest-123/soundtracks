@@ -21,13 +21,21 @@
         <div class="card p-4 mb-4">
     <h2 th:text="${event.eventName}">Event Name</h2>
     <!-- Overall Rating -->
-    <div class="rating mt-1" th:if="${hasRating}">
+    <!-- <div class="rating mt-1" th:if="${hasRating}">
 
         <span th:each="i : ${#numbers.sequence(1,5)}">
             <span th:text="${i <= (rating != null ? rating.intValue() : 0) ? '★' : '☆'}"></span>
         </span>
 
-    </div>
+    </div> -->
+    <div th:if="${eventRating != null}"
+     th:with="r=${eventRating.eventAverageRating != null ? eventRating.eventAverageRating.intValue() : 0}">
+
+    <span th:each="i : ${#numbers.sequence(1,5)}">
+        <span th:text="${i <= r ? '★' : '☆'}"></span>
+    </span>
+
+</div>
 
     <div class="event-image my-3">Event Bild</div>
 
