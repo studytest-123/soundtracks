@@ -23,12 +23,12 @@ public class Event {
     @Column(name = "event_entry")
     private LocalTime eventEntry;
     
-    @ManyToOne //(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "location_id_location")
     private Location location;
 
     @Transient
-    private Long locationId; // for form binding only, not persisted
+    private Long locationId;
 
     @Column(name = "event_price")
     private BigDecimal eventPrice;
@@ -36,8 +36,6 @@ public class Event {
     private String eventType;
     @Column(name = "event_description")
     private String eventDescription;
-    //private List<Performance> eventPerformances;
-    //private List<EventParticipation> eventParticipations;
     
     // constructors
     public Event() {
@@ -53,8 +51,6 @@ public class Event {
         this.eventPrice = eventPrice;
         this.eventType = eventType;
         this.eventDescription = eventDescription;
-        //this.eventPerformances = eventPerformances;
-        //this.eventParticipations = eventParticipations;
     }
     
     // getters and setters
@@ -119,7 +115,7 @@ public class Event {
         this.eventDescription = eventDescription;
     }   
     
-    // helper method 
+    // helper methods 
     public boolean isPast() {
         return eventDate != null && eventDate.isBefore(LocalDate.now());
     }
@@ -127,8 +123,4 @@ public class Event {
     public boolean isFuture() {
         return eventDate != null && !eventDate.isBefore(LocalDate.now());
     }
-
-    /* public boolean isReviewed() {
-        return eventRating != null;
-    } */
 }

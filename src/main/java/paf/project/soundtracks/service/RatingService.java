@@ -1,10 +1,8 @@
 package paf.project.soundtracks.service;
 
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
 import jakarta.transaction.Transactional;
 import paf.project.soundtracks.model.Event;
 import paf.project.soundtracks.model.Performance;
@@ -26,6 +24,7 @@ public class RatingService {
     private final RatingSubject ratingSubject;
     private final PerformanceRepository performanceRepository;
 
+    // constructors
     public RatingService(EventRepository eventRepository,
                          PersonalEventRatingRepository reviewRepository,
                          PersonRepository personRepository,
@@ -39,6 +38,7 @@ public class RatingService {
 
     }
 
+    // saving review and notify observer
     @Transactional
     public void saveReview(PersonalEventRating review, Long eventId) {
 

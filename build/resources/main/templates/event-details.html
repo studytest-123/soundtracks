@@ -130,48 +130,7 @@
         <div class="section-title"></div>
 
         <div class="row g-3 align-items-stretch">
-            <!-- Performances -->
-            <!-- <div class="col-md-4">
-                <div class="card p-3 text-center">
-                    <h6>Performances</h6>
-                    
-                    <ul class="list-group">
-
-            <li class="list-group-item bg-dark text-white"
-                th:each="performance : ${performances}">
-
-                <strong th:text="${performance.artist.artistName}">
-                    Artist Name
-                </strong>
-
-                <div class="rating mt-1">
-
-                    <span th:if="${performance.performanceRating != null}"
-                          th:with="rating=${performance.performanceRating.average}">
-
-                        <span th:each="i : ${#numbers.sequence(1,5)}">
-                            <span th:text="${i <= rating ? '★' : '☆'}"></span>
-                        </span>
-
-                    </span>
-
-                    <span th:if="${performance.performanceRating == null}">
-                        ☆ ☆ ☆ ☆ ☆
-                    </span>
-
-                </div>
-                
-
-            </li>
-
-        </ul>
-        <a th:href="@{/event/{id}/performance/new(id=${event.eventId})}"
-                class="btn btn-primary btn-sm mt-3">
-                    K&uuml;nstler hinzuf&uuml;gen
-                </a>
-                </div>
-                
-            </div> -->
+            
             <div class="col-md-4 d-flex">
     <div class="card p-3 w-100 d-flex flex-column">
 
@@ -228,24 +187,10 @@
 
         </ul>
 
-        <!-- Add artist button -->
-        <!-- <a th:href="@{/event/{id}/performance/new(id=${event.eventId})}"
-           class="btn btn-primary btn-sm mt-3">
-            + Künstler hinzufügen
-        </a> -->
-
     </div>
 </div>
 
             <!-- Reviews -->
-            <!-- <div class="col-md-4">
-                <div class="card p-3 text-center">
-                    <h6>Bewertungen</h6>
-                    <p class="text-muted small">
-                        Userbewertungen coming soon
-                    </p>
-                </div>
-            </div> -->
             <div class="col-md-8 d-flex">
     <div class="card p-3 w-100 d-flex flex-column">
 
@@ -280,136 +225,7 @@
         </span>
     </div>
 </div>
-        <!-- <ul class="list-group"
-            th:if="${!#lists.isEmpty(reviews)}">
 
-            <li class="list-group-item bg-dark text-white"
-                th:each="review : ${reviews}"> -->
-
-                <!-- user -->
-                <!-- !adding later -->
-                <!-- <strong th:text="${review.person.userName}">
-                    Username
-                </strong> -->
-
-                <!-- rating -->
-                <!-- <div class="rating mt-1"
-                     th:with="rating=${review.personalEventAverageRating}">
-
-                    <span th:each="i : ${#numbers.sequence(1,5)}">
-                        <span th:text="${i <= rating ? '★' : '☆'}"></span>
-                    </span>
-
-                </div> -->
-
-                <!-- comment -->
-                <!-- <p class="small mt-1"
-                   th:text="${review.personalEventRatingComments}">
-                </p>
-
-            </li>
-
-        </ul> -->
-<!-- Accordion -->
- <!-- <div class="accordion mt-4" id="reviewAccordion">
-
-    <div th:each="review, stat : ${reviews}" class="accordion-item">
- -->
-        <!-- HEADER -->
-        <!-- <h2 class="accordion-header">
-
-            <button class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    th:attr="data-bs-target='#review-' + ${stat.index}">
- -->
-                <!-- Summary -->
-                <!-- <div class="d-flex justify-content-between w-100">
-
-                    <span>
-                        Review #<span th:text="${stat.index + 1}"></span>
-                    </span>
- -->
-                    <!-- Overall stars -->
-                   <!--  <span>
-                        <span th:each="i : ${#numbers.sequence(1,5)}"
-                              th:text="${i <= review.personalEventAverageRating ? '★' : '☆'}">
-                        </span>
-                    </span>
-
-                </div>
-
-            </button>
-        </h2>
- -->
-        <!-- BODY -->
-        <!-- <div th:id="'review-' + ${stat.index}"
-             class="accordion-collapse collapse"
-             data-bs-parent="#reviewAccordion">
-
-            <div class="accordion-body">
- -->
-                <!-- SEGMENTS -->
-               <!--  <div class="d-flex flex-wrap gap-3 mb-3">
-
-                    <div>
-                        <div class="small">Atmosphere</div>
-                        <span th:text="${review.atmosphereAverage}"></span>
-                    </div>
-
-                    <div>
-                        <div class="small">Sound</div>
-                        <span th:text="${review.soundAverage}"></span>
-                    </div> -->
-
-                    <!-- add others same way -->
-
-              <!--   </div> -->
-
-                <!-- COMMENT -->
-             <!--    <div class="mb-3">
-                    <strong>Comment:</strong>
-                    <p th:text="${review.personalEventRatingComments}"></p>
-                </div>
- -->
-                <!-- PERFORMANCES -->
-                <!-- <div th:each="perf : ${review.performanceRatings}" 
-                     class="card p-3 mb-2">
-
-                    <h6 th:text="${perf.performance.artist.artistName}"></h6>
-
-                    <div class="d-flex gap-3 flex-wrap">
-
-                        <div>
-                            Performance:
-                            <span th:text="${perf.performanceQuality}"></span>
-                        </div>
-
-                        <div>
-                            Sound:
-                            <span th:text="${perf.soundQuality}"></span>
-                        </div>
-
-                        <div>
-                            Setlist:
-                            <span th:text="${perf.trackSelection}"></span>
-                        </div>
-
-                    </div>
-
-                    <p class="mt-2"
-                       th:text="${perf.performanceRatingComments}"></p>
-
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-</div> -->
-
-<!-- Accordion End -->
  <!-- modal popup -->
   <div th:each="review, stat : ${reviews}">
 

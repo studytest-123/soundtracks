@@ -3,29 +3,21 @@ package paf.project.soundtracks.model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.*;
-/* import paf.project.soundtracks.model.GastronomyRating;
-import paf.project.soundtracks.model.LocationRating;
-import paf.project.soundtracks.model.PerformanceRating;
-import paf.project.soundtracks.model.RestroomRating;
-import paf.project.soundtracks.model.SecurityRating;
-import paf.project.soundtracks.model.MerchandiseRating;
-import paf.project.soundtracks.model.WardrobeRating; */
 
 @Entity
 @Table(name = "personal_event_rating")
 public class PersonalEventRating {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "personal_event_rating_id")
     private Long personalEventRatingId;
+
     @ManyToOne
     @JoinColumn(name = "person_id_person")
     private Person person;
-    /* @ManyToOne
-    @JoinColumn(name = "event_rating_id_event_rating")
-    private EventRating eventRating; */
+
     @ManyToOne
     @JoinColumn(name = "event_id_event")
     private Event event;
@@ -41,7 +33,6 @@ public class PersonalEventRating {
 
     @OneToMany(mappedBy = "personalEventRating", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<PerformanceRating> performanceRatings = new ArrayList<>();
-    //private BigDecimal performanceRating;
 
     @Embedded
     private MerchandiseRating merchandise = new MerchandiseRating();
@@ -72,7 +63,7 @@ public class PersonalEventRating {
     private BigDecimal personalEventAverageRating;
 
     private String personalEventRatingComments;
-    /* private BigDecimal performanceAverage; */
+
     @Column(name = "atmosphere_average_rating")
     private BigDecimal atmosphereAverage;
 
@@ -311,10 +302,8 @@ public class PersonalEventRating {
         return wardrobe != null ? wardrobe.getAverage() : BigDecimal.ZERO;
     }
 
-    /* public BigDecimal getPerformanceAverage() {
-        return performanceAverage; // <- stored value from observer
-    } */
 
+    // helper method (null handling)
     public void initializeEmbeddeds() {
     //System.out.println("PersonalEventRatingModel CALLED");   
     if (atmosphere == null) atmosphere = new AtmosphereRating();

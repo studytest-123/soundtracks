@@ -1,3 +1,4 @@
+// dynamic changing of stars in frontend
 document.addEventListener("DOMContentLoaded", function () {
 
     const blocks = document.querySelectorAll(".rating-block");

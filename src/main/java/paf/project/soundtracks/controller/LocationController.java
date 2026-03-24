@@ -17,7 +17,7 @@ public class LocationController {
         this.locationRepository = locationRepository;
     }
 
-    /* create location form */
+    /* show create location form */
     @GetMapping("/new")
     public String showCreateLocationForm(Model model) {
 

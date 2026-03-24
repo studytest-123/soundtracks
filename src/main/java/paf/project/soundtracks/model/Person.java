@@ -1,7 +1,6 @@
 package paf.project.soundtracks.model;
 
 import java.math.BigDecimal;
-
 import jakarta.persistence.*;
 
 
@@ -22,10 +21,7 @@ public class Person {
     private BigDecimal reviewScore = BigDecimal.ZERO;
     @Column(name = "user_password")
     private String password;
-    /* 
-    private Set<Role> personRoles = new HashSet<>();
-    private List<EventParticipation> eventParticipations;
- */
+
     // constructors
     public Person() {
     }
@@ -75,23 +71,11 @@ public class Person {
     }
     public void setPassword(String password) {
         this.password = password;
-    }
-    /* public Set<Role> getPersonRoles() {
-        return personRoles;
-    }
-    public void setPersonRoles(Set<Role> personRoles) {
-        this.personRoles = personRoles;
-    }  
-    public List<EventParticipation> getEventParticipations() {
-        return eventParticipations;
-    }
-    public void setEventParticipations(List<EventParticipation> eventParticipations) {
-        this.eventParticipations = eventParticipations; }*/
-    
+    }    
 
-    @Override
+    /* @Override
     public String toString() {
         return "Person [personId=" + personId + ", userName=" + userName + ", reviewCount=" + reviewCount
                 + ", eventCount=" + eventCount + ", reviewScore=" + reviewScore + "]";
-    }
+    } */
 }

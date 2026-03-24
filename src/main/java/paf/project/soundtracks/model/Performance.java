@@ -1,12 +1,9 @@
 package paf.project.soundtracks.model;
 
 import java.time.Duration;
-
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-
 import jakarta.persistence.*;
-import paf.project.soundtracks.model.PerformanceRating;
 
 @Entity
 @Table(name = "performance")
@@ -35,16 +32,6 @@ public class Performance {
     @Column(name = "performance_genre")
     private String performanceGenre;
     
-
-    // JSON linking
-    //private Artist artistObject;
-
-    // Setlist
-    //private List<SetlistItem> performanceSetlist;
-
-    // Rating
-    // private PerformanceRating performanceRating;
-
     // constructors
     public Performance() {
     }
@@ -56,8 +43,6 @@ public class Performance {
         this.performanceDuration = performanceDuration;
         this.performanceType = performanceType;
         this.performanceGenre = performanceGenre;
-        /* this.artistObject = artistObject;
-        this.performanceSetlist = performanceSetlist; */
         this.performanceRating = performanceRating;
     }
 
@@ -103,23 +88,6 @@ public class Performance {
     public void setPerformanceGenre(String performanceGenre) {
         this.performanceGenre = performanceGenre;
     }
-
-    /* public Artist getArtistObject() {
-        return artistObject;
-    }
-
-    public void setArtistObject(Artist artistObject) {
-        this.artistObject = artistObject;
-    }
-
-    public List<SetlistItem> getPerformanceSetlist() {
-        return performanceSetlist;
-    }
-
-    public void setPerformanceSetlist(List<SetlistItem> performanceSetlist) {
-        this.performanceSetlist = performanceSetlist;
-    } */
-
     public PerformanceRating getPerformanceRating() {
         return performanceRating;
     }
@@ -128,7 +96,7 @@ public class Performance {
         this.performanceRating = performanceRating;
     }
 
-    @Override
+    /* @Override
     public String toString() {
         return "Performance{" +
                 "performanceId=" + performanceId +
@@ -137,9 +105,9 @@ public class Performance {
                 ", performanceDuration=" + performanceDuration +
                 ", performanceType='" + performanceType + '\'' +
                 ", performanceGenre='" + performanceGenre + '\'' +
-                /* ", artistObject=" + artistObject.getArtistName() +
-                ", performanceSetlist=" + performanceSetlist + */
+                ", artistObject=" + artistObject.getArtistName() +
+                ", performanceSetlist=" + performanceSetlist +
                 ", performanceRating=" + performanceRating +
                 '}';
-    }
+    } */
 }

@@ -122,8 +122,4 @@ public class EventRating {
     public void setMerchandiseAverageRating(BigDecimal merchandiseAverageRating) {
         this.merchandiseAverageRating = merchandiseAverageRating;
     }
-    /* public EventRating orElseGet(Object object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'orElseGet'");
-    } */
 }

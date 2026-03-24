@@ -31,6 +31,7 @@ public class RatingController {
     private final PerformanceRepository performanceRepository;
     private RatingService ratingService;
 
+    // constructors
     public RatingController(EventRepository eventRepository,
                             PerformanceRepository performanceRepository,
                             RatingService ratingService) {
@@ -39,6 +40,7 @@ public class RatingController {
         this.ratingService = ratingService;
     }
 
+    // initialize review for null handling
     @ModelAttribute("review")
     public PersonalEventRating initReview() {
         System.out.println("INIT REVIEW CALLED");

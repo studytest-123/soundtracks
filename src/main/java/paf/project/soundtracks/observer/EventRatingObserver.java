@@ -4,10 +4,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.Objects;
-
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
 import paf.project.soundtracks.model.Event;
 import paf.project.soundtracks.model.EventRating;
 import paf.project.soundtracks.model.PersonalEventRating;
@@ -46,7 +44,8 @@ public class EventRatingObserver implements RatingObserver {
         return filtered.stream()
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .divide(BigDecimal.valueOf(filtered.size()), 2, RoundingMode.HALF_UP);
-}
+        
+        }
 
         // recalculate and update EventRating
         @Override

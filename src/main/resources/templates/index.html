@@ -71,17 +71,6 @@
                         <li th:text="'Event-Teilnahmen: ' + ${user.eventCount}">Stat2</li>
                         <li th:text="'Bewertungsscore: ' + ${user.reviewScore}">Stat3</li>
                     </ul>
-                    <!-- <div sec:authorize="isAnonymous()">
-                        <a th:href="@{/login}" class="btn btn-primary btn-sm">Login</a>
-                    </div>
-
-                    <div sec:authorize="isAuthenticated()">
-                        <form th:action="@{/logout}" method="post">
-                            <button class="btn btn-secondary btn-sm">
-                                Logout
-                            </button>
-                        </form>
-                    </div>  -->
                 </div>
             </div>
 

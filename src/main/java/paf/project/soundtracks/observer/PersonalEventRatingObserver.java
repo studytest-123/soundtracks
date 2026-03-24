@@ -13,7 +13,7 @@ public class PersonalEventRatingObserver implements RatingObserver {
     @Override
     public void update(PersonalEventRating review) {
 
-        // calculate overall average
+        // calculate segment overall average
         review.setAtmosphereAverage(review.getAtmosphereCalculated());
         review.setGastronomyAverage(review.getGastronomyCalculated());
         review.setLocationAverage(review.getLocationCalculated());
@@ -22,14 +22,8 @@ public class PersonalEventRatingObserver implements RatingObserver {
         review.setSoundAverage(review.getSoundCalculated());
         review.setWardrobeAverage(review.getWardrobeCalculated());
         review.setMerchandiseAverage(review.getMerchandiseCalculated());
-        /* review.setAtmosphereAverage(review.getAtmosphere().getAverage());
-        review.setGastronomyAverage(review.getGastronomy().getAverage());
-        review.setLocationAverage(review.getLocation().getAverage());
-        review.setRestroomAverage(review.getRestroom().getAverage());
-        review.setSecurityAverage(review.getSecurity().getAverage());
-        review.setSoundAverage(review.getSound().getAverage());
-        review.setWardrobeAverage(review.getWardrobe().getAverage()); */
 
+        // calculate overall average
         BigDecimal sum = BigDecimal.ZERO;
         int divisor = 0;
 

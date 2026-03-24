@@ -1,3 +1,4 @@
+// adding artist to event
 function addArtist() {
 
     const select = document.getElementById("artistSelect");
@@ -28,6 +29,7 @@ function addArtist() {
 
 }
 
+// remove artist from event
 function removeArtist(button) {
 
     const li = button.parentElement;

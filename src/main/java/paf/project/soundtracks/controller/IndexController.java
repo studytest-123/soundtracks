@@ -24,19 +24,17 @@ public class IndexController {
     private final PersonRepository personRepository;
     private final PersonalEventRatingRepository personalEventRatingRepository;
 
+    // constructors
     public IndexController(EventRepository eventRepository, PersonRepository personRepository, PersonalEventRatingRepository personalEventRatingRepository) {
         this.eventRepository = eventRepository;
         this.personRepository = personRepository;
         this.personalEventRatingRepository = personalEventRatingRepository;
     }
 
+    // show index
     @GetMapping("/")
     public String index(Model model) {
 
-        // Mock user
-        /* Person user = new Person();
-        user.setPersonId(1L);
-        user.setUserName("john_doe"); */
         Authentication auth = SecurityContextHolder
             .getContext()
             .getAuthentication();
@@ -75,8 +73,6 @@ public class IndexController {
         if (latestReview != null) {
             latestReviewedEvent = latestReview.getEvent();
         }
-
-    
 
         // upcoming events
         List<Event> upcomingEvents = eventRepository.findByEventDateGreaterThanEqualOrderByEventDateAsc(today);

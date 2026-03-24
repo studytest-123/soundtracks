@@ -11,7 +11,6 @@ import paf.project.soundtracks.repository.EventRepository;
 import paf.project.soundtracks.repository.LocationRepository;
 import paf.project.soundtracks.repository.PerformanceRepository;
 import paf.project.soundtracks.repository.PersonalEventRatingRepository;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import paf.project.soundtracks.model.Location;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -39,6 +36,8 @@ public class EventController {
     private final PersonalEventRatingRepository personalEventRatingRepository;
     private final EventRatingRepository eventRatingRepository;  
 
+
+    // constructors
     public EventController(EventRepository eventRepository, ArtistRepository artistRepository, LocationRepository locationRepository, PerformanceRepository performanceRepository, PersonalEventRatingRepository personalEventRatingRepository, EventRatingRepository eventRatingRepository) {
         this.eventRepository = eventRepository;
         this.artistRepository = artistRepository;
@@ -48,8 +47,7 @@ public class EventController {
         this.eventRatingRepository = eventRatingRepository;
     }
 
-    
-    // create event form
+    // show create event form
     @GetMapping("/new")
     public String showCreateEventForm(Model model) {
         model.addAttribute("event", new Event());
@@ -69,23 +67,24 @@ public class EventController {
         event.setLocation(location);
         
         Event savedEvent = eventRepository.save(event);
+        
         // Save participating artists as performances
-    if (artistIds != null) {
+        if (artistIds != null) {
 
-        for (Long artistId : artistIds) {
+            for (Long artistId : artistIds) {
 
-            Artist artist = artistRepository.findById(artistId)
-                    .orElseThrow(() ->
-                        new IllegalArgumentException("Invalid artist ID: " + artistId));
+                Artist artist = artistRepository.findById(artistId)
+                        .orElseThrow(() ->
+                            new IllegalArgumentException("Invalid artist ID: " + artistId));
 
-            Performance performance = new Performance();
+                Performance performance = new Performance();
 
-            performance.setEvent(savedEvent);
-            performance.setArtist(artist);
+                performance.setEvent(savedEvent);
+                performance.setArtist(artist);
 
-            performanceRepository.save(performance);
+                performanceRepository.save(performance);
+            }
         }
-    }
         return "redirect:/event/" + savedEvent.getEventId();
     }
     
