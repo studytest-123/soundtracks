@@ -15,11 +15,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+// calculates and updates the star ratings based on selected radio buttons
 function updateRatings() {
 
     const blocks = document.querySelectorAll(".rating-block");
     let segmentAverages = [];
 
+    // for each rating block, calculate the average of the selected radio buttons and update the segment average display
     blocks.forEach(block => {
 
         const radios = block.querySelectorAll("input[type=radio]");
@@ -36,6 +38,7 @@ function updateRatings() {
 
         });
 
+        // for each group of radio buttons, find the checked one and add its value to the values array
         Object.values(groups).forEach(group => {
 
             const checked = group.find(r => r.checked);
@@ -46,6 +49,7 @@ function updateRatings() {
 
         });
 
+        // if there are any values, calculate the average and update the segment average display
         if (values.length > 0) {
 
             const avg = values.reduce((a,b) => a+b,0) / values.length;

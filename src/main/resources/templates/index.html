@@ -92,6 +92,9 @@
                                     <span>★ ★ ★ ☆ ☆</span>
                                 </div> -->
                                 <p th:text="${latestReviewedEvent.eventDescription}">Beschreibung (Vorschau)</p>
+                                <p class="small"
+                                   th:text="${latestReview.personalEventRatingComments}">Kommentare zum Event (Vorschau)
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -128,6 +131,7 @@
                                 <p class="small"
                                    th:text="${#strings.abbreviate(event.eventDescription,80)}">
                                 </p>
+                                
 
                             </div>
 

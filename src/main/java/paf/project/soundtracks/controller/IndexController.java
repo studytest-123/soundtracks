@@ -87,6 +87,7 @@ public class IndexController {
         model.addAttribute("upcomingEvents", upcomingEvents);
         model.addAttribute("pastEvents", pastEvents);
         model.addAttribute("events", eventRepository.findAll());
+        model.addAttribute("latestReview", latestReview);
 
         return "index"; // returns to templates/index.html
     }
