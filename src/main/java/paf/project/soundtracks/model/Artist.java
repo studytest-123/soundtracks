@@ -18,16 +18,20 @@ public class Artist {
     @Column(name = "artist_description")
     private String artistDescription;
 
+    @Column(name = "image_path")
+    private String imagePath;
+
     // constructors
     public Artist() {
     }
     
-    public Artist(Long artistId, String artistName, String artistGenre, String artistCountry, String artistDescription) {
+    public Artist(Long artistId, String artistName, String artistGenre, String artistCountry, String artistDescription, String imagePath) {
         this.artistId = artistId;
         this.artistName = artistName;
         this.artistGenre = artistGenre;
         this.artistCountry = artistCountry;
         this.artistDescription = artistDescription;
+        this.imagePath = imagePath;
     }
     
     // getters and setters
@@ -60,5 +64,11 @@ public class Artist {
     }   
     public void setArtistDescription(String artistDescription) {
         this.artistDescription = artistDescription;
+    }
+    public String getImagePath() {
+        return imagePath;
+    }
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

@@ -36,12 +36,21 @@ public class Event {
     private String eventType;
     @Column(name = "event_description")
     private String eventDescription;
+
+    // image path for event (persistance)    
+    @Column(name = "image_path")
+    private String imagePath;
+
+    // resolved image for display (not persisted)
+    @Transient
+    private String resolvedImage;
+
     
     // constructors
     public Event() {
     }
     public Event(Long eventId, String eventName, LocalDate eventDate, LocalTime eventStart, LocalTime eventEntry,
-            Location location, BigDecimal eventPrice, String eventType, String eventDescription) {
+            Location location, BigDecimal eventPrice, String eventType, String eventDescription, String imagePath) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventDate = eventDate;
@@ -51,6 +60,7 @@ public class Event {
         this.eventPrice = eventPrice;
         this.eventType = eventType;
         this.eventDescription = eventDescription;
+        this.imagePath = imagePath;
     }
     
     // getters and setters
@@ -114,6 +124,18 @@ public class Event {
     public void setEventDescription(String eventDescription) {
         this.eventDescription = eventDescription;
     }   
+    public String getImagePath() {
+        return imagePath;
+    }
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+    public String getResolvedImage() {
+    return resolvedImage;
+    }
+    public void setResolvedImage(String resolvedImage) {
+        this.resolvedImage = resolvedImage;
+    }
     
     // helper methods 
     public boolean isPast() {

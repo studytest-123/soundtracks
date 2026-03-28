@@ -11,11 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import paf.project.soundtracks.model.Event;
+import paf.project.soundtracks.model.Performance;
 import paf.project.soundtracks.model.Person;
 import paf.project.soundtracks.model.PersonalEventRating;
 import paf.project.soundtracks.repository.EventRepository;
+import paf.project.soundtracks.repository.PerformanceRepository;
 import paf.project.soundtracks.repository.PersonRepository;
 import paf.project.soundtracks.repository.PersonalEventRatingRepository;
+import paf.project.soundtracks.service.ImageResolver;
 
 @Controller
 public class IndexController {
@@ -23,12 +26,16 @@ public class IndexController {
     private final EventRepository eventRepository;
     private final PersonRepository personRepository;
     private final PersonalEventRatingRepository personalEventRatingRepository;
+    private final ImageResolver imageResolver;
+    private final PerformanceRepository performanceRepository;
 
     // constructors
-    public IndexController(EventRepository eventRepository, PersonRepository personRepository, PersonalEventRatingRepository personalEventRatingRepository) {
+    public IndexController(EventRepository eventRepository, PersonRepository personRepository, PersonalEventRatingRepository personalEventRatingRepository, ImageResolver imageResolver, PerformanceRepository performanceRepository) {
         this.eventRepository = eventRepository;
         this.personRepository = personRepository;
         this.personalEventRatingRepository = personalEventRatingRepository;
+        this.imageResolver = imageResolver;
+        this.performanceRepository = performanceRepository;
     }
 
     // show index
@@ -73,13 +80,50 @@ public class IndexController {
         if (latestReview != null) {
             latestReviewedEvent = latestReview.getEvent();
         }
+        // resolve image for latest reviewed event
+        if (latestReviewedEvent != null) {
+
+            List<PersonalEventRating> reviews =
+                personalEventRatingRepository.findByEvent(latestReviewedEvent);
+
+            List<Performance> performances =
+                performanceRepository.findByEvent(latestReviewedEvent);
+
+            String imageUrl = imageResolver.resolveEventImage(
+                latestReviewedEvent, reviews, performances
+            );
+
+            latestReviewedEvent.setResolvedImage(imageUrl);
+        }
 
         // upcoming events
         List<Event> upcomingEvents = eventRepository.findByEventDateGreaterThanEqualOrderByEventDateAsc(today);
+        // resolve images for upcoming events
+        for (Event event : upcomingEvents) {
+            List<PersonalEventRating> reviews =
+                personalEventRatingRepository.findByEvent(event);
+
+            List<Performance> performances =
+                performanceRepository.findByEvent(event);
+
+            String imageUrl = imageResolver.resolveEventImage(event, reviews, performances);
+            event.setResolvedImage(imageUrl);
+        }
 
         // past events
         List<Event> pastEvents = eventRepository.findByEventDateBeforeOrderByEventDateDesc(today);
-        
+        // resolve images for past events
+        for (Event event : pastEvents) {
+            List<PersonalEventRating> reviews =
+                personalEventRatingRepository.findByEvent(event);
+
+            List<Performance> performances =
+                performanceRepository.findByEvent(event);
+
+            String imageUrl = imageResolver.resolveEventImage(event, reviews, performances);
+            event.setResolvedImage(imageUrl);
+        }
+
         // pass to Thymeleaf
         model.addAttribute("user", user);
         model.addAttribute("latestReviewedEvent", latestReviewedEvent);
@@ -88,6 +132,8 @@ public class IndexController {
         model.addAttribute("pastEvents", pastEvents);
         model.addAttribute("events", eventRepository.findAll());
         model.addAttribute("latestReview", latestReview);
+
+        //System.out.println(System.getProperty("user.dir"));
 
         return "index"; // returns to templates/index.html
     }

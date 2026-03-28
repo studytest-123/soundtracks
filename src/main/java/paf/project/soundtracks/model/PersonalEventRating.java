@@ -88,11 +88,14 @@ public class PersonalEventRating {
     @Column(name = "merchandise_average_rating")
     private BigDecimal merchandiseAverage;
 
+    @Column(name = "image_path")
+    private String imagePath;
+
     // constructors
     public PersonalEventRating() {
     }  
 
-    public PersonalEventRating(Long personalEventRatingId, Person person, Event event, AtmosphereRating atmosphere, GastronomyRating gastronomy, LocationRating location, MerchandiseRating merchandise, List<PerformanceRating> performanceRatings, RestroomRating restroom, SecurityRating security, SoundRating sound, WardrobeRating wardrobe, BigDecimal personalEventAverageRating, String personalEventRatingComments) {
+    public PersonalEventRating(Long personalEventRatingId, Person person, Event event, AtmosphereRating atmosphere, GastronomyRating gastronomy, LocationRating location, MerchandiseRating merchandise, List<PerformanceRating> performanceRatings, RestroomRating restroom, SecurityRating security, SoundRating sound, WardrobeRating wardrobe, BigDecimal personalEventAverageRating, String personalEventRatingComments, String imagePath) {
         this.personalEventRatingId = personalEventRatingId;
         this.person = person;
         this.event = event;
@@ -107,6 +110,7 @@ public class PersonalEventRating {
         this.wardrobe = wardrobe;
         this.personalEventAverageRating = personalEventAverageRating;
         this.personalEventRatingComments = personalEventRatingComments;
+        this.imagePath = imagePath;
     }
 
     // getters and setters
@@ -217,6 +221,12 @@ public class PersonalEventRating {
     }
     public void setPersonalEventRatingComments(String personalEventRatingComments) {
         this.personalEventRatingComments = personalEventRatingComments;
+    }
+    public String getImagePath() {
+        return imagePath;
+    }
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public BigDecimal getAtmosphereAverage() {

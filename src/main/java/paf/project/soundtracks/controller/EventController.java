@@ -11,6 +11,9 @@ import paf.project.soundtracks.repository.EventRepository;
 import paf.project.soundtracks.repository.LocationRepository;
 import paf.project.soundtracks.repository.PerformanceRepository;
 import paf.project.soundtracks.repository.PersonalEventRatingRepository;
+import paf.project.soundtracks.service.ImageResolver;
+import paf.project.soundtracks.service.ImageService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import paf.project.soundtracks.model.Location;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -35,16 +40,20 @@ public class EventController {
     private final PerformanceRepository performanceRepository;
     private final PersonalEventRatingRepository personalEventRatingRepository;
     private final EventRatingRepository eventRatingRepository;  
+    private final ImageResolver imageResolver;
+    private final ImageService imageService;
 
 
     // constructors
-    public EventController(EventRepository eventRepository, ArtistRepository artistRepository, LocationRepository locationRepository, PerformanceRepository performanceRepository, PersonalEventRatingRepository personalEventRatingRepository, EventRatingRepository eventRatingRepository) {
+    public EventController(EventRepository eventRepository, ArtistRepository artistRepository, LocationRepository locationRepository, PerformanceRepository performanceRepository, PersonalEventRatingRepository personalEventRatingRepository, EventRatingRepository eventRatingRepository, ImageResolver imageResolver, ImageService imageService) {
         this.eventRepository = eventRepository;
         this.artistRepository = artistRepository;
         this.locationRepository = locationRepository;
         this.performanceRepository = performanceRepository;
         this.personalEventRatingRepository = personalEventRatingRepository;
         this.eventRatingRepository = eventRatingRepository;
+        this.imageResolver = imageResolver;
+        this.imageService = imageService;
     }
 
     // show create event form
@@ -59,12 +68,16 @@ public class EventController {
 
     // submit form
     @PostMapping("/new")
-    public String createEvent(@ModelAttribute Event event, @RequestParam(name = "artistIds", required = false) List<Long> artistIds) {
+    public String createEvent(@ModelAttribute Event event, @RequestParam(name = "artistIds", required = false) List<Long> artistIds, @RequestParam("image") MultipartFile image) {
 
         Location location = locationRepository.findById(event.getLocationId())
             .orElseThrow(() -> new IllegalArgumentException("Invalid location ID: " + event.getLocationId()));
         
         event.setLocation(location);
+
+        // handle image upload
+        String imagePath = imageService.saveImage(image, "events");
+        event.setImagePath(imagePath);
         
         Event savedEvent = eventRepository.save(event);
         
@@ -104,10 +117,16 @@ public class EventController {
 
         List<PersonalEventRating> reviews = personalEventRatingRepository.findByEvent(event);
 
+        for (PersonalEventRating review : reviews) {
+            review.getPerformanceRatings().size(); // force load
+        }
+
+        String imageUrl = imageResolver.resolveEventImage(event, reviews, performances);
+
         EventRating eventRating = eventRatingRepository.findByEvent(event)
             .orElse(new EventRating()); // return empty EventRating if not found to avoid null pointer
 
-        if(eventRating != null) {
+        /* if(eventRating != null) { */
             Map<String, BigDecimal> segments = Map.of(
                 "Atmosphäre", safe(eventRating.getAtmosphereAverageRating()),
                 "Gastronomie", safe(eventRating.getGastronomyAverageRating()),
@@ -118,8 +137,8 @@ public class EventController {
                 "Garderobe", safe(eventRating.getWardrobeAverageRating())
              );
              model.addAttribute("segments", segments);
-        }
-        
+        /* }
+         */
         boolean hasRating = eventRating != null
             && eventRating.getEventAverageRating() != null
             && event.getEventDate().isBefore(LocalDate.now());
@@ -129,6 +148,7 @@ public class EventController {
         model.addAttribute("performances", performances);
         model.addAttribute("reviews", reviews);
         model.addAttribute("eventRating", eventRating);
+        model.addAttribute("eventImage", imageUrl);
 
         //debugging
         /* System.out.println("EVENT: " + event.getEventName());

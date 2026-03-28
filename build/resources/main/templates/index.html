@@ -85,7 +85,7 @@
                         </h5>
                         <div class="row mt-2">
                             <div class="col-md-4">
-                                <div class="event-image">Event Bild</div>
+                                <img th:src="@{${latestReviewedEvent.resolvedImage}}" class="event-image mb-2" alt="Event Bild"/>
                             </div>
                             <div class="col-md-8">
                                 <!-- <div class="rating mb-2">
@@ -93,8 +93,10 @@
                                 </div> -->
                                 <p th:text="${latestReviewedEvent.eventDescription}">Beschreibung (Vorschau)</p>
                                 <p class="small"
-                                   th:text="${latestReview.personalEventRatingComments}">
-                                   blabla
+                                   th:text="${latestReview.person.userName} + ' sagt:'">Username (Vorschau)
+                                </p>
+                                <p class="small"
+                                   th:text="${latestReview.personalEventRatingComments}">Kommentare zum Event (Vorschau)
                                 </p>
                             </div>
                         </div>
@@ -127,7 +129,7 @@
                                 <h6 th:text="${event.eventName} + ' @ ' + ${event.location.locationName}"></h6>
                                 <h6 th:text="${event.eventDate}"></h6>
 
-                                <div class="event-image mb-2"></div>
+                                <img th:src="@{${event.resolvedImage}}" class="event-image mb-2" alt="Event Bild"/>
 
                                 <p class="small"
                                    th:text="${#strings.abbreviate(event.eventDescription,80)}">
@@ -194,7 +196,7 @@
                                 <h6 th:text="${event.eventName} + ' @ ' + ${event.location.locationName}"></h6>
                                 <h6 th:text="${event.eventDate}"></h6>
 
-                                <div class="event-image mb-2"></div>
+                                <img th:src="@{${event.resolvedImage}}" class="event-image mb-2" alt="Event Bild"/>
 
                                 <p class="small"
                                    th:text="${#strings.abbreviate(event.eventDescription,80)}">

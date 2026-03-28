@@ -10,6 +10,7 @@ import paf.project.soundtracks.model.SecurityRating;
 import paf.project.soundtracks.model.SoundRating;
 import paf.project.soundtracks.model.WardrobeRating;
 import paf.project.soundtracks.repository.EventRepository;
+import paf.project.soundtracks.service.ImageService;
 import paf.project.soundtracks.service.RatingService;
 import paf.project.soundtracks.repository.PerformanceRepository;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import paf.project.soundtracks.model.LocationRating;
 import paf.project.soundtracks.model.MerchandiseRating;
 import java.util.List;
@@ -30,14 +33,17 @@ public class RatingController {
     private final EventRepository eventRepository;
     private final PerformanceRepository performanceRepository;
     private RatingService ratingService;
+    private final ImageService imageService;
 
     // constructors
     public RatingController(EventRepository eventRepository,
                             PerformanceRepository performanceRepository,
-                            RatingService ratingService) {
+                            RatingService ratingService,
+                            ImageService imageService) {
         this.eventRepository = eventRepository;
         this.performanceRepository = performanceRepository;
         this.ratingService = ratingService;
+        this.imageService = imageService;
     }
 
     // initialize review for null handling
@@ -78,8 +84,12 @@ public class RatingController {
     /* form submit */
 
     @PostMapping("/new")
-    public String saveReview(@ModelAttribute("review") PersonalEventRating review, @RequestParam("eventId") Long eventId) {
+    public String saveReview(@ModelAttribute("review") PersonalEventRating review, @RequestParam("eventId") Long eventId,@RequestParam("image") MultipartFile image) {
         
+        // handle image upload
+        String imagePath = imageService.saveImage(image, "reviews");
+        review.setImagePath(imagePath);
+
         // save the review using the service
         ratingService.saveReview(review, eventId);
 
