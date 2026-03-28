@@ -10,6 +10,7 @@ public class RatingUtils {
     BigDecimal sum = BigDecimal.ZERO;
     int count = 0;
 
+    // add up all non-null values and count how many there are
     for (BigDecimal v : values) {
 
         if (v != null) {
@@ -23,6 +24,7 @@ public class RatingUtils {
         return BigDecimal.ZERO;
     }
 
+    // calculate the average and round to 2 decimal places
     return sum.divide(
             BigDecimal.valueOf(count),
             2,

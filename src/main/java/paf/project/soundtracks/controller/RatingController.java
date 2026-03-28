@@ -80,7 +80,7 @@ public class RatingController {
     @PostMapping("/new")
     public String saveReview(@ModelAttribute("review") PersonalEventRating review, @RequestParam("eventId") Long eventId) {
         
-
+        // save the review using the service
         ratingService.saveReview(review, eventId);
 
         return "redirect:/event/" + review.getEvent().getEventId();
